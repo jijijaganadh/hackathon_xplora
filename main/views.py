@@ -168,8 +168,8 @@ class MentorDetails(View):
             memberdetails = Memberdetails.objects.filter(user_id=request.user)
             print(memberdetails)
             # check member details
-            return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails.values()], "type":type([member for member in memberdetails.values()])})
-        except Memberdetails.DoesNotExist:
+            return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails.values()]})
+        except Mentordetails.DoesNotExist:
             pass
         return render(request, self.template_name, {"form": form})
         
@@ -196,6 +196,10 @@ class AddMember(View):
                 print("valid")
                 memberDetails = form.save(commit=False)
                 memberDetails.user_id = request.user
+                md=Memberdetails.objects.filter(user_id=request.user)
+                d=len(list(md))
+                if d>=1:
+                    return redirect("main:mentor")
                 memberDetails.save()
                 
                 return redirect('main:member')
