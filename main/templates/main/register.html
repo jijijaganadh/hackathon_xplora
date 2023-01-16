@@ -9,9 +9,11 @@
     <form method="POST">
       {% csrf_token %}
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" id="id_username" name="username" class="width-100">
+        <input placeholder=" " type="text" id="id_username" name="username" class="width-100" onkeypress="return ignoreSpaces(event)" >
         <label for="id_username" class="input-label">Username*</label>
       </div>
+      <p id ="username-error"></p>
+
       <!-- <div class="small text-muted mt-2">
         minimum of 8 characters required. Letters, digits and @/./+/-/_ only.
       </div> -->
@@ -23,6 +25,8 @@
         <input placeholder=" " type="password" id="id_password1" name="password1" class="width-100">
         <label for="id_password1" class="input-label">Password*</label>
       </div>
+      <p id="pswdError"></p>
+
       <!-- <div class="small text-muted mt-2">
         Your password must contain at least 8 characters.
       </div> -->
@@ -30,6 +34,8 @@
         <input placeholder=" " type="text" id="id_password2" name="password2" class="width-100">
         <label for="id_password2" class="input-label">confirmPassword*</label>
       </div>
+      <p id="confirmPswdError"></p>
+
       <!-- <div class="small text-muted mt-2">
         Enter the same password as before, for verification.
       </div> -->
@@ -44,5 +50,107 @@
     If you already have an account, <a href="/login">login</a> instead.
   </p> -->
 </div>
+
+<script>
+  //password validation
+  const pswdCheck = (text, passwordError) => {
+  let condition1 = /(?=.*\d)/; //should contain atleast 1 digit
+  let condition2 = /(?=.*[a-z])/; //should contain atleast 1 lowercase
+  let condition3 = /(?=.*[A-Z])/; //should contain atleast 1 uppercase
+  let condition4 = /[a-zA-Z0-9]{8,}/; //should contain atleast 8 characters
+
+  passwordError.style.color = "red";
+
+  if (!text.match(condition1)) {
+      passwordError.style.display = "block";
+      passwordError.textContent = "Password should contain atleast 1 digit";
+      return;
+  }
+
+  if (!text.match(condition2)) {
+      passwordError.style.display = "block";
+      passwordError.textContent = "Password should contain atleast 1 lowercase";
+      return;
+  }
+
+  if (!text.match(condition3)) {
+      passwordError.style.display = "block";
+      passwordError.textContent = "Password should contain atleast 1 uppercase";
+      return;
+  }
+
+  if (!text.match(condition4)) {
+      passwordError.style.display = "block";
+      passwordError.textContent = "Password should contain atleast 8 characters";
+      return;
+  }
+
+  passwordError.style.display = "none";
+  return;
+}
+let password = document.getElementById("id_password1");
+let passwordError = document.getElementById("pswdError");
+passwordError.style.display = "none";
+password.addEventListener('keypress', event => {
+  let text = password.value + `${event.key}`;
+  pswdCheck(text, passwordError);
+})
+
+//confirm password validation
+
+const confirmPasswordCheck = (text, initPasswrd, confPasswordError) => {
+
+confPasswordError.style.color = "red";
+
+if (text !== initPasswrd) {
+  confPasswordError.style.display = "block";
+  confPasswordError.innerText = "Passwords don't match";
+  return;
+}
+
+confPasswordError.style.display = "none";
+return;
+}
+
+let confPassword = document.getElementById("id_password2");
+let confPasswordError = document.getElementById("confirmPswdError");
+confPasswordError.style.display = "none";
+confPassword.addEventListener('keypress', event => {
+  let text = confPassword.value + `${event.key}`;
+  let initPasswrd = password.value;
+  confirmPasswordCheck(text, initPasswrd, confPasswordError);
+})
+
+//username validation
+let usernameEl = document.getElementById('id_username');
+let usernameError = document.getElementById('username-error');
+
+const checkUsername = (text) => {
+if(text.includes(" ")){
+  usernameError.style.display = 'block';
+  usernameError.textContent = 'Contains white spaces';
+  usernameError.style.color = 'red';
+  return;
+} 
+
+}
+
+usernameEl.addEventListener("keypress", (event)=>{
+checkUsername(usernameEl.value);
+});
+  function ignoreSpaces(event) {
+      
+      var character = event ? event.which : window.event.keyCode;
+      if (character == 32) {
+        usernameError.style.display = 'block';
+        usernameError.textContent = 'White spaces are not allowed ';
+        usernameError.style.color = 'red';
+        return false;
+      }
+      else  {
+        usernameError.style.display = 'none';
+      }
+  }
+</script>
 
 {% endblock %}

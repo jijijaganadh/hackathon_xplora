@@ -24,109 +24,117 @@
     <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
     <!-- ========move to top======== -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'hackathonwomen/common.css'%}">
-    <link rel="stylesheet" href="{% static 'hackathonwomen/login.css'%}">
+    <link rel="stylesheet" href="{% static 'main/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/inputstyle.css'%}">
    
     <body>
-      <h1>PROBLEM AND SOLUTION DETAILS</h1>
+      <section class="container header-container">
+        <div class="col-lg-3 col-md-8 col-sm-12 p-0">
+          <h3 class="mb-4">Problem Details</h3>
+          <form action="" class="form" method="POST" enctype ="multipart/form-data">
+            {% csrf_token %}
+            <div class="d-flex flex-row align-items-center mb-4">
+              <div class="form-outline flex-fill mb-2">
+                <select id="problem-id" class="select form-control-lg width-100" name="institution_name">
+                    <option selected disabled>Choose problem</option>
+                    {% for prob in problems %}
+                    <option value="{{prob.problem_id}}" id="problem">{{prob.problem_name}}</option>
+                    {% endfor %}
+                  </select>
+                 </div>
+            </div>
+            <div class="form-outline mb-2">
+              <label class="form-label" for="form2Example27">Description</label>
+              <div id="problem-description">
+              </div>
+            </div>
+           <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+          <script>
+              $("#problem-id").change(function () {
+                  const problemId = $(this).val();  
+                  $.ajax({                       // initialize an AJAX request
+                      type: "POST",
+                      url: "{% url 'main:problem_description' %}",
+                      data: {
+                          'problem_id': problemId,      
+                          'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                      },
+                      
+                      success: function (data) {   
+                        
+                          let html_data = `<div>"${data.description}</div>`;
+                        
+                          $("#problem-description").html(html_data); // replace the contents of the topic input with the data that came from the server
+                      }
+                  });
+              });
+          </script>
+
+           <!-- <div class="form-outline mb-2">
+            <label class="form-label" for="form2Example27">Description</label>
+            <div id="description"></div>
+          </div> -->
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+           <script  type="text/javascript">
+            let selectElement = document.getElementById('select');
+            let descriptionElement = document.getElementById("description");
+
+            selectElement.addEventListener("click",(event)=>{
+              descriptionElement.textContent = selectElement.value;
+              console.log(selectElement.value);
+
+
+            });
+            selectElement.addEventListener("change",()=>{
+              console.log(selectElement.value.description);
+              descriptionElement.textContent = JSON.stringify(selectElement.value);
+
+
+            })
+            $('#select').change(function(){
+                  data = {"problem_id": $("#select").find(":selected").text()}
+            });
+           
+           </script>
+            
+            <label for="ID">upload Solution</label>
+            <input
+              class="form-control form-control-lg"
+              name="solution_upload"
+              id="formFileLg"
+              type="file"
+              required
+              accept=".pdf"
+             
+            />
+            <div class="small text-muted mt-2">
+              Upload your solution or any other relevant file in pdf format. Max file size
+              50 MB
+            </div>
+           
+            <div class="pt-4 mb-4">
+              <button role="button" class="btn secondary-button" type="submit">Sign Up</button>
+            </div>
+          </form>
+
+
+        </div>
+      </section>
+
+      <!-- <h1>PROBLEM AND SOLUTION DETAILS</h1>
       <section class="header-container">
-        <div class="row  justify-content-center">
+        <div class="row  justify-content-center"> -->
             <!-- <div class="col-md-6 col-lg-5 d-flex align-items-center">
                 <img src="{% static 'assets/image.jpg'%}" 
                   alt="login form" class="img-fluid">
               </div> -->
-              <div class="col-md-6 col-lg-5 d-flex align-items-center justify-content-center p-5" style="border: 1px solid black;">
+              <!-- <div class="col-md-6 col-lg-5 d-flex align-items-center justify-content-center p-5" style="border: 1px solid black;">
                 <div style="max-width: 300px;">
-                    <form action="" class="form" method="POST" enctype ="multipart/form-data">
-                        {% csrf_token %}
-                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Problem Details</h5>
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <div class="form-outline flex-fill mb-2">
-                            <select id="problem-id" class="select form-control-lg" name="institution_name">
-                                <option selected disabled>Choose problem</option>
-                                {% for prob in problems %}
-                                <option value="{{prob.problem_id}}" id="problem">{{prob.problem_name}}</option>
-                                {% endfor %}
-                              </select>      
-                             </div>
-                        </div>
-                        <div class="form-outline mb-2">
-                          <label class="form-label" for="form2Example27">Description</label>
-                          <div id="problem-description">
-                          </div>
-                        </div>
-                       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-                      <script>
-                          $("#problem-id").change(function () {
-                              const problemId = $(this).val();  
-                              $.ajax({                       // initialize an AJAX request
-                                  type: "POST",
-                                  url: "{% url 'main:problem_description' %}",
-                                  data: {
-                                      'problem_id': problemId,      
-                                      'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-                                  },
-                                  
-                                  success: function (data) {   
-                                    
-                                      let html_data = `<div>"${data.description}</div>`;
-                                    
-                                      $("#problem-description").html(html_data); // replace the contents of the topic input with the data that came from the server
-                                  }
-                              });
-                          });
-                      </script>
-
-                       <!-- <div class="form-outline mb-2">
-                        <label class="form-label" for="form2Example27">Description</label>
-                        <div id="description"></div>
-                      </div> -->
-                       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-                       <script  type="text/javascript">
-                        let selectElement = document.getElementById('select');
-                        let descriptionElement = document.getElementById("description");
-  
-                        selectElement.addEventListener("click",(event)=>{
-                          descriptionElement.textContent = selectElement.value;
-                          console.log(selectElement.value);
-
-          
-                        });
-                        selectElement.addEventListener("change",()=>{
-                          console.log(selectElement.value.description);
-                          descriptionElement.textContent = JSON.stringify(selectElement.value);
-
-
-                        })
-                        $('#select').change(function(){
-                              data = {"problem_id": $("#select").find(":selected").text()}
-                        });
-                       
-                       </script>
-                        
-                        <label for="ID">upload Solution</label>
-                        <input
-                          class="form-control form-control-lg"
-                          name="solution_upload"
-                          id="formFileLg"
-                          type="file"
-                          required
-                          accept=".pdf"
-                         
-                        />
-                        <div class="small text-muted mt-2">
-                          Upload your solution or any other relevant file in pdf format. Max file size
-                          50 MB
-                        </div>
-                       
-                        <div class="pt-4 mb-4">
-                          <button role="button" class="btn btn-lg  btn-block" type="submit">Sign Up</button>
-                        </div>
-                      </form>
+                    
                 </div>
                 
               </div>
             </div>
-    </section>
+    </section> -->
 </body>
 </html>

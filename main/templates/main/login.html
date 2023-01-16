@@ -11,20 +11,102 @@
     <form method="POST">
     {% csrf_token %}
     <div class="material-textfield mt-4">
-      <input placeholder=" " type="text" id="id_username" name="username" class="width-100">
+      <input placeholder=" " type="text" id="id_username" name="username" class="width-100" onkeypress="return ignoreSpaces(event)">
       <label for="id_username" class="input-label">Username*</label>
     </div>
+    <p id ="username-error"></p>
+
     <div class="material-textfield mt-4">
       <input placeholder=" " type="password" id="id_password" name="password" class="width-100">
       <label for="id_password" class="input-label">Password*</label>
     </div>
+    <p id="pswdError"></p>
+
     <!-- {{ login_form|crispy }} -->
-    <button class="btn secondary-button mt-4" type="submit">Login</button>
+    <button class="btn secondary-button mt-4 width-100" type="submit">Login</button>
   </form>
   <div class="m-0 mt-4 text-center">
     <p class="m-0">Don't have an account? <a href="/register">Create an account</a></p>
   </div>
   </div>
 </div>
+
+<script>
+  //password validation
+  const pswdCheck = (text, passwordError) => {
+  let condition1 = /(?=.*\d)/; //should contain atleast 1 digit
+  let condition2 = /(?=.*[a-z])/; //should contain atleast 1 lowercase
+  let condition3 = /(?=.*[A-Z])/; //should contain atleast 1 uppercase
+  let condition4 = /[a-zA-Z0-9]{8,}/; //should contain atleast 8 characters
+
+  passwordError.style.color = "red";
+
+  if (!text.match(condition1)) {
+      passwordError.style.display = "block";
+      passwordError.textContent = "Password should contain atleast 1 digit";
+      return;
+  }
+
+  if (!text.match(condition2)) {
+      passwordError.style.display = "block";
+      passwordError.textContent = "Password should contain atleast 1 lowercase";
+      return;
+  }
+
+  if (!text.match(condition3)) {
+      passwordError.style.display = "block";
+      passwordError.textContent = "Password should contain atleast 1 uppercase";
+      return;
+  }
+
+  if (!text.match(condition4)) {
+      passwordError.style.display = "block";
+      passwordError.textContent = "Password should contain atleast 8 characters";
+      return;
+  }
+
+  passwordError.style.display = "none";
+  return;
+}
+let password = document.getElementById("id_password");
+let passwordError = document.getElementById("pswdError");
+passwordError.style.display = "none";
+password.addEventListener('keypress', event => {
+  let text = password.value + `${event.key}`;
+  pswdCheck(text, passwordError);
+})
+
+
+//username validation
+let usernameEl = document.getElementById('id_username');
+let usernameError = document.getElementById('username-error');
+
+const checkUsername = (text) => {
+if(text.includes(" ")){
+  usernameError.style.display = 'block';
+  usernameError.textContent = 'Contains white spaces';
+  usernameError.style.color = 'red';
+  return;
+} 
+
+}
+
+usernameEl.addEventListener("keypress", (event)=>{
+checkUsername(usernameEl.value);
+});
+  function ignoreSpaces(event) {
+      
+      var character = event ? event.which : window.event.keyCode;
+      if (character == 32) {
+        usernameError.style.display = 'block';
+        usernameError.textContent = 'White spaces are not allowed ';
+        usernameError.style.color = 'red';
+        return false;
+      }
+      else  {
+        usernameError.style.display = 'none';
+      }
+  }
+</script>
 
 {% endblock %}
