@@ -39,9 +39,11 @@
                   <label for="institution_address" class="input-label">Institution Address</label>
                 </div>
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="phoneno" name="phone" class="width-100">
+                  <input placeholder=" " type="text" id="phoneno" name="phone" class="width-100" onkeypress="return ignoreSpaces(event)"/>
                   <label for="phoneno" class="input-label">Contact Number</label>
                 </div>
+                <p id="phoneNumberError"></p>
+
                 <div class="mt-4">
                   <label for="ID">upload Institution ID</label>
                   <input
@@ -86,6 +88,37 @@
                 <button type="submit" class="btn secondary-button">Register</button>
               </div>
           </form>
+          <script>
+
+            let phoneNumberEl = document.getElementById("phoneno");
+                  let phoneNumberErrorEl = document.getElementById("phoneNumberError");
+                  phoneNumberErrorEl.style.display = "none";
+                  function validate(text) {
+                    let regx = '^\\+?[1-9][0-9]{8}$';
+                    if (!text.match(regx)) {
+                      phoneNumberErrorEl.style.display = "block";
+                      phoneNumberErrorEl.textContent = "Enter your 10 digit phone number";
+                      phoneNumberErrorEl.style.color = "red";
+                      return;
+                    }
+                    phoneNumberErrorEl.style.display = "none";
+                  }
+             
+                        
+                  function ignoreSpaces(event) {
+                    var character = event ? event.which : window.event.keyCode;
+                    let text = phoneNumberEl.value;
+                    if(event.charCode > 64 && event.charCode < 123) {
+                      phoneNumberErrorEl.style.display = "block";
+                      phoneNumberErrorEl.textContent = "Only digits are allowed";
+                      phoneNumberErrorEl.style.color = "red";
+                      return false
+                    }
+                    validate(text);
+                    
+                  }
+            
+                </script>
       </div>
     </section>
 
@@ -107,6 +140,7 @@
           otherTextElement.style.display = "none";
         }
       });
+
     </script>
   </body>
 </html>
