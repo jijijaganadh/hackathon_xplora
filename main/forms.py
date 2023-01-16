@@ -19,11 +19,19 @@ class MainParticipantForm(forms.ModelForm):
         model = MainParticipant
         fields = '__all__'
         
-class mentordetailsForm(forms.ModelForm):
+class MentordetailsForm(forms.ModelForm):
     class Meta:
         model = Mentordetails
         fields = ['name',"phoneno","email",'institution_name','designation']
     
+class ShowMentordetailsForm(forms.ModelForm):
+    class Meta:
+        model = Mentordetails
+        fields = ['name',"phoneno","email",'institution_name','designation']
+        
+    
+        
+        
 class MainParticipantForm(forms.ModelForm):
     class Meta:
         model = MainParticipant
@@ -76,4 +84,11 @@ class MemberForm(forms.ModelForm):
                 raise forms.ValidationError({"phoneno": "Phone number is invalid"})  
         return data
     
+        
+        
+class AddMemberDetailsForm(forms.ModelForm):
+    
+    class Meta:
+        model = Memberdetails
+        fields = '__all__'
         

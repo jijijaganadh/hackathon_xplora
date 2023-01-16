@@ -1,7 +1,7 @@
 import json
 from django.http import BadHeaderError, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from main.forms import ContactForm, MainParticipantForm, MemberForm, NewUserForm, mentordetailsForm
+from main.forms import ContactForm, MainParticipantForm, MemberForm, NewUserForm, MentordetailsForm,ShowMentordetailsForm, AddMemberDetailsForm
 from django.contrib.auth.models import User
 
 from main.models import Book, Institution
@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import MainParticipant, Problem, Institution,Mentordetails, Solution_details
+from .models import MainParticipant, Memberdetails, Problem, Institution,Mentordetails, Solution_details
 # Create your views here.
 
 # frontend
@@ -82,9 +82,9 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 try:
+                    login(request, user)
                     main_participant = MainParticipant.objects.get(user_id = user)
                 except:
-                    login(request, user)
                     return redirect('main:registration')
                 
                 messages.info(request, f"You are now logged in as {username}.")
@@ -97,7 +97,7 @@ def login_request(request):
 def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
-    return redirect("main:homepage")
+    return redirect("main:index")
 
 
 def registration_request(request):
@@ -149,9 +149,70 @@ def problem(request):
         return render(request,'main/problem.html', {'problems':problems})
 
 
+from django.views import View
+
+class MentorDetails(View):
+    form_class = ShowMentordetailsForm
+    template_name = "main/show-member-details.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        print(request.user.id)
+        try:
+            memberdetails = Memberdetails.objects.filter(user_id=request.user)
+            print(memberdetails)
+            # check member details
+            return render(request, self.template_name, {"form": form, "memberdetails": list(memberdetails)})
+        except Memberdetails.DoesNotExist:
+            pass
+        return render(request, self.template_name, {"form": form})
+        
+    def post(self, request, *args, **kwargs):
+        pass
+
+class AddMember(View):
+    form_class = AddMemberDetailsForm
+    template_name = "main/members.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {"form": form})
+        
+    def post(self, request, *args, **kwargs):  
+        if request.method == "POST":
+            form = MemberForm(request.POST,request.FILES)
+            # try:
+            #     members = Memberdetails.objects.get(user_id = request.user)
+            # except: 
+            #     members = {}
+            print(request.POST)
+            if form.is_valid():
+                print("valid")
+                memberDetails = form.save(commit=False)
+                memberDetails.user_id = request.user
+                memberDetails.save()
+                
+                return redirect('main:member')
+                # return render(request, 'main/members.html')
+                # context = {"form": form, "members":members}
+                # return render(request, 'main/members.html', context)  
+
+            else:
+                context = {"form": form}
+                return render(request, 'main/members.html', context)  
+        
+        else:
+            return render(request, 'main/members.html')  
+                # form = self.form_class(request.POST)
+                # if form.is_valid():
+                #     form.save()
+                #     redirect('main:member')
+                # return render(request, self.template_name, {"form": form})
+        
+    
 def mentordetails(request):
  if request.method == "POST":
-    form = mentordetailsForm(request.POST)
+    form = MentordetailsForm(request.POST)
 
     if form.is_valid():
         mentorDetails = form.save(commit=False)
@@ -170,13 +231,18 @@ from django.contrib.auth.decorators import login_required
 def memberdetails(request):
  if request.method == "POST":
     form = MemberForm(request.POST,request.FILES)
+    try:
+        members = Memberdetails.objects.get(user_id = request.user)
+    except: 
+        members = {}
     if form.is_valid():
         memberDetails = form.save(commit=False)
         memberDetails.user_id = request.user
         memberDetails.save()
         
 
-        return redirect('main:mentor') 
+        context = {"form": form, "members":members}
+        return render(request, 'main/members.html', context)  
 
     else:
         context = {"form": form}

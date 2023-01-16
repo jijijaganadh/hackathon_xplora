@@ -83,5 +83,5 @@ class Memberdetails(models.Model):
     institution_id= models.FileField(upload_to=user_directory_path)
 
     class Meta:
-          db_table="member_details"
+        db_table="member_details"
  
