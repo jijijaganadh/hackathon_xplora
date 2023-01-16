@@ -1,0 +1,19 @@
+@import url('colors.css');
+
+
+@media screen and (max-width:768px){
+    .guidelines-img{
+        display: none;
+    }
+}
+
+.problem-div{
+    background-color: #f3f7f3;
+    box-shadow: 0px  2px 8px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid black; */
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }

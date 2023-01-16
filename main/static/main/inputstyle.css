@@ -1,0 +1,249 @@
+
+.material-textfield {
+  position: relative;
+
+}
+/* .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5rem;
+} */
+
+.input-label{
+  position: absolute;
+  font-size: 1rem;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  color: gray;
+  padding: 0 0.3rem;
+  margin: 0 0.5rem;
+  transition: .1s ease-out;
+  transform-origin: left top;
+  pointer-events: none;
+}
+input {
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid gray;
+  border-radius: 4px;  
+  padding: 0.5rem 0.7rem;
+  color: gray;
+  transition: 0.1s ease-out;
+}
+input:focus {
+  border-color: #6200EE;  
+}
+input:focus + .input-label {
+  color: #6200EE;
+  top: 0;
+  transform: translateY(-50%) scale(.9);
+}
+input:not(:placeholder-shown) + .input-label {
+  top: 0;
+  transform: translateY(-50%) scale(.9);
+}
+.width-100{
+    width: 100%;
+}
+
+.input[type="file"]{
+    padding: .5rem !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* input{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+} */
+
+/* @use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/textfield";
+
+@include textfield.core-styles; */
+
+
+/* css2 */
+
+/* body {
+    height: 120vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    overflow: auto;
+}
+
+.container {
+    justify-content: center;
+    overflow:visible;
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+}
+
+.content form .user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+form .user-details .input-box {
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
+}
+
+form .input-box span.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.user-details .input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+form .participation-details .participation-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+form .category {
+    display: flex;
+    width: 80%;
+    margin: 14px 0;
+    justify-content: space-between;
+}
+
+form .category label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+form .category label .dot {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #d9d9d9;
+    border: 5px solid transparent;
+    transition: all 0.3s ease;
+}
+
+#dot-1:checked~.category label .one,
+#dot-2:checked~.category label .two {
+    background: #050107;
+    border-color: #d4d3d3;
+}
+
+form input[type="radio"] {
+    display: none;
+}
+
+form .button {
+    height: 45px;
+    margin: 35px 0
+}
+
+form .button input {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    background: blue;
+
+}
+
+form .button input:hover {
+    transform: scale(0.99);
+    background: linear-gradient(-135deg, #4460ff, #6d7eca);
+}
+
+@media(max-width: 584px) {
+    .container {
+        max-width: 100%;
+    }
+
+    form .user-details .input-box {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    form .category {
+        width: 100%;
+    }
+
+    .content form .user-details {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+
+    .user-details::-webkit-scrollbar {
+        width: 5px;
+    }
+}
+
+@media(max-width: 459px) {
+    .container .content .category {
+        flex-direction: column;
+    }
+} */

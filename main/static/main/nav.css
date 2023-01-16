@@ -1,0 +1,31 @@
+@import url('colors.css');
+
+
+.nav-background{
+    background-color: var(--white);
+    box-shadow: 0px  2px 4px rgba(0, 0, 0, 0.125);
+}
+.nav-item{
+    margin-left: 24px;
+}
+.nav-link{
+    color: var(--primary-blue) !important;
+    font-weight: 500;
+}
+.navbar-toggler{
+    border: none;
+}
+@media screen and (max-width:768px){
+    .nav-item{
+        margin-left: 0px !important;
+    }
+    .navbar-nav{
+        padding: 10px;
+    }
+    .button-width{
+        width: 100%;
+    }
+    #navbarNavDropdown{
+        background-color: var(--white);
+    }
+}

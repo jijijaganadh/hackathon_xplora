@@ -1,0 +1,30 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<!--Login--> 
+<div class="container header-container">
+  <div class="col-lg-3 col-md-8 col-sm-12 p-0">
+    <h1>Login</h1>
+    <form method="POST">
+    {% csrf_token %}
+    <div class="material-textfield mt-4">
+      <input placeholder=" " type="text" id="id_username" name="username" class="width-100">
+      <label for="id_username" class="input-label">Username*</label>
+    </div>
+    <div class="material-textfield mt-4">
+      <input placeholder=" " type="password" id="id_password" name="password" class="width-100">
+      <label for="id_password" class="input-label">Password*</label>
+    </div>
+    <!-- {{ login_form|crispy }} -->
+    <button class="btn secondary-button mt-4" type="submit">Login</button>
+  </form>
+  <div class="m-0 mt-4 text-center">
+    <p class="m-0">Don't have an account? <a href="/register">Create an account</a></p>
+  </div>
+  </div>
+</div>
+
+{% endblock %}

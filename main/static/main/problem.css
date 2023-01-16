@@ -1,0 +1,151 @@
+@import url('colors.css');
+
+
+/* Problem statment container */
+.problem-div{
+  background-color: var(--white);
+  box-shadow: 0px  2px 8px rgba(0, 0, 0, 0.16);
+  /*border: 1px solid black;
+  */border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.problem-div:hover{
+  box-shadow: 0px  2px 8px rgba(0, 0, 0, 0.16),4px  4px 0px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+/* Modal  */
+
+.modal-header {
+  border-bottom: 1px solid var(--orange);
+  color: var(--black);
+}
+
+.btn-close:hover{
+  color: var(--white) !important;
+  border:1px solid var(--orange);
+  border-radius: 20px;
+}
+
+.modal-content {
+  border-radius: 8px;
+  /* display: block;
+  position: absolute;
+  left: 60px;
+  height: 80px;
+  width: 40rem;
+  overflow-y:auto;
+  overflow-x:auto; */
+}
+
+
+
+
+
+
+/* * {
+  border-radius: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+
+} */
+/* 
+section article {
+  margin: 0.14rem;
+  padding: 2rem;
+} */
+
+/* .a-left {
+  background-color: rgb(255, 238, 216);
+  flex: 40%;
+  margin: 6px;
+}
+
+.a-center {
+  background-color: rgb(237, 250, 212);
+  flex: 20%;
+  margin: 6px;
+}
+
+.a-right {
+  background-color: rgb(122, 127, 151);
+  color: white;
+  margin: 6px;
+  flex: 20%;
+} */
+
+/* .two-container,
+.three-container {
+  display: flex;
+  margin: auto;
+  border-radius: 2px;
+
+} */
+
+
+/* anchor tag */
+/* a:link {
+  text-decoration: none;
+  color: black;
+}
+
+
+a:hover {
+  text-decoration: underline;
+} */
+ /* anchor tag end */
+
+/* media queries start */
+
+/* @media (max-width: 900px) {
+
+  .two-container,
+  .three-container {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 800px) {
+
+  .two-container,
+  .three-container {
+    flex-direction: row;
+  }
+} */
+
+/* media queries end */
+
+/* modal start */
+
+/* .modal-header {
+  background-color: black;
+  color: white;
+}
+
+.btn-close {
+  background-color: #f3f7f3
+}
+
+.modal-content {
+  border-radius: 8px; */
+  /* display: block;
+  position: absolute;
+  left: 60px;
+  height: 80px;
+  width: 40rem;
+  overflow-y:auto;
+  overflow-x:auto; */
+/* } */
+
+
+/* modal end */
