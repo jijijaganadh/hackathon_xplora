@@ -21,9 +21,11 @@
   <!-- style sheets -->
   <link rel="stylesheet" href="{% static 'main/common.css'%}">
   <link rel="stylesheet" href="{% static 'main/nav.css'%}">
-  <link rel="stylesheet" href="{% static 'main/alignment.css'%}">
   <link rel="stylesheet" href="{% static 'main/footer.css'%}">
   <link rel="stylesheet" href="{% static 'main/animate.css'%}">
+  <link rel="stylesheet" href="{% static 'main/faq.css'%}">
+  <link rel="stylesheet" href="{% static 'main/problem.css' %}">
+
   <style>
 
   </style>
@@ -60,6 +62,7 @@
         </ul>
       </div>
   </nav>
+  {% block content %}
   <!-- header section -->
   <section class="header-container">
     <div class=" container row">
@@ -1006,7 +1009,7 @@
       </div>
     </div>
   </section>
-
+  {% endblock %}
   <!--========== footer section ==========-->
   <footer class="main-footer">
     <div class="container">

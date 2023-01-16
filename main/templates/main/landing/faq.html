@@ -1,3 +1,4 @@
+{% extends 'main/landing/index.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +28,7 @@
 
   </head>
   <body>
+    {% block content %}
     <section class="container">
       <!--========== header section ==========-->
       <div class="text-center">
@@ -37,7 +39,7 @@
       <!--========== FAQ Accordion ==========-->
       <div class="accordion accordion-container div-margin mt-5" data-aos="fade-up">
         <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-2" aria-expanded="false">
+          <button id="accordion-button-1" aria-expanded="false">
             <span class="accordion-title">How do I Register for Xplora-WINHACK?</span>
             <span class="icon" aria-hidden="true"></span>
           </button>
@@ -51,7 +53,7 @@
           </div>
         </div>
         <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-1" aria-expanded="false">
+          <button id="accordion-button-2" aria-expanded="false">
             <span class="accordion-title">Xplora WIN HACK  is only open to teams? Can an individual participate?</span>
             <span class="icon" aria-hidden="true"></span>
           </button>
@@ -65,7 +67,7 @@
           </div>
         </div>
         <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-4" aria-expanded="false">
+          <button id="accordion-button-3" aria-expanded="false">
             <span class="accordion-title">Is it possible to change the team members after registration?</span>
             <span class="icon" aria-hidden="true"></span>
           </button>
@@ -78,7 +80,7 @@
           </div>
         </div>
         <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-3" aria-expanded="false">
+          <button id="accordion-button-4" aria-expanded="false">
             <span class="accordion-title">
               What are the selection criteria for the final hackathon?
             </span>
@@ -170,6 +172,7 @@
         </p>
       </div>
     </section>
+    
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init();
@@ -189,5 +192,6 @@
       }
       items.forEach((item) => item.addEventListener('click', toggleAccordion));
       </script>
+      {% endblock %}
   </body>
 </html>

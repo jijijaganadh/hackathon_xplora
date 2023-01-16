@@ -1,3 +1,4 @@
+{% extends 'main/landing/index.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +27,7 @@
      <link rel="stylesheet" href="{% static 'main/guidelines.css' %}">
 </head>
 <body>
+     {% block content %}
     <section class="container">
         <!--=========== guidelines header section ==========-->
           <div>
@@ -182,6 +184,7 @@
           </div>
       </div>
      </section>
+     {% endblock %}
      <!--========== script ==========-->
      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
      <script>
