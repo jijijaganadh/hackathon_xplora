@@ -1,3 +1,4 @@
+@import url(colors.css);
 
 .material-textfield {
   position: relative;
@@ -16,8 +17,8 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  background-color: white;
-  color: gray;
+  background-color: var(--white);
+  color: var(--gray);
   padding: 0 0.3rem;
   margin: 0 0.5rem;
   transition: .1s ease-out;
@@ -27,17 +28,19 @@
 input {
   font-size: 1rem;
   outline: none;
-  border: 1px solid gray;
+  border: 1px solid var(--gray);
   border-radius: 4px;  
   padding: 0.5rem 0.7rem;
-  color: gray;
+  color:var(--gray);
   transition: 0.1s ease-out;
 }
 input:focus {
-  border-color: #6200EE;  
+  /* border-color:var(--orange);   */
+  border-color:  #6200EE;
 }
 input:focus + .input-label {
   color: #6200EE;
+  /* color: var(--orange); */
   top: 0;
   transform: translateY(-50%) scale(.9);
 }
