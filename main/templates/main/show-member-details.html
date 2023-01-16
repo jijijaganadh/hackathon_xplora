@@ -27,7 +27,10 @@
         <table class="table">
           <thead>
             <th scope="col">Name</th>
-            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">PhoneNo</th>
+            <th scope="col">InstitutionName</th>
+
   
           </thead>
           <tbody>
@@ -37,7 +40,6 @@
               <td>{{ member.email }}</td>
               <td>{{ member.phoneno }}</td>
               <td>{{ member.institution_name }}</td>
-              <td>{{ member.institution_id }}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -50,11 +52,9 @@
         {% endif %}
 
         <div class="mt-4">
-          {% if memberdetails.count <= 2  %}
           <button type="submit" class="btn secondary-button">
             <a href="{% url 'main:addmember' %}" >Add</a>
           </button>
-          {% endif %}
           
           <a href="/mentor/">
             <button type="button" class="btn secondary-button">Continue</button>

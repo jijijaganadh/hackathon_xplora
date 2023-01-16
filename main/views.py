@@ -31,7 +31,8 @@ def homepage(request):
     paginator = Paginator(books, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    mainParticipantDetails = MainParticipant.objects.get(user_id=request.user)
+    if request.user.is_authenticated:
+        mainParticipantDetails = MainParticipant.objects.get(user_id=request.user)
     return render(request=request, template_name='main/home.html', context={"books": page_obj,'user':mainParticipantDetails})
 
 
@@ -69,6 +70,8 @@ def register_request(request):
             return redirect("main:registration")
         messages.error(
             request, f"Unsuccessful Registration, {form.error_messages}")
+    if request.user.is_authenticated:
+        return redirect('main:homepage')
     form = NewUserForm()
     return render(request, 'main/register.html', {'register_form': form})
 
@@ -91,6 +94,8 @@ def login_request(request):
                 return redirect("main:homepage")
         return render(request=request, template_name="main/login.html", context={"login_form": form})
     else:
+        if request.user.is_authenticated:
+            return redirect('main:homepage')
         form = AuthenticationForm()
         return render(request=request, template_name="main/login.html", context={"login_form": form})
    
@@ -115,6 +120,7 @@ def registration_request(request):
         'institution': institution
     }
      return redirect("main:registration")
+    
     form = NewUserForm()
     return render(request, 'main/registration.html', {'register_form': form})
 
@@ -162,7 +168,7 @@ class MentorDetails(View):
             memberdetails = Memberdetails.objects.filter(user_id=request.user)
             print(memberdetails)
             # check member details
-            return render(request, self.template_name, {"form": form, "memberdetails": list(memberdetails)})
+            return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails.values()], "type":type([member for member in memberdetails.values()])})
         except Memberdetails.DoesNotExist:
             pass
         return render(request, self.template_name, {"form": form})
