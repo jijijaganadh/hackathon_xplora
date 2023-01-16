@@ -26,7 +26,8 @@ urlpatterns = [
     # path("participant/", views.participants, name="participant"),
     path("problem/", views.problem, name="problem"),
     path("mentor/", views.mentordetails, name="mentor"),
-    path("member/", views.memberdetails, name="member"),
+    path("member/", views.MentorDetails.as_view(), name="member"),
+    path("add_member/", views.AddMember.as_view(), name="addmember" ),
     path("problem_description", views.problem_description, name='problem_description'),
 
 
