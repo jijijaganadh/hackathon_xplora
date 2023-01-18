@@ -28,7 +28,15 @@ urlpatterns = [
     path("mentor/", views.mentordetails, name="mentor"),
     path("member/", views.MentorDetails.as_view(), name="member"),
     path("add_member/", views.AddMember.as_view(), name="addmember" ),
-    path("problem_description", views.problem_description, name='problem_description'),
+    path("problem_description/", views.problem_description, name='problem_description'),
+    path("userprofile/", views.ViewUserProfile.as_view(), name='userprofile'),
+    path("memberprofile/", views.ViewMemberProfile.as_view(), name='memberprofile'),
+    path("mentorprofile/", views.ViewMentorProfile.as_view(), name='mentorprofile'),
+     path("updateuserprofile/", views.UpdateUserProfile.as_view(), name='userprofile'),
+    path("updatememberprofile/", views.UpdateMemberProfile.as_view(), name='memberprofile'),
+    path("updatementorprofile/", views.UpdateMentorProfile.as_view(), name='mentorprofile'),
+    
+
 
 
 ]

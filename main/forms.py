@@ -92,3 +92,36 @@ class AddMemberDetailsForm(forms.ModelForm):
         model = Memberdetails
         fields = '__all__'
         
+#    home page     
+
+class MemberdetailsviewprofileForm(forms.ModelForm):
+    class Meta:
+        model= Memberdetails
+        fields=('name','email','phoneno','institution_name','institution_id')  
+    
+class ViewmainParticipantForm(forms.ModelForm):
+    class Meta:
+        model = MainParticipant
+        fields = ['teamleadname','college_id',"phone",'institution_name','institution_address']
+
+class MentordetailsviewprofileForm(forms.ModelForm):
+    class Meta:
+        model = Mentordetails
+        fields = ['name',"phoneno","email",'institution_name','designation']
+    
+class UpdateMentorForm(forms.ModelForm):
+    class Meta:
+        model = Mentordetails
+        fields = ['name',"phoneno","email",'institution_name','designation']
+
+class UpdateMainParticipantForm(forms.ModelForm):
+    class Meta:
+        model = MainParticipant
+        fields = ['teamleadname',"phone",'institution_name','institution_address']
+
+
+class UpdateMemberdetailsForm(forms.ModelForm):
+    class Meta:
+        model= Memberdetails
+        fields=('name','email','phoneno','institution_name')  
+    

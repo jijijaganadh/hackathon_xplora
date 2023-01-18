@@ -1,7 +1,7 @@
 import json
 from django.http import BadHeaderError, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from main.forms import ContactForm, MainParticipantForm, MemberForm, NewUserForm, MentordetailsForm,ShowMentordetailsForm, AddMemberDetailsForm
+from main.forms import ContactForm, MainParticipantForm, MemberForm, MemberdetailsviewprofileForm, MentordetailsviewprofileForm, NewUserForm, MentordetailsForm,ShowMentordetailsForm, AddMemberDetailsForm, UpdateMainParticipantForm, UpdateMemberdetailsForm, UpdateMentorForm, ViewmainParticipantForm
 from django.contrib.auth.models import User
 
 from main.models import Book, Institution
@@ -149,7 +149,7 @@ def problem(request):
         plbm = Problem.objects.get(problem_id = request.POST.dict()['institution_name'])
         instance = Solution_details.objects.create(user_id =request.user,problem_id =plbm,**usersignupdetails)
         instance.save()
-        return redirect('main:member')
+        return redirect('main:homepage')
     else:
         problems = Problem.objects.all()
         return render(request,'main/problem.html', {'problems':problems})
@@ -159,14 +159,14 @@ from django.views import View
 
 class MentorDetails(View):
     form_class = ShowMentordetailsForm
-    template_name = "main/show-member-details.html"
+    template_name = "main/viewmentorprofile.html"
     
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         print(request.user.id)
         try:
             memberdetails = Memberdetails.objects.filter(user_id=request.user)
-            print(memberdetails)
+            print(len(list(memberdetails)))
             # check member details
             return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails.values()]})
         except Mentordetails.DoesNotExist:
@@ -182,6 +182,7 @@ class AddMember(View):
     
     def get(self, request, *args, **kwargs):
         form = self.form_class()
+        
         return render(request, self.template_name, {"form": form})
         
     def post(self, request, *args, **kwargs):  
@@ -194,15 +195,15 @@ class AddMember(View):
             print(request.POST)
             if form.is_valid():
                 print("valid")
-                memberDetails = form.save(commit=False)
-                memberDetails.user_id = request.user
-                md=Memberdetails.objects.filter(user_id=request.user)
+                mentordetails = form.save(commit=False)
+                mentordetails.user_id = request.user
+                md=Mentordetails.objects.filter(user_id=request.user)
                 d=len(list(md))
                 if d>=1:
-                    return redirect("main:mentor")
-                memberDetails.save()
-                
-                return redirect('main:member')
+                    return redirect("main:homepage")
+                else:
+                 mentordetails.save()
+                return redirect('main:homepage')
                 # return render(request, 'main/members.html')
                 # context = {"form": form, "members":members}
                 # return render(request, 'main/members.html', context)  
@@ -212,6 +213,7 @@ class AddMember(View):
                 return render(request, 'main/members.html', context)  
         
         else:
+            
             return render(request, 'main/members.html')  
                 # form = self.form_class(request.POST)
                 # if form.is_valid():
@@ -225,10 +227,14 @@ def mentordetails(request):
     form = MentordetailsForm(request.POST)
 
     if form.is_valid():
-        mentorDetails = form.save(commit=False)
-        mentorDetails.user_id =request.user
-        mentorDetails.save()
-        return redirect('main:homepage')
+         mentorDetails = form.save(commit=False)
+         mentorDetails.user_id =request.user
+        #  md=Memberdetails.objects.filter(user_id=request.user)
+        #  d=len(list(md))
+        #  if d>=1:
+        #   return redirect("main:homepage")
+         mentorDetails.save()
+         return redirect('main:homepage')
     else:
         redirect('main:mentordetails')
 
@@ -261,3 +267,106 @@ def memberdetails(request):
  else:
     return render(request, 'main/members.html')
 
+
+# profile view- Home Page
+
+
+
+class ViewMemberProfile(View):
+    form_class = MemberdetailsviewprofileForm
+    template_name = "main/viewmemberprofile.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        print(request.user.id)
+        try:
+            memberdetails = Memberdetails.objects.filter(user_id=request.user)
+            print(len(list(memberdetails)))
+          
+            return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails.values()], 'length':len(list(memberdetails))})
+        except Mentordetails.DoesNotExist:
+            pass
+        return render(request, self.template_name, {"form": form, 'length':0})
+
+class ViewMentorProfile(View):
+    form_class = MentordetailsviewprofileForm
+    template_name = "main/viewmentorprofile.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        print(request.user.id)
+        try:
+            menterprofile = Mentordetails.objects.get(user_id=request.user)
+            print(menterprofile)
+            
+            return render(request, self.template_name, {"form": form, "mentordetails": menterprofile, 'length':1})
+        
+        except Mentordetails.DoesNotExist:
+            pass
+        return render(request, self.template_name, {"form": form, 'length':0})
+    
+    
+class ViewUserProfile(View):
+    form_class = ViewmainParticipantForm
+    template_name = "main/viewuserprofile.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        print(request.user.id)
+        try:
+            mainparticipantdetails = MainParticipant.objects.get(user_id=request.user)
+            print(mainparticipantdetails)
+            
+            return render(request, self.template_name, {"participant": mainparticipantdetails})
+        except MainParticipant.DoesNotExist:
+            pass
+        return render(request, self.template_name, {"form": form})   
+    
+class UpdateMentorProfile(View):
+    form_class = UpdateMentorForm
+    template_name = "main/viewmentorprofile.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        print(request.user.id)
+        try:
+            menterprofile = Mentordetails.objects.get(user_id=request.user)
+           
+            
+            return render(request, self.template_name, {"form": form, "mentordetails": menterprofile})
+        except Mentordetails.DoesNotExist:
+            pass
+        return render(request, self.template_name, {"form": form}) 
+    
+class UpdateUserProfile(View):
+    form_class = UpdateMainParticipantForm
+    template_name = "main/viewuserprofile.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        print(request.user.id)
+        try:
+            mainparticipantdetails = MainParticipant.objects.get(user_id=request.user)
+            print(mainparticipantdetails)
+            
+            return render(request, self.template_name, {"participant": mainparticipantdetails})
+        except MainParticipant.DoesNotExist:
+            pass
+        return render(request, self.template_name, {"form": form}) 
+    
+    
+class UpdateMemberProfile(View):
+    form_class = UpdateMemberdetailsForm
+    template_name = "main/show-member-details.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        print(request.user.id)
+        try:
+            memberdetails = Memberdetails.objects.filter(user_id=request.user)
+           
+          
+            return render(request, self.template_name, {"form": form, "memberdetails": memberdetails})
+        except Mentordetails.DoesNotExist:
+            pass
+        return render(request, self.template_name, {"form": form})

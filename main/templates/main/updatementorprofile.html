@@ -19,45 +19,47 @@
 <body>
   <section class="container header-container">
     <div class="col-lg-3 col-md-8 col-sm-12 p-0">
-      <h1>Member Details</h1>
+      <h1>Mentor Details</h1>
       <form action=""  class="form" method="GET" enctype ="multipart/form-data">
         {% csrf_token %}
        
-        {% if memberdetails %}
+        {% if mentordetails %}
         <table class="table">
           <thead>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">PhoneNo</th>
             <th scope="col">InstitutionName</th>
+            <th scope="col">Designation</th>
+
+
 
   
           </thead>
           <tbody>
-            {% for member in memberdetails %}
             <tr>
-              <td>{{ member.name }}</td>
-              <td>{{ member.email }}</td>
-              <td>{{ member.phoneno }}</td>
-              <td>{{ member.institution_name }}</td>
+              <td>{{ mentordetails.name }}</td>
+              <td>{{ mentordetails.email }}</td>
+              <td>{{ mentordetails.phoneno }}</td>
+              <td>{{ mentordetails.institution_name }}</td>
+              <td>{{ mentordetails.designation }}</td>
             </tr>
-            {% endfor %}
           </tbody>
         </table>
            
         {% else %}
             <div>
-              No Members were added
+              No mentor were added
             </div>
         {% endif %}
 
         <div class="mt-4">
           <button type="submit" class="btn secondary-button">
-            <a href="{% url 'main:addmember' %}" >Add</a>
+            <a href="{% url 'main:' %}" >Update</a>
           </button>
           
           <a href="/mentor/">
-            <button type="button" class="btn secondary-button">Skip</button>
+            <button type="button" class="btn secondary-button">delete</button>
           </a>
         </div>
 
