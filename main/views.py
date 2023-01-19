@@ -198,11 +198,8 @@ class AddMember(View):
                 mentordetails = form.save(commit=False)
                 mentordetails.user_id = request.user
                 md=Mentordetails.objects.filter(user_id=request.user)
-                d=len(list(md))
-                if d>=1:
-                    return redirect("main:homepage")
-                else:
-                 mentordetails.save()
+                
+                mentordetails.save()
                 return redirect('main:homepage')
                 # return render(request, 'main/members.html')
                 # context = {"form": form, "members":members}
@@ -298,7 +295,6 @@ class ViewMentorProfile(View):
         try:
             menterprofile = Mentordetails.objects.get(user_id=request.user)
             print(menterprofile)
-            
             return render(request, self.template_name, {"form": form, "mentordetails": menterprofile, 'length':1})
         
         except Mentordetails.DoesNotExist:
@@ -331,7 +327,7 @@ class UpdateMentorProfile(View):
         print(request.user.id)
         try:
             menterprofile = Mentordetails.objects.get(user_id=request.user)
-           
+             
             
             return render(request, self.template_name, {"form": form, "mentordetails": menterprofile})
         except Mentordetails.DoesNotExist:
@@ -346,8 +342,8 @@ class UpdateUserProfile(View):
         form = self.form_class()
         print(request.user.id)
         try:
-            mainparticipantdetails = MainParticipant.objects.get(user_id=request.user)
-            print(mainparticipantdetails)
+            mainparticipantdetails = MainParticipant.objects.get(user_id=request.user,instance=form)
+            
             
             return render(request, self.template_name, {"participant": mainparticipantdetails})
         except MainParticipant.DoesNotExist:
@@ -364,7 +360,7 @@ class UpdateMemberProfile(View):
         print(request.user.id)
         try:
             memberdetails = Memberdetails.objects.filter(user_id=request.user)
-           
+            
           
             return render(request, self.template_name, {"form": form, "memberdetails": memberdetails})
         except Mentordetails.DoesNotExist:
