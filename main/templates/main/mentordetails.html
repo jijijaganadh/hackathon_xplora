@@ -23,25 +23,25 @@
     <form  class="form" method="POST" enctype ="multipart/form-data">
       {% csrf_token %}
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" id="id_name" name="name" class="width-100">
+        <input placeholder=" " type="text" id="id_name" name="name" class="width-100" required>
         <label for="id_name" class="input-label">Name</label>
       </div>
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" id="id_email" name="email" class="width-100">
+        <input placeholder=" " type="text" id="id_email" name="email" class="width-100" required>
         <label for="id_email" class="input-label">Email</label>
       </div>
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)">
+        <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)" required>
         <label for="id_phoneno" class="input-label">Contact number</label>
       </div>
       <p id="phoneNumberError"></p>
 
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" id="id_institution_name" name="institution_name" class="width-100">
+        <input placeholder=" " type="text" id="id_institution_name" name="institution_name" class="width-100" required>
         <label for="id_institution_name" class="input-label">Institution Name</label>
       </div>
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" id="id_designation" name="designation" class="width-100">
+        <input placeholder=" " type="text" id="id_designation" name="designation" class="width-100" required>
         <label for="id_designation" class="input-label">Designation</label>
       </div>
       <div class="mt-4">

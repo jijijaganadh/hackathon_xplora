@@ -29,13 +29,13 @@
                         <div class="form-step form-step-active">
                             <div class="input-group">
                               <label for="name">Name of Team lead</label>
-                              <input type="text" name="teamleadname" id="teamleadname" />
+                              <input type="text" name="teamleadname" id="teamleadname" required/>
                               <label for="phone">Phone</label>
-                              <input type="text" name="phoneno" id="phoneno" />
+                              <input type="text" name="phoneno" id="phoneno"required />
                               <label for="Institution">Institution</label>
-                              <select name="institution" id="institution">
+                              <select name="institution" id="institution"required>
                                 {% for institution in register_form.institution %}
-                                <option value="{{ institution.id }}">
+                                <option value="{{ institution.id }}"required>
                                   {{ institution.institution_name }}
                                 </option>
                                 {% endfor %}
