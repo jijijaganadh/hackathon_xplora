@@ -27,21 +27,22 @@
       <form action=""  class="form" method="POST" enctype ="multipart/form-data">
         {% csrf_token %}
         <div class="material-textfield mt-4">
-          <input placeholder=" " type="text" id="id_name" name="name" class="width-100">
+          <input placeholder=" " type="text" id="id_name" name="name" class="width-100"required/>
           <label for="id_name" class="input-label">Name</label>
         </div>
+
         <div class="material-textfield mt-4">
-          <input placeholder=" " type="text" id="id_email" name="email" class="width-100">
+          <input placeholder=" " type="text" id="id_email" name="email" class="width-100" required/>
           <label for="id_email" class="input-label">Email</label>
         </div>
         <div class="material-textfield mt-4">
-          <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)">
+          <input placeholder=" " type="text" id="id_phoneno"name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)"required/>
           <label for="id_email" class="input-label">Contact Number</label>
         </div>
         <p id="phoneNumberError"></p>
 
         <div class="material-textfield mt-4">
-          <input placeholder=" " type="text" id="id_phoneno" name="institution_name" class="width-100">
+          <input placeholder=" " type="text" id="id_phoneno" name="institution_name" class="width-100" required/>
           <label for="id_phoneno" class="input-label">Institution Name</label>
         </div>
         <div class=" mt-4">
@@ -60,7 +61,9 @@
         </div>
         <div class="mt-4">
                 <button type="submit" class="btn secondary-button">Add </button>
-
+                <a href="/mentor/">
+                  <button type="button" class="btn secondary-button">Skip</button>
+                </a>
 
               </div>
 

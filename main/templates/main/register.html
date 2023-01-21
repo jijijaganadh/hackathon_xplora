@@ -10,7 +10,7 @@
     <form method="POST">
       {% csrf_token %}
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" required id="id_username" name="username" class="width-100" onkeypress="return ignoreSpaces(event)" >
+        <input placeholder=" " type="text" required id="id_username" name="username" class="width-100" onkeypress="return ignoreSpaces(event)" required>
         <label for="id_username" class="input-label">Username*</label>
       </div>
       <div class="small text-muted mt-2">
@@ -22,11 +22,11 @@
         minimum of 8 characters required. Letters, digits and @/./+/-/_ only.
       </div> -->
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="email" required id="id_email" name="email" class="width-100" >
+        <input placeholder=" " type="email" required id="id_email" name="email" class="width-100" required >
         <label for="id_email" class="input-label">Email*</label>
       </div>
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="password" required  id="id_password1" name="password1" class="width-100">
+        <input placeholder=" " type="password" required  id="id_password1" name="password1" class="width-100" required>
         <label for="id_password1" class="input-label">Password*</label>
       </div>
       <div class="small text-muted mt-2">
@@ -39,7 +39,7 @@
       </div> -->
       <div class="material-textfield mt-4">
         <input placeholder=" " type="password" required  id="id_password2" name="password2" class="width-100">
-        <label for="id_password2" class="input-label">confirmPassword*</label>
+        <label for="id_password2" class="input-label">Confirm Password*</label>
       </div>
       <p id="confirmPswdError"></p>
 
@@ -61,32 +61,39 @@
 <script>
   //password validation
   const pswdCheck = (text, passwordError) => {
-  let condition1 = /(?=.*\d)/; //should contain atleast 1 digit
+    let condition1 = /(?=.*[A-Z])/; //should contain atleast 1 uppercase
   let condition2 = /(?=.*[a-z])/; //should contain atleast 1 lowercase
-  let condition3 = /(?=.*[A-Z])/; //should contain atleast 1 uppercase
-  let condition4 = /[a-zA-Z0-9]{8,}/; //should contain atleast 8 characters
+  let condition3 = /(?=.*\d)/; //should contain atleast 1 digit
+  let condition4 = /(?=.*[!@#$%^&*])/; //should contain atleast 1 Special character
+  let condition5 = /[a-zA-Z0-9]{8,}/; //should contain atleast 8 characters
+
 
   passwordError.style.color = "red";
 
   if (!text.match(condition1)) {
+    passwordError.style.display = "block";
+    passwordError.textContent = "Password should contain atleast 1 uppercase";
+    return;
+}
+
+if (!text.match(condition2)) {
+  passwordError.style.display = "block";
+  passwordError.textContent = "Password should contain atleast 1 lowercase";
+  return;
+}
+
+  if (!text.match(condition3)) {
       passwordError.style.display = "block";
       passwordError.textContent = "Password should contain atleast 1 digit";
       return;
   }
-
-  if (!text.match(condition2)) {
-      passwordError.style.display = "block";
-      passwordError.textContent = "Password should contain atleast 1 lowercase";
-      return;
-  }
-
-  if (!text.match(condition3)) {
-      passwordError.style.display = "block";
-      passwordError.textContent = "Password should contain atleast 1 uppercase";
-      return;
-  }
-
   if (!text.match(condition4)) {
+    passwordError.style.display = "block";
+    passwordError.textContent = "Password should contain atleast 1 special characters";
+    return;
+}
+
+  if (!text.match(condition5)) {
       passwordError.style.display = "block";
       passwordError.textContent = "Password should contain atleast 8 characters";
       return;
