@@ -32,12 +32,11 @@ urlpatterns = [
     path("userprofile/", views.ViewUserProfile.as_view(), name='userprofile'),
     path("memberprofile/", views.ViewMemberProfile.as_view(), name='memberprofile'),
     path("mentorprofile/", views.ViewMentorProfile.as_view(), name='mentorprofile'),
-     path("updateuserprofile/", views.UpdateUserProfile.as_view(), name='userprofile'),
-    path("updatememberprofile/", views.UpdateMemberProfile.as_view(), name='memberprofile'),
-    path("updatementorprofile/", views.UpdateMentorProfile.as_view(), name='mentorprofile'),
-    
-
-
+    path("updateuserprofile/", views.UpdateUserProfile.as_view(), name='userprofile'),
+    path("updatememberprofile/<int:id>", views.UpdateMemberProfile.as_view(), name='memberprofile'),
+    path("updatementorprofile/", views.UpdateMentorProfile.as_view(), name='updatementorprofile'),
+    path("delete-mentor/", views.DeleteMentor.as_view(), name="deletementor"),
+    path("delete-member/<int:id>", views.DeleteMember.as_view(), name="deletemember"),
 
 ]
 

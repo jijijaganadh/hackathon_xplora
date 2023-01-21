@@ -43,6 +43,18 @@
               <td>{{ mentordetails.phoneno }}</td>
               <td>{{ mentordetails.institution_name }}</td>
               <td>{{ mentordetails.designation }}</td>
+              {% if length >= 1%}
+              <td>
+                <a href="/updatementorprofile/">
+                  <button type="button" class="btn secondary-button">Update</button>
+                </a>
+              </td>
+              <td>
+                <a href="/deletementor/">
+                  <button type="button" class="btn secondary-button">delete</button>
+                </a>
+              </td>
+              {% endif %}
             </tr>
           </tbody>
         </table>
@@ -61,14 +73,6 @@
             <a href="/home/">Continue</a>
             {% endif %}
           </button>
-          
-          <a href="/home/">
-            <button type="button" class="btn secondary-button">Update</button>
-          </a>
-          <a href="/home/">
-            <button type="button" class="btn secondary-button">delete</button>
-          </a>
-
         </div>
 
       </form>

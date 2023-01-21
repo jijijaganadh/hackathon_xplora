@@ -119,6 +119,8 @@ class UpdateMainParticipantForm(forms.ModelForm):
         model = MainParticipant
         fields = ['teamleadname',"phone",'institution_name','institution_address']
 
+    def clean(self):
+        return super().clean()
 
 class UpdateMemberdetailsForm(forms.ModelForm):
     class Meta:
