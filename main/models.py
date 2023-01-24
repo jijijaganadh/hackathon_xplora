@@ -29,7 +29,7 @@ def user_directory_path(instance, filename):
     return 'user_{0}/{1}'.format(instance.user_id, filename)
 
 class MainParticipant(models.Model):
-    user_id= models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    user_id= models.ForeignKey(User, null= True,  on_delete=models.CASCADE)
     teamleadname = models.CharField(max_length=50)
     phone = models.CharField(max_length=15)
     institution_name = models.CharField(max_length=50)
