@@ -4,7 +4,7 @@ from django.views import View
 import json
 from django.http import BadHeaderError, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from main.forms import ContactForm, MainParticipantForm, MemberForm, MemberdetailsviewprofileForm, MentordetailsviewprofileForm, NewUserForm, MentordetailsForm, ShowMentordetailsForm, AddMemberDetailsForm, UpdateMainParticipantForm, UpdateMemberdetailsForm, UpdateMentorForm, ViewmainParticipantForm
+from main.forms import ContactForm, MainParticipantForm, MemberForm, MemberdetailsviewprofileForm, MentordetailsviewprofileForm, NewUserForm, MentordetailsForm, ShowMentordetailsForm, AddMemberDetailsForm, UpdateMainParticipantForm, UpdateMemberdetailsForm, UpdateMentorForm, ViewmainParticipantForm, ViewproblemdetailsForm
 from django.contrib.auth.models import User
 
 from main.models import Book, Institution
@@ -434,6 +434,25 @@ class UpdateMemberProfile(View):
             memberdetails = form.save()
             print(memberdetails)
         return render(request, self.template_name, {"member": memberdetails})
+
+class ViewProblemdetails(View):
+    form_class = ViewproblemdetailsForm
+    template_name = "main/viewproblemdetails.html"
+
+    def get(self, request):
+        form = self.form_class()
+        try:
+            solutiondetails = Solution_details.objects.get(user_id=request.user)
+            print(solutiondetails.problem_id.problem_id)
+            problemdetails = Problem.objects.get(problem_id=solutiondetails.problem_id.problem_id)
+            print(solutiondetails)
+            
+            
+            return render(request, self.template_name, {"form": form, "problemdetails": problemdetails,"solutiondetails":solutiondetails})
+
+        except Solution_details.DoesNotExist:
+            pass
+        return render(request, self.template_name, {"form": form})
 
   
 

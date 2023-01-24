@@ -3,7 +3,7 @@ from django import forms
 # from click import Choice
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import MainParticipant, Memberdetails,Mentordetails
+from .models import MainParticipant, Memberdetails,Mentordetails, Solution_details
 
 # from .models import Solution
 
@@ -29,7 +29,10 @@ class ShowMentordetailsForm(forms.ModelForm):
         model = Mentordetails
         fields = ['name',"phoneno","email",'institution_name','designation']
         
-    
+class ViewproblemdetailsForm(forms.ModelForm):
+    class Meta:
+        model= Solution_details
+        fields = ['solution_upload']  
         
         
 class MainParticipantForm(forms.ModelForm):

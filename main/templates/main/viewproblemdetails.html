@@ -19,49 +19,39 @@
 <body>
   <section class="container header-container">
     <div class="col-lg-3 col-md-8 col-sm-12 p-0">
-      <h1>Member Details</h1>
+      <h1>Problem Details</h1>
       <form action=""  class="form" method="GET" enctype ="multipart/form-data">
         {% csrf_token %}
        
-        {% if memberdetails %}
+        {% if problemdetails %}
         <table class="table">
           <thead>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">PhoneNo</th>
-            <th scope="col">InstitutionName</th>
-
-  
+            <th scope="col">Problem Name</th>
+            <th scope="col">Problem Discription</th>
+            <th scope="col">Your Solution</th>
           </thead>
           <tbody>
-            {% for member in memberdetails %}
             <tr>
-              <td>{{ member.name }}</td>
-              <td>{{ member.email }}</td>
-              <td>{{ member.phoneno }}</td>
-              <td>{{ member.institution_name }}</td>
+              <td>{{ problemdetails.problem_name }}</td>
+              <td>{{ problemdetails.description }}</td>
+              <!-- <td>{{ problemdetails.solution_upload.url }}</td> -->
+
+
+              <!-- <td><a href="home/icfoss/17jan-/mixedproject{{solutiondetails.solution_upload.url}}" >View Solution</a></td> -->
             </tr>
-            {% endfor %}
           </tbody>
         </table>
            
         {% else %}
             <div>
-              No Members were added
+              No problem were added
             </div>
         {% endif %}
 
-        <div class="mt-4">
-          <button type="submit" class="btn secondary-button">
-            <a href="{% url 'main:addmember' %}" >Add</a>
-          </button>
-          
-          <a href="/home/">
-            <button type="button" class="btn secondary-button">back</button>
-          </a>
-        </div>
-
       </form>
+      <a href="/home/">
+        <button type="button" class="btn secondary-button">back</button>
+      </a>
     </div>
   </section>
              

@@ -34,6 +34,7 @@ urlpatterns = [
     path("updatementorprofile/", views.UpdateMentorProfile.as_view(), name='updatementorprofile'),
     path("deletementor/", views.DeleteMentor.as_view(), name="deletementor"),
     path("delete-member/<int:id>", views.DeleteMember.as_view(), name="deletemember"),
+    path("viewproblem/", views.ViewProblemdetails.as_view(), name='viewproblem'),
 
 ]
 
