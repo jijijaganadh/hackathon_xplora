@@ -12,6 +12,7 @@ urlpatterns = [
     path('faq/',views.faq,name="faq"),
     path('problemstatements/',views.plbmstmt,name="plbmstmt"),
     path('guidelines/',views.guidelines,name="guidelines"),
+    path('about/',views.about,name="about"),
 
     # login urls
     path("login/", views.login_request, name="login"),

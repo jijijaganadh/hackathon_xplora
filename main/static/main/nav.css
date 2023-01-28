@@ -12,6 +12,9 @@
     color: var(--primary-blue) !important;
     font-weight: 500;
 }
+.nav-link:hover{
+    color: var(--light-blue)!important;
+}
 .navbar-toggler{
     border: none;
 }

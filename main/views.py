@@ -37,6 +37,9 @@ def plbmstmt(request):
 def guidelines(request):
     return render(request, "main/landing/guidelines.html")
 
+def about(request):
+    return render(request, "main/landing/about.html")
+
 
 def homepage(request):
     books = Book.objects.all()
@@ -82,7 +85,7 @@ def register_request(request):
             user = form.save()
             send_activation_email(user, request)
             # login(request, user)
-            messages.success(request, "We sended you an activation link to your registered email. Please check your Email and Login through the given link.")
+            # messages.success(request, "Registration Successfull")
             return redirect("main:register")
         messages.error(
             request, f"Unsuccessful Registration, {form.error_messages}")

@@ -1,20 +1,21 @@
-{% extends "main/header.html" %}
-{% block content %}
-{% load crispy_forms_tags %}
+
+
+{% extends "main/login.html" %}
 
 <!--Register-->
-<div class="container header-container pt-5">
-  <div class="col-lg-3 col-md-8 col-sm-12 p-0 pt-3">
+<!-- <div class="container header-container pt-5">
+  <div class="col-lg-3 col-md-8 col-sm-12 p-0 pt-3"> -->
+    {% block auth %}
     <h1>Signup</h1>
-    <p class="m-0">Enter your details and create an account</p>
+    <p class="m-0 small">Enter your details and create an account</p>
     <form method="POST">
       {% csrf_token %}
       <div class="material-textfield mt-4">
         <input placeholder=" " type="text" required id="id_username" name="username" class="width-100" onkeypress="return ignoreSpaces(event)" required>
         <label for="id_username" class="input-label">Username*</label>
       </div>
-      <div class="small text-muted mt-2">
-        Username should be minimum of 8 characters
+      <div class="mt-1">
+        <P class="small text-muted m-0">Username should be minimum of 8 characters</P>
       </div>
       <p id ="username-error"></p>
 
@@ -29,8 +30,8 @@
         <input placeholder=" " type="password" required  id="id_password1" name="password1" class="width-100" required>
         <label for="id_password1" class="input-label">Password*</label>
       </div>
-      <div class="small text-muted mt-2">
-        Password should be minimum of 8 characters,number and  &@#$!.
+      <div class=" mt-1">
+        <p class="m-0 small text-muted">Password should be minimum of 8 characters,numbers and &@#$!.</p>
       </div>
       <p id="pswdError"></p>
 
@@ -46,17 +47,19 @@
       <!-- <div class="small text-muted mt-2">
         Enter the same password as before, for verification.
       </div> -->
-      <!-- {{ register_form|crispy }} -->
-      <button class="btn secondary-button mt-4 width-100" type="submit">Signup and continue</button>
+      
+      <button class="btn secondary-button auth-btn mt-4 width-100" type="submit">Signup</button>
     </form>
     <div class="m-0 mt-4 text-center">
-      <p class="m-0">If you already have an account, <a href="/login">login</a></p>
+      <p class="m-0">If you already have an account, <a href="/login">Sign in</a></p>
     </div>
-  </div>
+
+
+  <!-- </div> -->
   <!-- <p class="text-center">
     If you already have an account, <a href="/login">login</a> instead.
   </p> -->
-</div>
+<!-- </div> -->
 
 <script>
   //password validation
@@ -145,7 +148,7 @@ if(text.includes(" ")){
   usernameError.textContent = 'Contains white spaces';
   usernameError.style.color = 'red';
   return;
-} 
+}
 
 }
 
@@ -153,7 +156,7 @@ usernameEl.addEventListener("keypress", (event)=>{
 checkUsername(usernameEl.value);
 });
   function ignoreSpaces(event) {
-      
+
       var character = event ? event.which : window.event.keyCode;
       if (character == 32) {
         usernameError.style.display = 'block';
@@ -166,5 +169,4 @@ checkUsername(usernameEl.value);
       }
   }
 </script>
-
 {% endblock %}

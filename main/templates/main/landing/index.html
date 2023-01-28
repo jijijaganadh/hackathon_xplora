@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
     crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
@@ -23,10 +24,12 @@
   <link rel="stylesheet" href="{% static 'main/footer.css'%}">
   <link rel="stylesheet" href="{% static 'main/faq.css'%}">
   <link rel="stylesheet" href="{% static 'main/problem.css' %}">
+  <link rel="stylesheet" href="{% static 'main/guidelines.css' %}">
+  <link rel="stylesheet" href="{% static 'main/index.css' %}">
 
 <body>
   <!-- ========== navigation ========== -->
-  <nav class="navbar navbar-expand-lg nav-background sticky-top p-0" id="navbar">
+  <nav class="navbar navbar-expand-lg nav-background sticky-top " id="navbar">
     <div class="container-fluid mx-lg-4">
       <a class="navbar-brand toplogo img" href="{% url 'main:index' %}"><img src="{% static 'assets/200 x 100 gok icfoss.svg'%}" width="160px"
           height=40px style="margin-right:9px"></a>
@@ -39,6 +42,9 @@
           <li class="nav-item ">
             <a class="nav-link " aria-current="page" href="{% url 'main:index' %}">Home</a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link " aria-current="page" href="{% url 'main:about' %}">About</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'main:plbmstmt' %}">Problem</a>
           </li>
@@ -50,18 +56,23 @@
           </li>
           <li class="nav-item">
             <a href="{% url 'main:login' %}">
-              <button class="primary-button"><span>Login </span></button>
+              <button class="primary-button"><span>Sign in</span></button>
             </a>
           </li>
         </ul>
       </div>
+      
   </nav>
+  <div class="mt-0 m-0" id="up-water" data-aos="fade-down" >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="0.9" d="M0,128L40,117.3C80,107,160,85,240,101.3C320,117,400,171,480,165.3C560,160,640,96,720,58.7C800,21,880,11,960,5.3C1040,0,1120,0,1200,10.7C1280,21,1360,43,1400,53.3L1440,64L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>
+  </div>
   {% block content %}
+  <!-- ========== header banner ========== -->
   <!-- header section -->
-  <section class="header-container">
-    <div class=" container row">
-      <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 align-items-center" data-aos="fade-right">
-        <svg viewBox="0 0 348 231" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <section class="container vh-75" style="z-index: 1; margin-top: -120px !important;">
+    <div class="row mb-0 align-items-center">
+      <div class="col-lg-6 p-5 col-md-12 col-sm-12 col-xs-12 align-items-center" data-aos="fade-right">
+        <svg class="mt-0 m-5" viewBox="0 0 348 231" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M101.223 56.5841C101.223 56.5841 117.944 35.4668 118.985 36.8734C120.028 38.2814 103.888 57.9348 103.888 57.9348L101.223 56.5841Z"
             fill="#50447E" />
@@ -379,11 +390,12 @@
             fill="white" />
         </svg>
       </div>
-      <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 pt-5" data-aos="fade-left">
+      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 " data-aos="fade-left">
         <h1 class="display-5">Xplora Win Hack</h1>
         <p>February 25, 2023 – February 26, 2023</p>
         <p>
           Think outside the box and shape the future of tourism at our hackathon for women!<br>
+          
           Join us by registering now
           <!-- Join us for a weekend of coding, collaboration, and tourism! -->
         </p>
@@ -394,7 +406,91 @@
         </div>
       </div>
     </div>
+    <div class="text-center mt-0" style="background-color: var(--light-blue); z-index: 1; margin-top: -80 !important;">
+    <a class="ct-btn-scroll ct-js-btn-scroll" href="#section2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Chevron Down Circle</title><path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M352 216l-96 96-96-96"/></svg></a>
+  </div>
   </section>
+
+
+      <!--========== About hackathon ==========-->
+      <section class="mt-5" id="section2">
+        <div class="container p-lg-5 m-lg-5">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-lg-9 col-md-6" data-aos="fade-right">
+                    <h1>About Xplora</h1>
+                    <p class="line-space">
+                      Xplora Win Hack is a programme conducted by ICFOSS that encourages young
+                       women to develop confidence and a sense of independence. The event will be a continuous
+                       coding challenge lasting for 30 hours on the 25th & 26th of February 2023 at ICFOSS.
+                    </p>
+                    <p>Xplora Win Hack is a two-day program that brings together women programmers, designers,
+                       and entrepreneurs to collaborate on building innovative technology solutions. This event
+                        typically includes a hackathon competition where participants work in teams to create and presen
+                        their projects. The goal of a women's hackathon is to empower and support women in the tech industry
+                        and promote diversity and inclusion in the field.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 p-lg-1 p-md-5 d-flex flex-column align-items-center justify-content-between" data-aos="fade-left">
+                  <div class="btnFillup liquidbg col-lg-6 mb-3 d-flex justify-content-center" >
+                    <a href="{% url 'main:about' %}" role="button">About</a>
+                  </div>
+                  <div class="btnFillup liquidbg col-lg-6 mb-3 d-flex justify-content-center">
+                    <a href="{% url 'main:plbmstmt' %}" role="button">Problems</a>
+                  </div>
+                  <div class="btnFillup liquidbg col-lg-6 mb-3 d-flex justify-content-center">
+                    <a href="{% url 'main:guidelines' %}" role="button">Guidelines</a>
+                  </div>
+                  <div class="btnFillup liquidbg col-lg-6 d-flex justify-content-center">
+                    <a href="{% url 'main:faq' %}" role="button">FAQs</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- ========= Problemstatements intro ========== -->
+<!-- ========== Problem statements intro ========== -->
+<!-- <section class="">
+  <div class="container p-lg-5 m-lg-5">
+      <div class="row d-flex align-items-center">
+          <div class="col-lg-6">
+              <h1>Think out side the box..!</h1>
+              <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci impedit
+                  autem expedita laudantium exercitationem animi incidunt aut iusto minus eaque
+                  voluptatum, soluta praesentium dolore ad obcaecati totam, saepe rerum sed!
+              </p>
+              <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci impedit
+                  autem expedita laudantium exercitationem animi incidunt aut iusto minus eaque
+                  voluptatum, soluta praesentium dolore ad obcaecati totam, saepe rerum sed!
+              </p>
+              <a href="{% url 'main:plbmstmt' %}" class="primary-button"><span>Read More</span></a>
+          </div>
+          <div class="col-lg-6 p-3">
+              <div class="problem-carousel d-flex flex-column align-items-center">
+                  <div class="problem-item d-flex flex-column align-items-center justify-content-center p-5 ">
+                      <h6 class="mb-3">GPS-enabled Destination Tracker System</h6>
+                      <p>A Real-time destination information solution to plan and visit, on the go.</p>
+                  </div>
+                  <div class="problem-item d-flex flex-column align-items-center justify-content-center p-5 ">
+                    <h6 class="mb-3">Unified Ticket Management System</h6>
+                    <p>A web and mobile app-based ticket management system of the department of tourism and DTPC.</p>
+                  </div>
+                  <div class="problem-item d-flex flex-column align-items-center justify-content-center p-5 ">
+                    <h6 class="mb-3">GIS-enabled Facility Management Solution</h6>
+                    <p>GIS enabled system to manage and rate the various facilities / amenities in a tourist destination.</p>
+                  </div>
+                  <div class="mt-4 w-25 d-flex justify-content-between">
+                    <i class="fa-solid fa-arrow-left problem-btn-left" onclick="plusProblem(-1)"></i>
+                    <i class="fa-solid fa-arrow-right problem-btn-right" onclick="plusProblem(1)"></i>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+  </div>
+</section> -->
+    <!--========= how does it works =========-->
   <section class="container">
     <div class="text-center div-margin" data-aos="fade-up">
       <h1>How does it Work?</h1>
@@ -402,8 +498,6 @@
         Showcase your skills and creativity, tap into the resources available, connect with<br>
         like-minded
         individuals, strive to create something truly impactful.
-        <!-- You’re used to the normal problem solving process – now try it at 10x the speed.<br> The added benefit is NO
-        CODE. JUST INNOVATION! -->
       </p>
     </div>
     <div class="row align-items-center div-margin">
@@ -412,12 +506,6 @@
         <p class="light-black-text" align ="justify">
           Dive deeper by conducting independent research to truly tackle the problem at hand. Remember, the more
           knowledge and understanding you bring to the table, the more innovative and impactful your solution can be.
-          <!-- Select a theme from our diverse track offerings. The prompts provide a foundation, but don't limit yourself!
-          Dive deeper by conducting independent research to truly tackle the problem at hand. Remember, the more
-          knowledge and understanding you bring to the table, the more innovative and impactful your solution can be.
-          Take advantage of this opportunity to explore new ideas and think out of the box. The hackathon is a platform
-          to showcase your skills and creativity, tap into the resources available, connect with like-minded
-          individuals, and most importantly, strive to create something truly impactful. -->
         </p>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center" data-aos="fade-up">
@@ -674,13 +762,6 @@
           Work closely with your team to generate a
           variety of ideas and potential solutions. Collaborate to create a streamlined workflow, gather and arrange
           ideas, and produce initial drafts.
-          <!-- With a solid grasp of the problem at hand, it's important to work closely with your team to generate a
-          variety of ideas and potential solutions. Collaborate to create a streamlined workflow, gather and arrange
-          ideas, and produce initial drafts. Remember to keep iterating, testing and refining your ideas until you
-          arrive at a promising solution that not only addresses the hackathon challenge but also stands out among the
-          competition. Take time to review and gather feedback from your peers and mentors. Use this feedback to make
-          necessary adjustments and fine-tune your solution, so that it is polished, polished and most importantly it is
-          ready for the final showcase -->
         </p>
       </div>
     </div>
@@ -691,16 +772,6 @@
           Keep iterating and arrive at a promising solution. present your work in a clear and
           concise manner,showcase your hard work and
           creativity and bring a life to the solution.
-          <!-- showcase your hard work and
-          creativity to the judges, mentors, and fellow participants,
-          present your work in a clear and organized manner. -->
-          <!-- With the successful completion of your task, it is crucial to present your work in a clear and organized
-          manner, as outlined during the initial briefing. This requires paying attention to specific instructions and
-          adhering to established protocols for organization and presentation. By presenting your work in a clear and
-          concise manner, it showcases the level of detail, professionalism, and thoroughness of your work, and it
-          highlights the effort put in the hackathon challenge. It is an opportunity to showcase your hard work and
-          creativity to the judges, mentors, and fellow participants, so take the time to make sure your presentation is
-          polished, professional, and truly showcases the impact of your solution... -->
         </p>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
@@ -916,49 +987,12 @@
           Showcase your hard work and
           creativity to the judges, mentors, and fellow participants.
           You might just win a prize!
-          <!-- Upon reaching an important milestone in your progress, each team will have an opportunity to showcase their
-          progress and present their solutions to a panel of esteemed judges. These presentations will serve as a
-          platform to demonstrate the thoroughness of your work, and the judges will carefully evaluate the quality of
-          your solutions, taking into account the complexity of the problem, originality, and feasibility of the
-          proposed solution. -->
         </p>
       </div>
     </div>
-    <!--========== the problem ==========-->
-    <div>
-      <div class="text-center div-margin" data-aos="fade-up">
-        <h1>The Problem</h1>
-        <p class="light-black-text">
-          Select a problem from any one of the following, generate a <br>variety of ideas and potential solutions.
-        </p>
-      </div>
-      <div class="row mt-5" data-aos="fade-up">
-        <div class="col-lg-4 col-md-4 p-lg-5">
-          <h5>GPS enabled Destination tracker System</h5>
-          <p class="light-black-text">
-            A Real-time destination information solution to plan and visit, on the go.
-          </p>
-          <a href="{% url 'main:plbmstmt' %}">read more</a>
-        </div>
-        <div class="col-lg-4 col-md-4 p-lg-5">
-          <h5>Unified Ticket Management System</h5>
-          <p class="light-black-text">
-            A web and mobile app based ticket management system of the department of tourism and DTPC.
-          </p>
-          <a href="{% url 'main:plbmstmt' %}">read more</a>
-        </div>
-        <div class="col-lg-4 col-md-4 p-lg-5">
-          <h5>GIS enabled Facility Management Solution</h5>
-          <p class="light-black-text">
-            GIS enabled system to manage and rate the various
-            facilities / amenities in a tourist destination.
-          </p>
-          <a href="{% url 'main:plbmstmt' %}">read more</a>
-        </div>
-      </div>
-    </div>
+    <!-- ========== Have Question ?========== -->
     <div class="row align-items-center div-margin" data-aos="fade-up">
-      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <h1>Have a Question?</h1>
         <p>You'll find answers to the most common questions you may have. Also, please feel free to contact us if you
           still can't find any answers
@@ -973,22 +1007,12 @@
       <div class="text-center"  data-aos="fade-up">
         <h1>Organized by</h1>
         <div class="mt-4">
-          <img src="{% static 'assets/200 x 100 gok icfoss.svg'%}" width="260px" height=140px style="margin-right:9px">
-          <img src="{% static 'assets/genderandtech.png'%}" width="80px" height=20px style="margin-right:9px">
+          <img src="{% static 'assets/200 x 100 gok icfoss.svg'%}" height="80px" style="margin-right:9px">
+          <img src="{% static 'assets/genderandtech.png'%}" height="80px" style="margin-right:9px">
         </div>
       </div>
-      <div class="d-flex justify-content-center mt-2"  data-aos="fade-up">
-        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 text-center mt-3">
-          <p class="line-space">ICFOSS is the outcome of a decade of work by Free Software enthusiasts, advocates,
-            developers and supporters in the state of Kerala and outside.
-            Recognizing the strides made by the FOSS community in Kerala, the Government of Kerala implemented the
-            International Centre for Free and Open Source Software (ICFOSS) in 2009.
-            ICFOSS today carries out a number of FOSS-related activities in a model that brings together Academia,Industry,
-            Government and the FOSS Community.
-          </p>
-        </div>
-      </div>
-    </div><!-- end about icfoss -->
+
+    </div>
     <!-- ========== In Association With ========== -->
     <div class="mt-5">
       <div class="text-center" data-aos="fade-up">
@@ -996,107 +1020,85 @@
       </div>
       <div class="d-flex align-items-center justify-content-center" data-aos="fade-up">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3 d-flex justify-content-around">
-          <img src="{% static 'assets/kerala_startup_mission.svg'%}" width="180px" height=80px style="margin-right:9px">
-          <img src="{% static 'assets/Kerala_Tourism_Logo-700x520 (1).png'%}" width="160px" height=40px style="margin-right:9px">
-          <img src="{% static 'assets/Tourism Club Logo final.png'%}" width="80px" height=40px style="margin-right:9px">
-          <img src="{% static 'assets/KDISC LOGO.gif'%}" width="180px" height=16px style="margin-right:9px">
-          <img src="{% static 'assets/KKEM LOGO.png'%}" width="180px" height=10px style="margin-right:9px">
+          <img src="{% static 'assets/kerala_startup_mission.svg'%}" height=80px style="margin-right:9px">
+          <img src="{% static 'assets/Kerala_Tourism_Logo-700x520 (1).png'%}"  height=80px style="margin-right:9px">
+          <img src="{% static 'assets/Tourism Club Logo final.png'%}"  height=80px style="margin-right:9px">
+          <img src="{% static 'assets/KDISC LOGO.gif'%}" height="80px" style="margin-right:9px">
+          <img src="{% static 'assets/KKEM LOGO.png'%}" height="80px" style="margin-right:9px">
         </div>
       </div>
     </div>
   </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    let upWaterElement = document.getElementById('up-water');
+
+    var lastScrollTop = 0;
+    // element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
+    window.addEventListener("scroll", function(){ // or window.addEventListener("scroll"....
+       var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+       if (st > lastScrollTop && st<55) {
+          // downscroll code
+          // upWaterElement.style.display = "none";
+          upWaterElement.style.transition = 'opacity 0.6s ease-in'
+          upWaterElement.style.opacity = '0'
+       } else if (st < lastScrollTop && st<55) {
+          // upscroll code
+          upWaterElement.style.opacity = '1'
+          // upWaterElement.style.display = "block";
+       } // else was horizontal scroll
+       lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+    }, false);
+      </script>
   {% endblock %}
   <!--========== footer section ==========-->
-  <footer class="main-footer">
-    <div class="container">
-      <!--Widgets Section-->
-      <div class="widgets-section">
-        <div class="row clearfix">
-          <!--Column-->
-          <div class="big-column col-lg-6 col-md-12 col-sm-12">
-            <div class="row clearfix">
-              <!--Footer Column-->
-              <div class="footer-column col-lg-7 col-md-6 col-sm-12">
-                <div class="footer-widget about-widget">
-                  <div class="logo">
-                    <a href="{% url 'main:index' %}"><img src="{% static 'assets/logo.svg'%}" alt="" /></a>
-                  </div>
-                  <div class="text">
-                    <p>The Xplora WIN HACK (Women in Hackathon) programme at ICFOSS aims to promote a
-                      sense of independence in young women engineers and assist them in developing confidence and
-                      freedom in their lives
+  <footer>
+    <div class="mt-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 210">
+            <path fill="#19A3FF" fill-opacity="1" d="M0,96L48,96C96,96,192,96,288,122.7C384,149,480,203,576,202.7C672,203,768,149,864,138.7C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
+    </div>
+    <section class="footer-container" style="border:none">
+        <div class="container">
+            <div class="row p-4 pt-0 d-flex align-items-center">
+                <div class="col-lg-3 col-sm-12 p-2">
+                    <img src="{% static 'assets/logo.svg'%}" alt="">
+                    <p class="small mt-2">The Xplora WIN HACK (Women in Hackathon) programme of ICFOSS aims to
+                        promote a sense of independence in young women
                     </p>
-                  </div>
                 </div>
-              </div>
-              <!--Footer Column-->
-              <div class="footer-column col-lg-5 col-md-6 col-sm-12">
-                <div class="footer-widget links-widget">
-                  <h2>Quick Links</h2>
-                  <ul class="footer-list">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Services</a></li>
-                  </ul>
+                <div class="col-lg-9">
+                    <!-- <div class="row"> -->
+                        <div class="">
+                            <h5 class="m-0">Join us and shape the future of tourism at our hackathon for women!</h5>
+                            <p class="m-0 mb-3">Fore more details, visit the following links</p>
+                            <div class="p-0 col-lg-6 d-flex justify-content-between footer-link">
+                                <a href="{% url 'main:register' %}">Registration</a>
+                                <a href="{% url 'main:guidelines' %}">Guidelines</a>
+                                <a href="{% url 'main:faq' %}">FAQ</a>
+                                <a href="#">About us</a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="m-0 p-0 row ">
+                            <div class="p-0 col-lg-8 col-sm-12 align-items-center ">
+                                <p class="m-0 small">Designed and developed by e-Governance R&D Lab ICFOSS</p>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6 p-md-0 p-sm-0 mt-md-2 mt-sm-2 d-flex justify-content-between" >
+                                <a href="https://www.facebook.com/ICFOSS"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://twitter.com/fosskerala"><i class="fab fa-twitter"></i></a>
+                                <a href="https://www.linkedin.com/company/icfoss"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.youtube.com/@icfoss8917"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    <!-- </div> -->
                 </div>
-              </div>
             </div>
-          </div>
-
-          <!--Column-->
-          <div class="big-column col-lg-6 col-md-12 col-sm-12">
-            <div class="row clearfix">
-
-              <!--Footer Column-->
-              <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-              </div>
-
-            </div>
-
-            <!--Footer Column-->
-            <div class="footer-column col-lg-120 col-md-6 col-sm-12 ">
-              <div class="footer-widget info-widget">
-                <h2>Contact Info</h2>
-                <ul class="info-list">
-                  <li>ICFOSS</li>
-                  <li>Swatantra, South Pavilion</li>
-                  <li>Sports Hub, Karyavattom</li>
-                  <li>Trivandrum-695581</li>
-                  <li>Kerala, India</li>
-                </ul>
-                <!-- Social Links -->
-                <ul class="social-links">
-
-                  <a class="btn text-white btn-floating m-1" style="background-color: #3b5998;" href="#!"
-                    role="button"><i class="fab fa-facebook-f"></i></a>
-
-                  <a class="btn text-white btn-floating m-1" style="background-color: #00acee;" href="#!"
-                    role="button"><i class="fab fa-twitter"></i></a>
-                  <a class="btn text-white btn-floating m-1" style="background-color: #0A66C2;" href="#!"
-                    role="button"><i class="fab fa-linkedin-in"></i></a>
-                  <a class="btn text-white btn-floating m-1" style="background-color: #FF0000;" href="#!"
-                    role="button"><i class="fab fa-youtube"></i></a>
-
-
-                </ul>
-              </div>
-            </div>
-
-          </div>
         </div>
-
-      </div>
-    </div>
-    </div>
-
-    <!-- Footer Bottom -->
-    <div class="footer-bottom">
-      <div class="container">
-        <div>Designed and developed by e-Governance R&D Lab ICFOSS</div>
-      </div>
-    </div>
-
-  </footer>
+    </section>
+</footer>
   <!-- end footer -->
   <!--========== Scripts ==========-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -1104,8 +1106,5 @@
   <script>
     AOS.init();
   </script>
-  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script> -->
-</body>
-
+  <!-- problem intro carousel -->
 </html>
