@@ -1,0 +1,505 @@
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+    integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+    crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    /* .row.content {height: 100%} */
+    
+    /* Set gray background color and 100% height */
+    /* .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    } */
+        
+    /* On small screens, set height to 'auto' for the grid */
+    /* @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    } */
+    /* ------- Global style ------- */
+:root{
+  --darkblue:#0F1730;
+  --lightcolor:rgb(247, 248, 251);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font-family: sans-serif;
+  background-color: rgb(247, 248, 251);
+}
+
+a{
+  color: var(--lightcolor);
+  text-decoration: none;
+}
+.container{
+  padding: 20px;
+}
+
+/* ------- Sidebar style ------- */
+.sidebar{
+  position: fixed;
+  /* width: 250px; */
+  height: 100vh;
+  background-color: var(--darkblue);
+  color: #FFF;
+}
+.sidebar .logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar ul{
+  margin-top: 50px;
+  list-style: none;
+}
+.sidebar ul li{
+  padding: 16px 10px;
+  margin: 16px;
+  border-radius: 5px;
+}
+.sidebar ul li a{
+  color: currentColor;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar ul li a i{
+  width: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar ul li.active{
+  background-color: var(--lightcolor);
+  color: var(--darkblue);
+}
+.sidebar ul li:hover{
+  background-color: rgb(25 33 68 / .8);
+  color: var(--lightcolor);
+}
+
+/* ------- Content style ------- */
+.content{
+  position: fixed;
+  right: 0;
+  /* width: calc(100% - 250px); */
+  height: 100%;
+  min-height: 100vh;
+  background-color: var(-lightcolor);
+  overflow: hidden auto
+}
+
+nav{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 70px;
+  padding: 0 20px;
+  gap: 20px;
+}
+
+nav p{
+  display: flex;
+  gap: 10px;
+}
+nav .notification{
+  position: relative;
+}
+nav .notification i{
+  font-size: 1.3rem;
+}
+nav .notification .badge{
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  background-color: #f00;
+  color: var(--lightcolor);
+  font-size: 10px;
+  text-align: center;
+  line-height: 16px;
+}
+nav .profile-img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+nav .profile-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+header{
+  color: var(--darkblue);
+}
+
+
+/* charts container */
+.cards-container{
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  gap: 2%;
+  margin: 20px;
+}
+
+.card{
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 2%;
+  width: 49%;
+  overflow: hidden;
+}
+.card > div{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+
+@media (width < 1024px){
+  .card{
+    width: 98%;
+  }
+  
+}
+
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0C0175 var(--darkblue);
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: var(--darkblue)
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--darkblue);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--darkblue);
+}
+
+  </style>
+</head>
+<body>
+  <div class="row">
+    <div class="col-lg-3 position-fixed sidebar">
+      <div class="logo">
+        <h2>Xplora</h2>
+      </div>
+      <ul>
+        <li class='active'>
+          <a href="#">
+           <i class="fa-solid fa-chart-column"></i>
+           <span>Status</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-building-user"></i>
+            <span>Team Lead</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-regular fa-file-lines"></i>
+            <span>Members</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+          <i class="fa-regular fa-file-lines"></i>
+           <span>Mentor</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+          <i class="fa-regular fa-file-lines"></i>
+           <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-9 position-fixed content p-5">
+      <nav class="text-start">
+        <!-- <p>
+          <i class="fa-solid fa-signal"></i>
+          <span>Activity</span>
+        </p>
+        <div class="notification ">
+          <i class="fa-regular fa-bell"></i>
+          <span class="badge">5</span>
+        </div>
+        <div class="profile-img">
+          <img src="https://xsgames.co/randomusers/assets/avatars/male/46.jpg" alt="profile img">
+        </div> -->
+      </nav>
+        
+      <!--  Main heading  -->
+        <div class="container">
+          <header class="">
+          <h1 class="">Welcome back, Alice</h1>
+          <span>Get an overview of your submission</span>
+          </header>
+        </div>
+        <div class="border border-secondary rounded p-4">
+          
+        </div>
+        <div class="cards-container">
+          <div class="card card1">
+            <div id="chart-1"></div>
+          </div>
+          <div class="card card2">      
+            <div id="chart-2"></div>
+          </div>
+          <div class="card card3">
+            <div id="chart-3"></div>
+          </div>
+          <div class="card card4">
+            <div id="chart-4"></div>
+          </div>
+          
+        </div>
+        
+      
+      </div>
+      
+      
+  </div>
+  
+  
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+<!-- <nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Status</a></li>
+        <li><a href="#">Team Leader</a></li>
+        <li><a href="#">Member</a></li>
+        <li><a href="#">Mentor</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2 class="pb-4">Logo</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Status</a></li>
+        <li><a href="#section2">Team Leader</a></li>
+        <li><a href="#section3">Member</a></li>
+        <li><a href="#section3">Mentor</a></li>
+        <li><a href="#section3">Logout</a></li>
+      </ul><br>
+    </div>
+    <br>
+    <div class="col-sm-9">
+      <div class="well">
+        <h4>Dashboard</h4>
+        <p>Some text..</p>
+      </div>
+    </div>  -->
+    <!-- <section id="#section1">
+       
+    </section>
+    <section class="#section2">
+
+    </section> -->
+  </div>
+    <!-- <div class="col-sm-9">
+      <div class="well">
+        <h4>Dashboard</h4>
+        <p>Some text..</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Users</h4>
+            <p>1 Million</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Pages</h4>
+            <p>100 Million</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Sessions</h4>
+            <p>10 Million</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Bounce</h4>
+            <p>30%</p> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="well">
+            <p>Text</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+          </div>
+        </div>
+      </div>
+    </div>
+</div> -->
+<script>
+  const list = document.querySelectorAll('ul li')
+
+
+// add active list to sidebar links list.
+list.forEach( li => {
+  li.addEventListener('click', e =>{
+    list.forEach( li => {
+      li.classList.remove('active')
+    })
+    e.currentTarget.classList.add('active')
+  })
+})
+
+// chart 1
+var xArray1 = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yArray1 = [55, 49, 44, 24, 15];
+
+var layout1 = {title:"World Wide mineral water Production"};
+
+var data1 = [{labels:xArray1, values:yArray1, type:"pie"}];
+
+Plotly.newPlot("chart-1", data1, layout1);
+
+// chart 2
+
+var xArray2 = ["Italy","France","Spain","USA","Argentina"];
+var yArray2 = [55, 49, 44, 24, 15];
+
+var data2 = [{
+  x: xArray2,
+  y: yArray2,
+  type: "bar"  }];
+var layout2 = {title:"World Wide mineral water Production"};
+
+Plotly.newPlot("chart-2", data2, layout2);
+
+
+// chart 3
+var xArray3 = [55, 49, 44, 24, 15];
+var yArray3 = ["Italy","France","Spain","USA","Argentina"];
+
+var data3 = [{
+  x: xArray3,
+  y: yArray3,
+  type: "bar",
+  orientation: "h"
+}];
+
+var layout3 = {title:"World Wide mineral water Production"};
+
+Plotly.newPlot("chart-3", data3, layout3);
+// chart 4
+
+var xArray4 = [50,60,70,80,90,100,110,120,130,140,150];
+var yArray4 = [7,8,8,9,9,9,10,11,14,14,15];
+
+// Define Data
+var data4 = [{
+  x: xArray4,
+  y: yArray4,
+  mode:"markers",
+  type:"scatter"
+}];
+
+// Define Layout
+var layout4 = {
+  xaxis: {range: [40, 160], title: "Square Meters"},
+  yaxis: {range: [5, 16], title: "Price in Millions"},
+  title: "House Prices vs. Size"
+};
+
+Plotly.newPlot("chart-4", data4, layout4);
+</script>
+</body>
+</html>

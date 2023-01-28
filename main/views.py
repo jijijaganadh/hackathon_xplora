@@ -37,6 +37,9 @@ def plbmstmt(request):
 def guidelines(request):
     return render(request, "main/landing/guidelines.html")
 
+def about(request):
+    return render(request, "main/landing/about.html")
+
 
 def homepage(request):
     books = Book.objects.all()

@@ -31,13 +31,104 @@
     {% block content %}
     <section class="container">
       <!--========== header section ==========-->
-      <div class="text-center">
+      <div class="mt-5 text-center">
         <h5>FAQs</h5>
         <h1>Frequently Asked Questions</h1>
         <p class="light-black-text">Have questions ? &nbsp;we're here to help</p>
       </div>
+      <div class="mt-5" >
+         <!-- FAQ -->
+    <div class="faq-container wrapper">
+      <div class="faq-wrapper width-100" data-aos="fade-up">
+        <div class="question">
+          How do I Register for Xplora-WINHACK?
+        </div>
+        <div class="answercont">
+          <div class="answer light-black-text">
+            Xplora is a live 30 Hrs long coding challenge specifically for women,
+            in the field of Tourism.For registering in the event, you can visit
+            <a href="{% url 'main:register' %}">Xplora WINHACK Registration</a> , provide your details (and of your team)
+            and also provide the details of the solution you have envisaged.
+          </div>
+        </div>
+      </div>
+      <div class="faq-wrapper width-100" data-aos="fade-up">
+        <div class="question">
+          Xplora WIN HACK is only open to teams? Can an individual participate?
+        </div>
+        <div class="answercont">
+          <div class="answer light-black-text">
+            You can participate in this event as a team or as an individual contributor,
+            providing your solutions to the <a href="{% url 'main:plbmstmt' %}">problem statements</a>, problem statements.
+            For those participating as a team, the team lead needs to do the registration process. Each team can have a
+            maximum of 3 members.
+          </div>
+        </div>
+      </div>
+      <div class="faq-wrapper width-100" data-aos="fade-up">
+        <div class="question">
+          Is it possible to change the team members after registration?
+        </div>
+        <div class="answercont">
+          <div class="answer light-black-text">
+            Members of the team can be changed up until the initial evaluation process.
+            Once the initial evaluation is complete, the registered team will be treated as final. However, there is no
+            provision to change the team lead.
+          </div>
+        </div>
+      </div>
+      <div class="faq-wrapper width-100" data-aos="fade-up">
+        <div class="question">
+          What are the selection criteria for the final hackathon?
+        </div>
+        <div class="answercont">
+          <div class="answer light-black-text">
+            Evaluation criteria will include the novelty of the idea, simplicity,
+            clarity, cost effectiveness, social relevance, and viability of the project.
+          </div>
+        </div>
+      </div>
+      <div class="faq-wrapper width-100" data-aos="fade-up">
+        <div class="question">
+          What is the last date of submission of solution and Grand Finale ?
+        </div>
+        <div class="answercont">
+          <div class="answer light-black-text">
+            Last date for submission is 03-02-2023 and Grand Finale conducted on 25-26 February, 2023.
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+     
+
+
+<!--========== FAQ active and inactive interaction script ==========-->
+<script>
+  let question = document.querySelectorAll(".question");
+
+  question.forEach(question => {
+    question.addEventListener("click", event => {
+      const active = document.querySelector(".question.active");
+      if (active && active !== question) {
+        active.classList.toggle("active");
+        active.nextElementSibling.style.maxHeight = 0;
+      }
+      question.classList.toggle("active");
+      const answer = question.nextElementSibling;
+      if (question.classList.contains("active")) {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      } else {
+        answer.style.maxHeight = 0;
+      }
+    })
+  })
+</script>
+
+
+
       <!--========== FAQ Accordion ==========-->
-      <div class="accordion accordion-container div-margin mt-5" data-aos="fade-up">
+      <!-- <div class="accordion accordion-container div-margin mt-5" data-aos="fade-up">
         <div class="accordion-item" data-aos="fade-up">
           <button id="accordion-button-1" aria-expanded="false">
             <span class="accordion-title">How do I Register for Xplora-WINHACK?</span>
@@ -104,9 +195,9 @@
             </p>
           </div>
         </div>
-      </div><!-- Accordion end -->
+      </div>Accordion end -->
       <!--======== Mail Section ==========-->
-      <div class="mt-5 text-center"  data-aos="fade-up">
+      <div class="mt-5 text-center mb-0"  data-aos="fade-up">
         <div>
           <svg width="200" height="200" viewBox="0 0 340 233" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M103.498 232.324L0.849854 196.683L24.8732 127.494L127.521 163.136L103.498 232.324Z" fill="#E1E1E1"/>
@@ -164,7 +255,7 @@
             <path d="M224.273 130.585V144.414H221.705V132.738H218.781V130.585H224.273Z" fill="#ECECEC"/>
             </svg>
         </div>
-        <h5>Still have questions?</h5>
+        <h4>Still have questions?</h4>
         <p class="light-black-text">
           Can't find the answer you're looking for?
           Please connect with us
@@ -172,7 +263,7 @@
         </p>
       </div>
     </section>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init();
     </script>
@@ -190,7 +281,7 @@
         }
       }
       items.forEach((item) => item.addEventListener('click', toggleAccordion));
-      </script>
+      </script> -->
       {% endblock %}
   </body>
 </html>

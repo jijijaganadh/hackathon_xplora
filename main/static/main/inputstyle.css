@@ -36,10 +36,10 @@ input {
 }
 input:focus {
   /* border-color:var(--orange);   */
-  border-color:  #6200EE;
+  border-color:  #297FFD;
 }
 input:focus + .input-label {
-  color: #6200EE;
+  color: #297FFD;
   /* color: var(--orange); */
   top: 0;
   transform: translateY(-50%) scale(.9);
