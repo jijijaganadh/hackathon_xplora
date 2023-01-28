@@ -28,9 +28,16 @@ SECRET_KEY = 'django-insecure-mjq6__5fgp#lv@d__$s3r0si1&un29%x!t=yqj&gv=tz!(qy1+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-
+EMAIL_FROM_USER = 'devteamicfoss@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'devteamicfoss@gmail.com'
+EMAIL_HOST_PASSWORD = 'zqvqtjvllespntyg'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+import sys
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,8 +54,6 @@ INSTALLED_APPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,6 +129,8 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USEL10N = True
 
 USE_TZ = True
 
