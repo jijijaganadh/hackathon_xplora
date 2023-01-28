@@ -77,16 +77,25 @@ def register_request(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
         if form.is_valid():
+            user = form.save(commit=False)
+            # user.is_active = False
             user = form.save()
-            login(request, user)
-            messages.success(request, "Registration Successfull")
-            return redirect("main:registration")
+            send_activation_email(user, request)
+            # login(request, user)
+            messages.success(request, "We sended you an activation link to your registered email. Please check your Email and Login through the given link.")
+            return redirect("main:register")
         messages.error(
             request, f"Unsuccessful Registration, {form.error_messages}")
     if request.user.is_authenticated:
         return redirect('main:homepage')
+    
     form = NewUserForm()
     return render(request, 'main/register.html', {'register_form': form})
+
+
+
+
+
 
 
 def login_request(request):
@@ -454,6 +463,61 @@ class ViewProblemdetails(View):
             pass
         return render(request, self.template_name, {"form": form})
 
-  
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from .utils import generate_token
+from django.core.mail import EmailMessage
+from django.conf import settings
+import threading
+from django.urls import reverse
 
+class EmailThread(threading.Thread):
+
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send()
+
+  
+def send_activation_email(user, request):
+    current_site = get_current_site(request)
+    email_subject = 'Activate your account'
+    email_body = render_to_string('authentication/activate.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generate_token.make_token(user)
+    })
+
+    email = EmailMessage(subject=email_subject, body=email_body,
+                         from_email=settings.EMAIL_FROM_USER,
+                         to=[user.email]
+                         )
+    email.send()
+    # if not settings.TESTING:
+    #     EmailThread(email).start()
    
+def activate_user(request, uidb64, token):
+
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+
+        user = User.objects.get(pk=uid)
+        # user.is_active = True
+
+    except Exception as e:
+        user = None
+
+    if user and generate_token.check_token(user, token):
+        user.is_email_verified = True
+        user.save()
+
+        messages.add_message(request, messages.SUCCESS,
+                             'Email verified, you can now login')
+        return redirect(reverse('main:login'))
+
+    return render(request, 'authentication/activate-failed.html', {"user": user})

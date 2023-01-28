@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
+
 
 
 app_name = 'main'
@@ -35,6 +37,6 @@ urlpatterns = [
     path("deletementor/", views.DeleteMentor.as_view(), name="deletementor"),
     path("delete-member/<int:id>", views.DeleteMember.as_view(), name="deletemember"),
     path("viewproblem/", views.ViewProblemdetails.as_view(), name='viewproblem'),
-
+    path('activate-user/<uidb64>/<token>',views.activate_user, name='activate'),
 ]
 
