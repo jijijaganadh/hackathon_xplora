@@ -30,6 +30,7 @@
             <th scope="col">PhoneNo</th>
             <th scope="col">InstitutionName</th>
             <th scope="col">InstitutionAddress</th>
+            <th scope="col">InstitutionID</th>
 
   
           </thead>
@@ -39,6 +40,8 @@
               <td>{{ participant.phone }}</td>
               <td>{{ participant.institution_name }}</td>
               <td>{{ participant.institution_address }}</td>
+              <td>{{ participant.college_id.url }}</td>
+              
             </tr>
           </tbody>
         </table>
