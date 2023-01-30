@@ -6,9 +6,7 @@ from django.http import BadHeaderError, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from main.forms import ContactForm, MainParticipantForm, MemberForm, MemberdetailsviewprofileForm, MentordetailsviewprofileForm, NewUserForm, MentordetailsForm, ShowMentordetailsForm, AddMemberDetailsForm, UpdateMainParticipantForm, UpdateMemberdetailsForm, UpdateMentorForm, ViewmainParticipantForm, ViewproblemdetailsForm
 from django.contrib.auth.models import User
-
 from main.models import Book, Institution
-
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.contrib import messages
@@ -16,10 +14,15 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 
 from .models import MainParticipant, Memberdetails, Problem, Institution, Mentordetails, Solution_details
-# Create your views here.
-
-# frontend
-# landing site
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from .utils import generate_token
+from django.core.mail import EmailMessage
+from django.conf import settings
+import threading
+from django.urls import reverse
 
 
 def index(request):
@@ -75,17 +78,18 @@ def contact(request):
     form = ContactForm()
     return render(request, 'main/contact.html', {'form': form})
 
-
+# sign up form
+# @login_required(login_url='/login/')
 def register_request(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # user.is_active = False
+            user.is_active = False
             user = form.save()
             send_activation_email(user, request)
             # login(request, user)
-            # messages.success(request, "Registration Successfull")
+            messages.success(request, "Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
             return redirect("main:register")
         messages.error(
             request, f"Unsuccessful Registration, {form.error_messages}")
@@ -95,12 +99,7 @@ def register_request(request):
     form = NewUserForm()
     return render(request, 'main/register.html', {'register_form': form})
 
-
-
-
-
-
-
+# login form
 def login_request(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -125,12 +124,13 @@ def login_request(request):
         form = AuthenticationForm()
         return render(request=request, template_name="main/login.html", context={"login_form": form})
 
-
+# logout form
 def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect("main:index")
 
+# collect main_participant profile details 
 @login_required(login_url='/login/')
 def registration_request(request):
     if request.method == "POST":
@@ -158,6 +158,7 @@ def proposal_submission(request):
 
         return HttpResponse("Submitted")
 
+# In html problem page -display each problem and their discription
 @login_required(login_url='/login/')
 def problem_description(request):
     if request.method == 'POST':
@@ -166,6 +167,7 @@ def problem_description(request):
         print("problem_description", problem_description)
         return JsonResponse({"description": problem.description})
 
+# save problems and their solutions in pdf format
 @login_required(login_url='/login/')
 def problem(request):
     if request.method == 'POST':
@@ -184,6 +186,7 @@ def problem(request):
         problems = Problem.objects.all()
         return render(request, 'main/problem.html', {'problems': problems})
 
+# view mentor details
 class MentorDetails(View):
     form_class = ShowMentordetailsForm
     template_name = "main/viewmentorprofile.html"
@@ -204,7 +207,7 @@ class MentorDetails(View):
         pass
 
 
-
+# add members details 
 class AddMember(View):
     form_class = AddMemberDetailsForm
     template_name = "main/members.html"
@@ -241,14 +244,9 @@ class AddMember(View):
         else:
 
             return render(request, 'main/members.html')
-            # form = self.form_class(request.POST)
-            # if form.is_valid():
-            #     form.save()
-            #     redirect('main:member')
-            # return render(request, self.template_name, {"form": form})
-
+          
+# save mentordetails
 @login_required(login_url='/login/')
-
 def mentordetails(request):
     if request.method == "POST":
         form = MentordetailsForm(request.POST)
@@ -256,10 +254,6 @@ def mentordetails(request):
         if form.is_valid():
             mentorDetails = form.save(commit=False)
             mentorDetails.user_id = request.user
-        #  md=Memberdetails.objects.filter(user_id=request.user)
-        #  d=len(list(md))
-        #  if d>=1:
-        #   return redirect("main:homepage")
             mentorDetails.save()
             return redirect('main:homepage')
         else:
@@ -270,9 +264,8 @@ def mentordetails(request):
         return render(request, 'main/mentordetails.html')
 
 
+# save memberdetail
 @login_required(login_url='/login/')
-
-
 def memberdetails(request):
     if request.method == "POST":
         form = MemberForm(request.POST, request.FILES)
@@ -422,15 +415,11 @@ class UpdateUserProfile(View):
             data = form.save()
             print(data)
         return render(request, self.template_name, {"participant": data})
-        # return render(request, self.template_name, {"form": mainparticipantdetails})
 
   
-
-
 class UpdateMemberProfile(View):
     form_class = UpdateMemberdetailsForm
     template_name = "main/updatememberprofile.html"
-    # view_template_name = "main/viewmemberprofile.html"
     
     def get(self, request,id):
         form = self.form_class()
@@ -466,15 +455,7 @@ class ViewProblemdetails(View):
             pass
         return render(request, self.template_name, {"form": form})
 
-from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
-from .utils import generate_token
-from django.core.mail import EmailMessage
-from django.conf import settings
-import threading
-from django.urls import reverse
+
 
 class EmailThread(threading.Thread):
 
@@ -485,7 +466,7 @@ class EmailThread(threading.Thread):
     def run(self):
         self.email.send()
 
-  
+# send activation email at the time of registration  
 def send_activation_email(user, request):
     current_site = get_current_site(request)
     email_subject = 'Activate your account'
@@ -504,6 +485,7 @@ def send_activation_email(user, request):
     # if not settings.TESTING:
     #     EmailThread(email).start()
    
+# activate user when clicking the link in email   
 def activate_user(request, uidb64, token):
 
     try:
@@ -517,8 +499,8 @@ def activate_user(request, uidb64, token):
 
     if user and generate_token.check_token(user, token):
         user.is_email_verified = True
+        user.is_active = True
         user.save()
-
         messages.add_message(request, messages.SUCCESS,
                              'Email verified, you can now login')
         return redirect(reverse('main:login'))
