@@ -140,7 +140,6 @@ def registration_request(request):
             mainparicipant.user_id = request.user
             mainparicipant.status = 'U'
             mainparicipant.save()
-            from django.http import JsonResponse
             return redirect('main:problem')
         institution = Institution.objects.all()
         form = {
@@ -183,8 +182,18 @@ def problem(request):
         instance.save()
         return redirect('main:homepage')
     else:
-        problems = Problem.objects.all()
-        return render(request, 'main/problem.html', {'problems': problems})
+        # find main Participant with user id
+        #add user type to problemDetails model
+        # mainparticipant.usertype
+        mainparticipantdetails = MainParticipant.objects.get(
+                user_id=request.user)
+        usetype = mainparticipantdetails.usertype
+        
+        # print(usetype)
+        problemdetails = Problem.objects.filter(usertype=usetype).values()
+        # problemdetails = Problem.objects.all()
+        print(problemdetails)
+        return render(request, 'main/problem.html', {'problems': problemdetails})
 
 # view mentor details
 class MentorDetails(View):
@@ -249,7 +258,7 @@ class AddMember(View):
 @login_required(login_url='/login/')
 def mentordetails(request):
     if request.method == "POST":
-        form = MentordetailsForm(request.POST)
+        form = MentordetailsForm(request.POST,request.FILES)
 
         if form.is_valid():
             mentorDetails = form.save(commit=False)
@@ -302,6 +311,8 @@ class ViewMemberProfile(View):
         try:
             memberdetails = Memberdetails.objects.filter(user_id=request.user)
             print(len(list(memberdetails)))
+            print(memberdetails)
+            # print(memberdetails.institution.id)
 
             return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails.values()], 'length': len(list(memberdetails))})
         except Mentordetails.DoesNotExist:
@@ -336,8 +347,8 @@ class ViewUserProfile(View):
         try:
             mainparticipantdetails = MainParticipant.objects.get(
                 user_id=request.user)
-            print(mainparticipantdetails)
-
+            # print(mainparticipantdetails.upload_photo.name.replace(""))
+            # mainparticipantdetails.upload_photo = mainparticipantdetails.upload_photo.path
             return render(request, self.template_name, {"participant": mainparticipantdetails})
         except MainParticipant.DoesNotExist:
             pass
@@ -444,7 +455,7 @@ class ViewProblemdetails(View):
         form = self.form_class()
         try:
             solutiondetails = Solution_details.objects.get(user_id=request.user)
-            print(solutiondetails.problem_id.problem_id)
+            # print(solutiondetails.problem_id.problem_id)
             problemdetails = Problem.objects.get(problem_id=solutiondetails.problem_id.problem_id)
             print(solutiondetails)
             

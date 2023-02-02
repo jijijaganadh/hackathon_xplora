@@ -31,7 +31,7 @@
         <label for="id_email" class="input-label">Email</label>
       </div>
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)" required>
+        <input placeholder=" " type="text" id="id_phoneno" name="phoneno" maxlength="10" minlength="10" class="width-100" oninvalid="setCustomValidity('Please enter valid phone number')"onkeypress="return ignoreSpaces(event)" required>
         <label for="id_phoneno" class="input-label">Contact number</label>
       </div>
       <p id="phoneNumberError"></p>
@@ -43,6 +43,19 @@
       <div class="material-textfield mt-4">
         <input placeholder=" " type="text" id="id_designation" name="designation" class="width-100" required>
         <label for="id_designation" class="input-label">Designation</label>
+      </div>
+      <div class=" mt-4">
+        <label for="institution_id">upload photo</label>
+        <input
+          class="form-control form-control-lg"
+          name="upload_photo"
+          id="upload_photo"
+          type="file"
+          required
+        />
+        <div class="small text-muted mt-2">
+          Upload your passportsize photo
+        </div>
       </div>
       <div class="mt-4">
         <button type="submit" class="btn secondary-button">Register</button>

@@ -31,6 +31,7 @@
             <th scope="col">PhoneNo</th>
             <th scope="col">InstitutionName</th>
             <th scope="col">Designation</th>
+            <th scope="col">profile photo</th>
 
 
 
@@ -43,6 +44,7 @@
               <td>{{ mentordetails.phoneno }}</td>
               <td>{{ mentordetails.institution_name }}</td>
               <td>{{ mentordetails.designation }}</td>
+              <td><img src="{{ mentordetails.upload_photo.url }}" alt="" height="100" ></td>
               {% if length >= 1%}
               <td>
                 <a href="/updatementorprofile/">

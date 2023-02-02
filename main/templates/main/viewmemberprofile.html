@@ -30,8 +30,9 @@
             <th scope="col">Email</th>
             <th scope="col">PhoneNo</th>
             <th scope="col">InstitutionName</th>
+            <th scope="col">Institution ID</th>
+            <th scope="col"> Profile Photo</th>
 
-  
           </thead>
           <tbody>
             {% for member in memberdetails %}
@@ -40,6 +41,16 @@
               <td>{{ member.email }}</td>
               <td>{{ member.phoneno }}</td>
               <td>{{ member.institution_name }}</td>
+              <!-- <td>{{ member.upload_photo }}</td> -->
+
+               <td><img src='{{ member.upload_photo }}'></td>
+               <td><img src='{{ member.institution_id }}'></td>
+
+
+             <!-- <td><img src='{{ member.upload_photo }}' alt="" height="100" ></td>
+             <td><img src="{{ member.institution_id.url }}" alt="" height="100" ></td> -->
+
+    
               <td><a href="/updatememberprofile/{{member.id}}">
                 <button type="button" class="btn secondary-button">Update</button>
               </a></td>

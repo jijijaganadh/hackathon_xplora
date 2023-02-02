@@ -32,7 +32,7 @@
             <label for="id_email" class="input-label">Email</label>
           </div>
           <div class="material-textfield mt-4">
-            <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)" value="{{ member.phoneno }}">
+            <input placeholder=" " type="text" id="id_phoneno" name="phoneno" maxlength="10" minlength="10" oninvalid="setCustomValidity('Please enter valid phone number')" class="width-100" onkeypress="return ignoreSpaces(event)" value="{{ member.phoneno }}">
             <label for="id_email" class="input-label">Contact Number</label>
           </div>
           <p id="phoneNumberError"></p>

@@ -20,10 +20,6 @@
   <section class="container header-container">
     <div class="col-lg-3 col-md-8 col-sm-12 p-0">
       <h1>Member Details</h1>
-      
-
-
-
       <form action=""  class="form" method="POST" enctype ="multipart/form-data">
         {% csrf_token %}
         <div class="material-textfield mt-4">
@@ -36,7 +32,7 @@
           <label for="id_email" class="input-label">Email</label>
         </div>
         <div class="material-textfield mt-4">
-          <input placeholder=" " type="text" id="id_phoneno"name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)"required/>
+          <input placeholder=" " type="text" id="id_phoneno"name="phoneno" class="width-100" maxlength="10" minlength="10" oninvalid="setCustomValidity('Please enter valid phone number')"onkeypress="return ignoreSpaces(event)"required/>
           <label for="id_email" class="input-label">Contact Number</label>
         </div>
         <p id="phoneNumberError"></p>
@@ -55,8 +51,18 @@
             required
           />
           <div class="small text-muted mt-2">
-            Upload your Institution ID . Max file size
-            50 MB
+          </div>
+        </div>
+        <div class=" mt-4">
+          <label for="institution_id">upload Photo</label>
+          <input
+            class="form-control form-control-lg"
+            name="upload_photo"
+            id="upload_photo"
+            type="file"
+            required
+          />
+          <div class="small text-muted mt-2">
           </div>
         </div>
         <div class="mt-4">

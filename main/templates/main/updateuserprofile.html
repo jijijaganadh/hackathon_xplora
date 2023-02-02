@@ -42,7 +42,7 @@
                     <label for="institution_address" class="input-label">Institution Address*</label>
                   </div>
                   <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" required id="phoneno" name="phone" class="width-100" value="{{ participant.phone}}" onkeypress="return ignoreSpaces(event)"/>
+                    <input placeholder=" " type="text" required id="phoneno" name="phone"maxlength="10" minlength="10" oninvalid="setCustomValidity('Please enter valid phone number')" class="width-100" value="{{ participant.phone}}" onkeypress="return ignoreSpaces(event)"/>
                     <label for="phoneno" class="input-label">Contact Number*</label>
                   </div>
                   <p id="phoneNumberError"></p>
