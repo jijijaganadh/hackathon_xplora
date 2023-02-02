@@ -148,7 +148,10 @@ def registration_request(request):
         return redirect("main:registration")
 
     form = NewUserForm()
-    return render(request, 'main/registration.html', {'register_form': form})
+    current_user=request.user
+    email=current_user.email
+    context={'email':email}
+    return render(request, 'main/registration.html', {'register_form': form,'participant':context})
 
 @login_required(login_url='/login/')
 def proposal_submission(request):

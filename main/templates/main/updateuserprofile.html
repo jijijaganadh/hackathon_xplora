@@ -1,115 +1,131 @@
+{%extends "main/home.html"%} 
+{% load static %} 
+{% block view %}
+<!DOCTYPE html>
+<html lang="en">
 
-  {% load static %}
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <!-- bootsrap css cdn -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
-      integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
-      crossorigin="anonymous" />
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
-      <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-      <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" /> -->
-      <!-- style sheets -->
-      <link rel="stylesheet" href="{% static 'main/common.css' %}" />
-      <link rel="stylesheet" href="{% static 'main/inputstyle.css' %}" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- bootsrap css cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+    integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+    crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" /> -->
+  <!-- style sheets -->
+  <link rel="stylesheet" href="{% static 'main/common.css' %}" />
+  <link rel="stylesheet" href="{% static 'main/inputstyle.css' %}" />
 
-      <title>Registraion Form</title>
-    </head>
-  
-    <body>
-      <section class="container header-container">
-        <div class="col-lg-3 col-md-8 col-sm-12 p-0">
-          <h6>Enter Team Leader details</h6>
-          <form  class="form" method="POST" enctype ="multipart/form-data">
-            {% csrf_token %}
-              <div class="">
-                <div class="">
-                  <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" required id="teamleadname" name="teamleadname" class="width-100" value="{{ participant.teamleadname }}">
-                    
-                    <label for="teamleadname" class="input-label">Name of Team Lead*</label>
-                  </div>
-                  <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" required id="institution_name" name="institution_name" class="width-100" value="{{ participant.institution_name }}">
-                    <label for="institution_name" class="input-label">Institution Name*</label>
-                  </div>
-                  <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" required id="institution_address" name="institution_address" class="width-100" value="{{ participant.institution_address}}">
-                    <label for="institution_address" class="input-label">Institution Address*</label>
-                  </div>
-                  <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" required id="phoneno" name="phone"maxlength="10" minlength="10" oninvalid="setCustomValidity('Please enter valid phone number')" class="width-100" value="{{ participant.phone}}" onkeypress="return ignoreSpaces(event)"/>
-                    <label for="phoneno" class="input-label">Contact Number*</label>
-                  </div>
-                  <p id="phoneNumberError"></p>
-                  </div>
+  <title>Registraion Form</title>
+</head>
+
+<body>
+  <div class="vh-100 d-flex justify-content-left align-items-left">
+    <div class="container">
+      <div class="row d-flex justify-content-left">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="card bg-light">
+            <div class="card-body p-5">
+              <h2 class="fw-bold mb-2 text-uppercase">Update Details</h2>
+
+              <form  class="form" method="POST" enctype ="multipart/form-data">
+                
+                {% csrf_token %}
+
+                <div class="material-textfield mt-4">
+                  <input placeholder=" " type="text" required id="teamleadname" name="teamleadname" class="width-100"
+                    value="{{ participant.teamleadname }}" />
+                  <label for="teamleadname" class="input-label">Name</label>
                 </div>
-              </div>
-                <div class="mt-4">
-                  <button type="submit" class="btn secondary-button">Update</button>
+
+                <div class="material-textfield mt-4">
+                  <input placeholder=" " type="text" required id="phoneno" name="phone" class="width-100"
+                    value="{{ participant.phone}}" onkeypress="return ignoreSpaces(event)" />
+                  <label for="phoneno" class="input-label">Contact Number*</label>
                 </div>
-                <a href="/home/">
-                  <button type="button" class="btn secondary-button">Back</button>
-                </a>
-            </form>
-            <script>
-  
-              let phoneNumberEl = document.getElementById("phoneno");
-                    let phoneNumberErrorEl = document.getElementById("phoneNumberError");
-                    phoneNumberErrorEl.style.display = "none";
-                    function validate(text) {
-                      let regx = '^\\+?[1-9][0-9]{8}$';
-                      if (!text.match(regx)) {
-                        phoneNumberErrorEl.style.display = "block";
-                        phoneNumberErrorEl.textContent = "Enter your 10 digit phone number";
-                        phoneNumberErrorEl.style.color = "red";
-                        return;
-                      }
-                      phoneNumberErrorEl.style.display = "none";
-                    }
-               
-                          
-                    function ignoreSpaces(event) {
-                      var character = event ? event.which : window.event.keyCode;
-                      let text = phoneNumberEl.value;
-                      if(event.charCode > 64 && event.charCode < 123) {
-                        phoneNumberErrorEl.style.display = "block";
-                        phoneNumberErrorEl.textContent = "Only digits are allowed";
-                        phoneNumberErrorEl.style.color = "red";
-                        return false
-                      }
-                      validate(text);
-                      
-                    }
-              
-                  </script>
-        
-      </section>
-  
-      <script src="{% static 'js/script.js' %}" defer></script>
-      <script type="text/javascript">
-        let institutionSelectElement = document.getElementById("institution");
-        let otherTextElement = document.getElementById("other");
-        institutionSelectElement.addEventListener("click", (event) => {
-          if (institutionSelectElement.value == 0) {
-            otherTextElement.style.display = "block";
-          } else {
-            otherTextElement.style.display = "none";
-          }
-        });
-        institutionSelectElement.addEventListener("change", (event) => {
-          if (institutionSelectElement.value == 0) {
-            otherTextElement.style.display = "block";
-          } else {
-            otherTextElement.style.display = "none";
-          }
-        });
-  
-      </script>
-    </body>
-  </html>
-  
+                <p id="phoneNumberError"></p>
+
+                <div class="material-textfield mt-4">
+                  <input placeholder=" " type="text" required id="institution_name" name="institution_name"
+                    class="width-100" value="{{ participant.institution_name }}" />
+                  <label for="institution_name" class="input-label">Institution Name*</label>
+                </div>
+
+                <div class="material-textfield mt-4">
+                  <input placeholder=" " type="text" required id="institution_address" name="institution_address"
+                    class="width-100" value="{{ participant.institution_address}}" />
+
+                  <label for="institution_address" class="input-label">Institution Address*</label>
+                </div>
+
+                <br>
+                <button type="submit" class="btn btn-primary">Update</button>
+
+                <button type="submit" class="btn btn-outline-primary">
+                  <a href="/userprofile/">Back</a>
+                </button>
+
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let phoneNumberEl = document.getElementById("phoneno");
+    let phoneNumberErrorEl = document.getElementById("phoneNumberError");
+    phoneNumberErrorEl.style.display = "none";
+    function validate(text) {
+      let regx = "^\\+?[1-9][0-9]{8}$";
+      if (!text.match(regx)) {
+        phoneNumberErrorEl.style.display = "block";
+        phoneNumberErrorEl.textContent = "Enter your 10 digit phone number";
+        phoneNumberErrorEl.style.color = "red";
+        return;
+      }
+      phoneNumberErrorEl.style.display = "none";
+    }
+
+    function ignoreSpaces(event) {
+      var character = event ? event.which : window.event.keyCode;
+      let text = phoneNumberEl.value;
+      if (event.charCode > 64 && event.charCode < 123) {
+        phoneNumberErrorEl.style.display = "block";
+        phoneNumberErrorEl.textContent = "Only digits are allowed";
+        phoneNumberErrorEl.style.color = "red";
+        return false;
+      }
+      validate(text);
+    }
+  </script>
+
+  <script src="{% static 'js/script.js' %}" defer></script>
+  <script type="text/javascript">
+    let institutionSelectElement = document.getElementById("institution");
+    let otherTextElement = document.getElementById("other");
+    institutionSelectElement.addEventListener("click", (event) => {
+      if (institutionSelectElement.value == 0) {
+        otherTextElement.style.display = "block";
+      } else {
+        otherTextElement.style.display = "none";
+      }
+    });
+    institutionSelectElement.addEventListener("change", (event) => {
+      if (institutionSelectElement.value == 0) {
+        otherTextElement.style.display = "block";
+      } else {
+        otherTextElement.style.display = "none";
+      }
+    });
+  </script>
+</body>
+
+</html>
+{% endblock %}
