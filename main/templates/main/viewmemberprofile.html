@@ -32,6 +32,7 @@
     <div class="vh-100 d-flex justify-content-left align-items-left">
 
       <div class="container">
+        <h3 class="mb-3">Team Members</h3>
 
         <div class="row d-flex justify-content-left">
           {% csrf_token %}
@@ -44,7 +45,7 @@
             <div class="card bg-light">
               <div class="card-body p-5">
                 <!-- <h2 class="fw-light mb-2">Member {{ member.id }}</h2> -->
-                <h2 class="fw-light mb-2">Member</h2>
+                <!-- <h2 class="fw-light mb-2">Member</h2> -->
 
 
 
@@ -67,9 +68,12 @@
 
                 &nbsp;<div>
 
-                  <a href="/updatememberprofile/{{member.id}}">
+                  <!-- <a href="/updatememberprofile/{{member.id}}">
                     <button type="button" class="btn btn-primary">Update</button>
-                  </a> &nbsp;
+                  </a> -->
+
+                  <a class="btn btn-primary " href="/updatememberprofile/{{member.id}}">Update</a>                 
+                  &nbsp;
 
                   <a href="/delete-member/{{member.id}}">
                     <button type="button" class="btn btn-outline-danger">Delete</button>

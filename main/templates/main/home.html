@@ -19,6 +19,7 @@
     <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
     <!-- font cdn -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{% static 'main/common.css' %}" />
     <link rel="stylesheet" href="{% static 'main/inputstyle.css' %}" />
@@ -161,8 +162,10 @@
                             </li>
                             <li>
                                 <a href="/userprofile/">
+                                    <!-- <ion-icon name="person-outline"> -->
                                     <i class="metismenu-icon pe-7s-eyedropper fas fa-user fa-fw me-3">
-                                    </i>Team Leader
+                                    </i>  Team Leader
+                                <!-- </ion-icon> -->
                                 </a>
                             </li>
                             <li>
@@ -182,7 +185,7 @@
                             <li>
                                 <a href="/viewproblem/">
                                     <i class=" metismenu-icon pe-7s-pendrive fas fa-question">
-                                    </i>Problem Statement
+                                    </i>Problem
                                 </a>
                             </li>
 
@@ -260,23 +263,25 @@
                     <!-- problem statement status view start end -->
                     <!-- <div class="col-md-10 col-xl-8 mt-4"> -->
                     <!-- <label>hello</label> -->
-                    <div class="card mb-3 widget-content bg-midnight-bloom">
+                    <div class="card mb-3 widget-content bg-primary">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">
-                                <div class="widget-heading"><span
-                                        style="font-weight: lighter; color: #ffff; font-size: xx-large;">Problem
+                                <div class=""><span
+                                        style="font-weight: bold-lighter; color: #ffff; font-size: xx-large;">Problem
                                         Status</span></div>
                                 <div class="">
                                     <div>
-                                        Problem Submission Status is
+                                        Submission Status is
                                         {% if user.status == 'U' %}
-                                        <span class="bg-warning p-2 rounded">Under Processing</span> 
+                                        <!-- <span class="bg-warning p-2 rounded">Under Reviewing</span>  -->
+                                        <span class= "text-warning">Under Reviewing</span> 
+
                                         
                                         {% elif user.status == 'A' %}
-                                        <span class="bg-success p-2 rounded">Accepted</span> 
+                                        <span class="text-success">Accepted</span> 
                                         
                                         {% else %}
-                                        <span class="bg-danger p-2 rounded">Rejected</span><br>
+                                        <span class="text-danger">Rejected</span><br>
                                         
                                         Remarks: {{ user.remark }}
                                         {% endif %}
@@ -301,21 +306,23 @@
                                 <div class="card mb-3 widget-content bg-dark">
                                     <div class="widget-content-wrapper text-white">
                                         <div class="widget-content-left">
-                                            <div class="widget-heading"><span
-                                                style="font-weight: lighter; color: #ffff; font-size: x-large;">Uploaded Problem</span></div>
+                                            <div class=""><span
+                                                style="font-weight: bold-lighter; color: #ffff; font-size: x-large;">Problem Statement</span></div>
                                             <div class="">
                                                 <form action="" class="form" method="GET" enctype="multipart/form-data">
                                                     {% csrf_token %}
 
                                                     {% if problem_details %}
                                                     <p class="card-text"> <b>{{ problem_details.problem_name }}</b><br />
-                                                    </p><br>
+                                                    </p>
+
+                                                    <a class="btn btn-primary" href="/viewproblem/" role="button">More Details</a>
 
                                                     <!-- <p class="card-text">{{ problem_details.description }}<br /></p> -->
                                                     {% if soln %}
-                                                    <a class="btn btn-primary"
+                                                    <!-- <a class="btn btn-primary"
                                                         href="{{ soln.solution_upload.url }}"
-                                                        role="button">View Solution</a>
+                                                        role="button">View Solution</a> -->
                                                     {% else %}
                                                     <div>
                                                         No problem were selected
@@ -357,6 +364,8 @@
 
             <script type="text/javascript"
                 src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
+                <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+                <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 
 
