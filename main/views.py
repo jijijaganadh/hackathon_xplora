@@ -1,3 +1,4 @@
+from email import message
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views import View
@@ -50,9 +51,16 @@ def homepage(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     if request.user.is_authenticated:
-        mainParticipantDetails = MainParticipant.objects.get(
+        mainParticipantDetails = MainParticipant.objects.filter(
             user_id=request.user)
-    return render(request=request, template_name='main/home.html', context={"books": page_obj, 'user': mainParticipantDetails})
+        solution_detals = Solution_details.objects.filter(user_id=request.user)
+        if mainParticipantDetails.exists() and solution_detals.exists():
+            problem_details = Problem.objects.filter(problem_id = solution_detals[0].problem_id.problem_id)
+            return render(request=request, template_name='main/home.html', context={"books": page_obj, 'user': mainParticipantDetails[0], 'soln':solution_detals[0], 'problem_details': problem_details[0]},)
+        elif not solution_detals.exists():
+            return redirect('main:problem')
+        else:
+            return redirect('main:registration')
 
 
 def contact(request):
@@ -83,16 +91,22 @@ def contact(request):
 def register_request(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user = form.save()
-            send_activation_email(user, request)
-            # login(request, user)
-            messages.success(request, "Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
-            return redirect("main:register")
-        messages.error(
-            request, f"Unsuccessful Registration, {form.error_messages}")
+        username=request.POST['username']
+        try:
+            if User.objects.filter(username=username):
+                messages.error(request,"Username already exists, Please try again with different Username")
+                return redirect('main:register')
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.is_active = False
+                user = form.save()
+                send_activation_email(user, request)
+                # login(request, user)
+                messages.success(request, "Congratulations,Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
+                return redirect("main:register")
+            messages.error(request, f"Unsuccessful Registration, Because {form.error_messages}")
+        except Exception as e:
+            messages.error(request,f"Entered Email already exists, Please try again with another Email")
     if request.user.is_authenticated:
         return redirect('main:homepage')
     
@@ -115,8 +129,9 @@ def login_request(request):
                 except:
                     return redirect('main:registration')
 
-                messages.info(request, f"You are now logged in as {username}.")
+                
                 return redirect("main:homepage")
+        messages.error(request, f"Invalid username or password.")    
         return render(request=request, template_name="main/login.html", context={"login_form": form})
     else:
         if request.user.is_authenticated:
@@ -127,7 +142,6 @@ def login_request(request):
 # logout form
 def logout_request(request):
     logout(request)
-    messages.info(request, "You have successfully logged out.")
     return redirect("main:index")
 
 # collect main_participant profile details 
@@ -317,7 +331,7 @@ class ViewMemberProfile(View):
             print(memberdetails)
             # print(memberdetails.institution.id)
 
-            return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails.values()], 'length': len(list(memberdetails))})
+            return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails], 'length': len(list(memberdetails))})
         except Mentordetails.DoesNotExist:
             pass
         return render(request, self.template_name, {"form": form, 'length': 0})
@@ -356,6 +370,7 @@ class ViewUserProfile(View):
         except MainParticipant.DoesNotExist:
             pass
         return render(request, self.template_name, {"form": form})
+
 
 
 class UpdateMentorProfile(View):

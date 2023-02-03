@@ -26,72 +26,117 @@
 
 
   <!-- start -->
-  <div class="vh-100 d-flex justify-content-left align-items-left">
-    <div class="container">
-      <div class="row d-flex justify-content-left">
-        <div class="col-12 col-md-8 col-lg-6">
-          <div class="card bg-light">
-            <div class="card-body p-5">
-              <h2 class="fw-bold mb-2 text-uppercase">Member Details</h2>
-  
-              <form action=""  class="form" method="GET" enctype ="multipart/form-data">  
+  <form action="" class="form" method="GET" enctype="multipart/form-data">
 
-  
-                {% csrf_token %}
-                {% if memberdetails %}
 
-                {% for member in memberdetails %}
+    <div class="vh-100 d-flex justify-content-left align-items-left">
 
-  
-                        <h6>{{ member.name }}</h6>
-                        <p>Email : {{ member.email }}</p>
-                        <p>Contact Number : {{ member.phoneno }}</p>
-                        <p>Institution Name : {{ member.institution_name }}</p>
+      <div class="container">
+        <h3 class="mb-3">Team Members</h3>
 
-                        <img src="{{ member.institution_id }}" alt="id" height="100">
-                        <img src="{{ member.upload_photo }}" alt="photo" height="100">
-                        <div>
-                          <a href="/updatememberprofile/{{member.id}}">
-                              <button type="button" class="btn btn-primary">Update</button>
-                            </a>
-                        
-                          <a href="/delete-member/{{member.id}}">
-                              <button type="button" class="btn btn-primary">Delete</button>
-                            </a>
-                            
-                        </div>
-                        
-                        {% endfor %}
-                        
-                        
-                        {% else %}
-                        <div>
-                          No Members were added
-                        </div>
-                        {% endif %}
-                        
-                        <div class="mt-4">
-                          <button type="submit" class="btn btn-outline-primary">
-                            {% if length < 2 %} <a href="/add_member/">Add</a>
-                              {% else %}
-                              <a href="/home/">Continue</a>
-                              {% endif %}
-                          </button>
-                        </div>
-              </form>
-              
-  
+        <div class="row d-flex justify-content-left">
+          {% csrf_token %}
+          {% if memberdetails %}
+
+          {% for member in memberdetails %}
+
+
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="card bg-light">
+              <div class="card-body p-5">
+                <!-- <h2 class="fw-light mb-2">Member {{ member.id }}</h2> -->
+                <!-- <h2 class="fw-light mb-2">Member</h2> -->
+
+
+
+                <img src="{{ member.upload_photo.url }}" alt="" height="170" width="138"
+                  style="border: 1px solid rgb(2, 117, 216); border-radius: 3px; margin-top: 2rem;">
+
+                <br />
+                <br>
+                <p class="card-title" style="font-size: x-large;">{{ member.name }}</p>
+
+                <p class="card-text"> <b>{{ member.institution_name }}</b> <br /> </p>
+                <p class="card-text">Contact Number : {{ member.phoneno }}
+                  <br />Email:{{ member.email }}
+                </p>
+                <div>
+                  <a class="btn btn-outline-primary" href="{{ member.institution_id.url }}" role="button">View ID</a>
+                </div>
+
+                <!-- <img src="{{ member.institution_id }}" alt="id" height="100"> -->
+
+                &nbsp;<div>
+
+                  <!-- <a href="/updatememberprofile/{{member.id}}">
+                    <button type="button" class="btn btn-primary">Update</button>
+                  </a> -->
+
+                  <a class="btn btn-primary " href="/updatememberprofile/{{member.id}}">Update</a>                 
+                  &nbsp;
+
+                  <a href="/delete-member/{{member.id}}">
+                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                  </a>
+
+                </div>
+
+              </div>
             </div>
           </div>
+
+
+
+          {% endfor %}
+
         </div>
       </div>
     </div>
-  </div>
+
+
+    {% else %}
+    <div class="mb-2">
+      No Members were added
+    </div>
+    <br>
+    {% endif %}
+    <div class="mt-10">
+      <!-- <div> -->
+      <!-- <button type="submit" class="btn btn-outline-primary">
+        {% if length < 2 %} <a href="/add_member/">Add</a>
+          {% else %}
+          {% endif %}
+      </button> -->
+
+      
+
+        {% if length < 2 %} 
+        <div class=" mb-4">
+        
+        <a class="btn btn-primary " href="/add_member/">Add Member</a>
+        <br>
+      </div>
+        {% else %}
+        {% endif %}
+  
+
+    </div>
+
+  </form>
+
+  <!-- </div> -->
+  <!-- </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
   <!-- end -->
 
 
-             
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-  </html>
-  {% endblock %}
+
+</html>
+{% endblock %}

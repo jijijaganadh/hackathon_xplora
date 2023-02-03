@@ -28,39 +28,41 @@
   </head>
 <body>
 
-  <!-- start -->
+<!-- start -->
+<form action=""  class="form" method="GET" enctype ="multipart/form-data">
+
 <div class="vh-100 d-flex justify-content-left align-items-left">
   <div class="container">
+    <h3>Problem Statement</h3>
+
     <div class="row d-flex justify-content-left">
       <div class="col-12 col-md-8 col-lg-6">
         <div class="card bg-light">
           <div class="card-body p-5">
-            <h2 class="fw-bold mb-2 text-uppercase">Problem Details</h2>
+            <h2 class="fw-light mb-2">Problem Details</h2>
 
-            <form action=""  class="form" method="GET" enctype ="multipart/form-data">
               {% csrf_token %}
              
               {% if problemdetails %}
-
-                      <h6>{{ problemdetails.problem_name }}</h6>
                       
-                      <p>{{ problemdetails.description }}</p>
-                                            
-                      <p><a href="{{ solutiondetails.solution_upload.url }}">View Uploaded Solution</a></p>
+                      <p class="card-text"> <b>{{ problemdetails.problem_name }}</b><br/></p>
+  
+                        <p class="card-text">{{ problemdetails.description }}<br/></p>
 
-                      <img src="{{ mentordetails.upload_photo.url }}" alt="" height="100">
+
+                                            
+                      <!-- <p><a href="{{ solutiondetails.solution_upload.url }}">View Uploaded Solution</a></p> -->
+                      <a class="btn btn-primary" href="{{ solutiondetails.solution_upload.url }}" role="button">View Solution</a>
+
 
                       {% else %}
                       <div>
-                        No problem were added
+                        No problem were selected
                       </div>
                   {% endif %}
           
-                  <a href="/home/">
-                    <button type="button" class="btn btn-outline-primary">Home</button>
-                  </a>              
               
-            </form>
+              
             
 
           </div>
@@ -69,6 +71,8 @@
     </div>
   </div>
 </div>
+</form>
+
 <!-- end -->
              
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>

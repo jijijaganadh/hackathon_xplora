@@ -1,8 +1,10 @@
 from wsgiref.validate import validator
+from xml.dom import ValidationErr
 from django import forms
 # from click import Choice
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from nbformat import ValidationError
 from .models import MainParticipant, Memberdetails,Mentordetails, Solution_details
 
 # from .models import Solution
@@ -42,12 +44,16 @@ class MainParticipantForm(forms.ModelForm):
 
 
 class NewUserForm(UserCreationForm):
-     email = forms.EmailField(required=True)
-
-     class Meta:
+    email = forms.EmailField(required=True)
+    class Meta:
          model = User
          fields = ("username", "email",
                    "password1", "password2",)
+    def clean_email(self):
+        email=self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationErr("Email already exists")
+        return email
 #     class Meta:
 #         model = MainParticipant
 #         # fields = ("teamleadname", "phoneno",
@@ -57,7 +63,7 @@ class NewUserForm(UserCreationForm):
 #         model = Solution
         # fields = ("problem_statment_type", "file_upload")
 
-     def save(self, commit=True):
+    def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
 

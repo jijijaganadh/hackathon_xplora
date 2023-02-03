@@ -26,49 +26,52 @@
 
 
   <!-- start -->
+  <form action="" class="form b-3 mt-md-4 " method="GET" enctype="multipart/form-data">
+
 <div class="vh-100 d-flex justify-content-left align-items-left">
+
   <div class="container">
+    <h3>Team Mentor</h3>
+
     <div class="row d-flex justify-content-left">
-      <div class="col-12 col-md-8 col-lg-6">
+      <div class="col-12 col-md-8 col-lg-8">
         <div class="card bg-light">
           <div class="card-body p-5">
-            <h2 class="fw-bold mb-2 text-uppercase">Mentor Details</h2>
+            <h3 class="fw-light mb-2">Mentor Details</h3>
 
-            <form action="" class="form b-3 mt-md-4 " method="GET" enctype="multipart/form-data">
 
               {% csrf_token %}
               {% if mentordetails %}
+              <!-- <label> <img src="{{ mentordetails.upload_photo.url }}" alt="" height="100"></label> -->
+              <img src="{{ mentordetails.upload_photo.url }}" alt="" height="170" width="138" style="border: 1px solid rgb(2, 117, 216); border-radius: 3px; margin-top: 2rem;">
 
-                      <h6>{{ mentordetails.name }}</h6>
-                      <p>Email : {{ mentordetails.email }}</p>
-                      
-                      <p>Contact Number : {{ mentordetails.phoneno }}</p>
-                      
-                      <p>Institution Name : {{ mentordetails.institution_name }}</p>
-                      
-                      <p>Designation: {{ mentordetails.designation }} </p>
+                    <br/>  
+                    <br><p class="card-title" style="font-size: x-large;">{{ mentordetails.name }}</p>
 
-                      <img src="{{ mentordetails.upload_photo.url }}" alt="" height="100">
+                    <p class="card-text"> <b>{{ mentordetails.institution_name }}</b><br/>
+                      {{ mentordetails.designation }}<br/></p>
+
+                      <p class="card-text">Contact Number : {{ mentordetails.phoneno }}<br/>
+                      Email : {{ mentordetails.email }} </p>
+
 
                       {% if length >= 1%}
                       
               <div>
-                <br>
-              <a href="/updatementorprofile/">
+              <!-- <a href="/updatementorprofile/">
                   <button type="button" class="btn btn-primary">Update</button>
-                </a>
+                </a> -->
+                <a class="btn btn-primary " href="/updatementorprofile/">Update</a>                 
+
+                
+                &nbsp;
               
                 <a href="/deletementor/">
-                  <button type="button" class="btn btn-primary">Delete</button>
+                  <button type="button" class="btn btn-outline-danger">Delete</button>
                 </a>
-
-
               </div>
 
-                      
-
-
-                  {% endif %}
+               {% endif %}
 
               {% else %}
               <div>
@@ -76,21 +79,18 @@
               </div>
           {% endif %}
 
-                  <div class="mt-4">
-                    <button type="submit" class="btn btn-outline-primary">
-                      {% if length < 1 %} <a href="/mentor/">Add</a>
-                        {% else %}
-                        <a href="/home/">Continue</a>
-                        {% endif %}
-                    </button>
+                <div>
+                    <!-- <button type="submit" class="btn btn-outline-primary"> -->
+                      {% if length < 1 %}
+                      
+                      <!-- <a href="/mentor/">Add</a> -->
+                      <a class="btn btn-primary " href="/mentor/">Add Member</a>
+
+                    <!-- </button> -->
                   </div>
-          
 
-                 
-
-              
-            </form>
-            
+                        {% else %}
+                        {% endif %}  
 
           </div>
         </div>
@@ -98,6 +98,8 @@
     </div>
   </div>
 </div>
+</form>
+
 <!-- end -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
