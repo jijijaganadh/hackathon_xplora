@@ -94,7 +94,7 @@ def register_request(request):
         username=request.POST['username']
         try:
             if User.objects.filter(username=username):
-                messages.error(request,"Username already exit please try some other")
+                messages.error(request,"Username already exists, Please try again with different Username")
                 return redirect('main:register')
             if form.is_valid():
                 user = form.save(commit=False)
@@ -102,12 +102,12 @@ def register_request(request):
                 user = form.save()
                 send_activation_email(user, request)
                 # login(request, user)
-                messages.success(request, "Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
-                messages.error(request, f"Unsuccessful Registration, {form.error_messages}")
+                messages.success(request, "Congratulations,Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
+                messages.error(request, f"Unsuccessful Registration, Because {form.error_messages}")
                 return redirect("main:register")
-            messages.error(request, f"Unsuccessful Registration,{form.error_messages}")
+            messages.error(request, f"Unsuccessful Registration, Because {form.error_messages}")
         except Exception as e:
-            messages.error(request,f"Entered Email already exists")
+            messages.error(request,f"Entered Email already exists, Please try again with another Email")
     if request.user.is_authenticated:
         return redirect('main:homepage')
     
@@ -130,7 +130,7 @@ def login_request(request):
                 except:
                     return redirect('main:registration')
 
-                messages.info(request, f"You are now logged in as {username}.")
+                
                 return redirect("main:homepage")
         messages.error(request, f"Invalid username or password.")    
         return render(request=request, template_name="main/login.html", context={"login_form": form})
@@ -143,7 +143,6 @@ def login_request(request):
 # logout form
 def logout_request(request):
     logout(request)
-    messages.info(request, "You have successfully logged out.")
     return redirect("main:index")
 
 # collect main_participant profile details 
