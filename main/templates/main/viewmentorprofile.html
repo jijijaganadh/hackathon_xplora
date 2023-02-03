@@ -29,7 +29,10 @@
   <form action="" class="form b-3 mt-md-4 " method="GET" enctype="multipart/form-data">
 
 <div class="vh-100 d-flex justify-content-left align-items-left">
+
   <div class="container">
+    <h3>Team Mentor</h3>
+
     <div class="row d-flex justify-content-left">
       <div class="col-12 col-md-8 col-lg-8">
         <div class="card bg-light">
@@ -55,9 +58,13 @@
                       {% if length >= 1%}
                       
               <div>
-              <a href="/updatementorprofile/">
+              <!-- <a href="/updatementorprofile/">
                   <button type="button" class="btn btn-primary">Update</button>
-                </a>&nbsp;
+                </a> -->
+                <a class="btn btn-primary " href="/updatementorprofile/">Update</a>                 
+
+                
+                &nbsp;
               
                 <a href="/deletementor/">
                   <button type="button" class="btn btn-outline-danger">Delete</button>
@@ -73,9 +80,13 @@
           {% endif %}
 
                 <div>
-                    <button type="submit" class="btn btn-outline-primary">
-                      {% if length < 1 %} <a href="/mentor/">Add</a>
-                    </button>
+                    <!-- <button type="submit" class="btn btn-outline-primary"> -->
+                      {% if length < 1 %}
+                      
+                      <!-- <a href="/mentor/">Add</a> -->
+                      <a class="btn btn-primary " href="/mentor/">Add Member</a>
+
+                    <!-- </button> -->
                   </div>
 
                         {% else %}
