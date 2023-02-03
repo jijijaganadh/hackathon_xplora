@@ -12,6 +12,7 @@
     color: var(--primary-blue) !important;
     font-weight: 500;
 }
+.active,
 .nav-link:hover{
     color: var(--light-blue)!important;
 }
