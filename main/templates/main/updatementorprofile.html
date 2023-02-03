@@ -32,7 +32,7 @@
       <div class="col-12 col-md-8 col-lg-6">
         <div class="card bg-light">
           <div class="card-body p-5">
-            <h2 class="fw-bold mb-2 text-uppercase">Update Details</h2>
+            <h2 class="fw-light mb-2">Update Mentor Details</h2>
 
             <form  class="form" method="POST" enctype ="multipart/form-data">
               {% csrf_token %}
@@ -65,11 +65,18 @@
 
                 <div> 
                   <br>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <!-- <button type="submit" class="btn btn-primary"><a href="/mentorprofile/">Update</a>
+                </button> -->
 
-                <button type="submit" class="btn btn-outline-primary">
+                <!-- <button type="submit" class="btn btn-primary"><a href="/mentorprofile/">Update</a>
+                </button> -->
+
+               <a class="btn btn-primary" href="/mentorprofile/" role="button" type ="submit">Update</a>
+
+
+                <!-- <button type="submit" class="btn btn-outline-primary">
                   <a href="/mentorprofile/">Back</a>
-                </button>
+                </button> -->
 
                 </div> 
 

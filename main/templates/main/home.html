@@ -1,6 +1,8 @@
 {% extends 'main/header.html' %}
 {% block content %}
+
 {% load static %}
+
 <!doctype html>
 <html lang="en">
 
@@ -20,9 +22,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{% static 'main/common.css' %}" />
     <link rel="stylesheet" href="{% static 'main/inputstyle.css' %}" />
+
+
+
+    <style>
+        /* .background-img {
+            background: url('/static/assets/backg.jpg');
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover; */
+            /* filter: blur(8px);
+            -webkit-filter: blur(8px);
+        } */
+
+        .fas {
+            color: #0275d8;
+        }
+
+        .app-header {
+            color: #205295;
+        }
+
+        .close:hover {
+            color: rgb(255, 0, 0);
+
+        }
+    </style>
+
 </head>
 
 <body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to sign out?
+                </div>
+                <div class="modal-footer">
+                    <a href="/home/" class="btn btn-outline-secondary" role="btn btn-default">Cancel</a>
+
+                    <a href="/logout" class="btn btn-primary" role="button">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -66,11 +119,12 @@
 
             </div>
         </div>
-
+        <!-- phone -->
         <div class="app-main">
             <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">
-                    <div class="logo-src"></div>
+                    <h6>Xplora WinHACK</h6>
+                    <!-- <div class="logo-src"></div> -->
                     <div class="header__pane ml-auto">
                         <div>
                             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -107,47 +161,51 @@
                             <li>
                                 <a href="/userprofile/">
                                     <i class="metismenu-icon pe-7s-eyedropper fas fa-user fa-fw me-3">
-                                    </i>Team Leader Details
+                                    </i>Team Leader
                                 </a>
                             </li>
                             <li>
                                 <a href="/memberprofile/">
                                     <i class="metismenu-icon pe-7s-pendrive fas fa-users fa-fw me-3">
-                                    </i>Members Details
+                                    </i>Members
                                 </a>
                             </li>
 
                             <li>
                                 <a href="/mentorprofile/">
                                     <i class=" metismenu-icon pe-7s-pendrive fas fa-user-graduate">
-                                    </i>Mentor Details
+                                    </i>Mentor
                                 </a>
                             </li>
 
                             <li>
                                 <a href="/viewproblem/">
                                     <i class=" metismenu-icon pe-7s-pendrive fas fa-question">
-                                    </i>Problem Details
+                                    </i>Problem Statement
                                 </a>
                             </li>
 
 
                             <li>
-                                <a href="/logout">
-                                    <i class="metismenu-icon pe-7s-pendrive fa fa-sign-out fa-fw me-3 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+                                <a href="/logout" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="metismenu-icon pe-7s-pendrive fas fa-sign-out fa-fw me-3 ">
                                     </i>Sign Out
                                 </a>
                             </li>
-
-                            
 
                         </ul>
                     </div>
                 </div>
             </div>
+            <!-- <section class="vh-100 d-flex align-items-center justify-content-center background-img"> -->
+
+            <!-- <div class="app-main__outer background-img"> -->
             <div class="app-main__outer">
-                <div class="app-main__inner">
-                 
+
+
+                <div class="app-main__inner mt-4">
+
+
 
                     <!-- <div class="app-page-title">
                         <div class="page-title-wrapper">
@@ -187,106 +245,133 @@
                     </div> -->
                     <!-- card end -->
 
-
                     <!-- div start -->
-                    <div>
-                        {% block view %}
-                        <!-- content here start-->
-                        <!-- problem statement status view start end -->
-                        <div class="col-md-10 col-xl-8">
-                            <div class="card mb-3 widget-content bg-midnight-bloom">
-                                <div class="widget-content-wrapper text-white">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">Problem Status</div>
-                                        <div class="widget-subheading">
-                                            <div>
-                                                Current Registration Status is
-                                                {% if user.status == 'U' %}
-                                                Under Processing
-                                                {% elif user.status == 'A' %}
-                                                Accepted
-                                                {% else %}
-                                                Rejected
-                                                {{ user.remark }}
-                                                {% endif %}
-                                                
-                                            </div>
-                                        </div>
+                    <!-- <div class="row mb-0"> -->
+
+
+                    {% block view %}
+
+
+                    <!-- content here start-->
+
+
+
+                    <!-- problem statement status view start end -->
+                    <!-- <div class="col-md-10 col-xl-8 mt-4"> -->
+                    <!-- <label>hello</label> -->
+                    <div class="card mb-3 widget-content bg-midnight-bloom">
+                        <div class="widget-content-wrapper text-white">
+                            <div class="widget-content-left">
+                                <div class="widget-heading"><span
+                                        style="font-weight: lighter; color: #ffff; font-size: xx-large;">Problem
+                                        Status</span></div>
+                                <div class="widget-subheading">
+                                    <div>
+                                        Problem Submission Status is
+                                        {% if user.status == 'U' %}
+                                        Under Processing
+                                        {% elif user.status == 'A' %}
+                                        Accepted
+                                        {% else %}
+                                        Rejected
+                                        {{ user.remark }}
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- problem statement status view end -->
+                    </div>
 
-                        <!-- problem statement SELECTED start -->
 
-                    <!-- <div class="row">
+                    <!-- </div> -->
+                    <!-- problem statement status view end -->
+
+                    <!-- problem statement SELECTED start -->
+
+
+
+                    <div class="row">
                         <div class="row">
                             <div class="col-md-6 col-xl-4">
                                 <div class="card mb-3 widget-content bg-midnight-bloom">
                                     <div class="widget-content-wrapper text-white">
                                         <div class="widget-content-left">
-                                            <div class="widget-heading">Total Orders</div>
-                                            <div class="widget-subheading">Last year expenses</div>
+                                            <div class="widget-heading"><span
+                                                style="font-weight: lighter; color: #ffff; font-size: x-large;">Uploaded Problem</span></div>
+                                            <div class="widget-subheading">
+                                                <form action="" class="form" method="GET" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+
+                                                    {% if problemdetails %}
+                                                    <p class="card-text"> <b>{{ problemdetails.problem_name }}</b><br />
+                                                    </p>
+
+                                                    <p class="card-text">{{ problemdetails.description }}<br /></p>
+
+                                                    <a class="btn btn-primary"
+                                                        href="{{ solutiondetails.solution_upload.url }}"
+                                                        role="button">View Uploaded Solution</a>
+
+
+                                                    {% else %}
+                                                    <div>
+                                                        No problem were selected
+                                                    </div>
+                                                    {% endif %}
+
+                                                </form>
+
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                        
 
-                        <div class="col-md-6 col-xl-4">
-                            <div class="card mb-3 widget-content bg-grow-early">
-                                <div class="widget-content-wrapper text-white">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">CONTENT</div>
-                                        <div class="widget-subheading">CONTENT CONTENT</div>
+
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card mb-3 widget-content bg-grow-early">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">CONTENT</div>
+                                            <div class="widget-subheading">CONTENT CONTENT</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-    
+
                         <!-- problem statement SELECTED end -->
-                        
+
 
 
                         <!-- content here end-->
                         {% endblock %}
+                        <!-- </div> -->
+                        <!-- div end -->
+
+
+
                     </div>
-                    <!-- div end -->
-
-
-
                 </div>
+                <!-- </section> -->
             </div>
-        </div>
-                      
-        
-        <script type="text/javascript"
-            src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
-        {% endblock %}
 
-        
+
+
+            <script type="text/javascript"
+                src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
+
+
+
+            {% endblock %}
+
+
+
+
 
 </body>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<div class="modal-dialog" style="z-index: 10000;">
-    <div class="modal-content">
-        <div class="modal-header">
-            <!-- <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            Do you want to Sign Out?
-        </div>
-        <div class="modal-footer">
-            <a href="/logout" class="btn btn-primary" role="button">Sign Out</a>
-            <a href="/home/" class="" role="btn btn-default">Cancel</a>
-        </div>
-    </div>
-</div>
-</div>
 
 </html>
