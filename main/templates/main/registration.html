@@ -175,13 +175,10 @@
                               <input placeholder=" " type="text" required id="institution_address" name="institution_address" class="width-100" required>
                               <label for="institution_address" class="input-label">Institution Address*</label>
                             </div>
-                            <div class="material-textfield mt-4">
-                              <input placeholder=" " type="text" required id="phoneno" name="phone" class="width-100" onkeypress="return ignoreSpaces(event)" required/>
-                              <label for="phoneno" class="input-label">Contact Number*</label>
                             </div>
                             <p id="phoneNumberError"></p>
                              <div class="mt-4">
-                              <label for="ID">upload Institution ID</label>
+                              <label for="ID">upload Institution ID/Valid ID-proof</label>
                               <input
                                 class="form-control form-control-sm"
                                 name="college_id"
@@ -191,9 +188,33 @@
                               />
                               <div class="small text-muted mt-2">
                                 Upload your Institution ID or any other relevant file. Max file size
-                                50 MB
+                                100 KB
+                              </div>
+                              <div>
+                                <h6>your email{{user.email}}</h6>
+                              </div>
+                              <div class="material-textfield mt-4">
+                                <input placeholder=" " type="text" required id="phoneno" name="phone" maxlength="10" milength="10" class="width-100" oninvalid="setCustomValidity('Please enter valid phone number')"  onkeypress="return ignoreSpaces(event)" required/>
+                                <label for="phoneno" class="input-label">Contact Number*</label>
                               </div>
                             </div>
+                            <div class="mt-4">
+                              <label for="ID">upload photo</label>
+                              <input
+                                class="form-control form-control-sm"
+                                name="upload_photo"
+                                id="formFileLg"
+                                type="file"
+                                required
+                              />
+                              <div class="small text-muted mt-2">
+                                Upload your passport size photo  
+                              </div>
+                            <p>Please select your choice</p>
+                             <input type="radio" id="html" name="usertype" value="ST" required>
+                             <label for="html">student</label><br>
+                             <input type="radio" id="css" name="usertype" value="PT">
+                            <label for="css">professional</label><br>
                           </div>
                         </div>
                           <div class="mt-4">

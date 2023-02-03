@@ -39,27 +39,32 @@ urlpatterns = [
     path("delete-member/<int:id>", views.DeleteMember.as_view(), name="deletemember"),
     path("viewproblem/", views.ViewProblemdetails.as_view(), name='viewproblem'),
     path('activate-user/<uidb64>/<token>',views.activate_user, name='activate'),
+    
+     # Forget Password
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
-             template_name='commons/password-reset/password_reset_form.html',
-             subject_template_name='commons/password-reset/password_reset_subject.txt',
-             email_template_name='commons/password-reset/password_reset_email.html',
-             # success_url='/login/'
+             template_name='main/password_reset_form.html',
+             subject_template_name='main/password_reset_subject.txt',
+             email_template_name='main/password_reset_email.html',
+             success_url='/password-reset_done'
          ),
          name='password_reset'),
-    path('password-reset/done/',
+    path('password-reset_done/',
          auth_views.PasswordResetDoneView.as_view(
-             template_name='commons/password-reset/password_reset_done.html'
+             template_name='main/password_reset_done.html'
+              
          ),
          name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/',
          auth_views.PasswordResetConfirmView.as_view(
-             template_name='commons/password-reset/password_reset_confirm.html'
+             template_name='main/password_reset_confirm.html',
+             success_url='/password-reset-complete'
+
          ),
          name='password_reset_confirm'),
     path('password-reset-complete/',
          auth_views.PasswordResetCompleteView.as_view(
-             template_name='commons/password-reset/password_reset_complete.html'
+             template_name='main/password_reset_complete.html'
          ),
          name='password_reset_complete'),
 ]

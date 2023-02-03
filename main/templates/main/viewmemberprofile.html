@@ -1,86 +1,97 @@
+{%extends "main/home.html"%}
 {% load static %}
+{% block view %}
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- bootsrap css cdn -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
     crossorigin="anonymous" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-  <!-- stylesheets -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" /> -->
+  <!-- style sheets -->
   <link rel="stylesheet" href="{% static 'main/common.css' %}" />
   <link rel="stylesheet" href="{% static 'main/inputstyle.css' %}" />
 
+  <title>Registraion Form</title>
 </head>
+
 <body>
-  <section class="container header-container">
-    <div class="col-lg-3 col-md-8 col-sm-12 p-0">
-      <h1>Member Details</h1>
-      <form action=""  class="form" method="GET" enctype ="multipart/form-data">
-        {% csrf_token %}
-       
-        {% if memberdetails %}
-        <table class="table">
-          <thead>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">PhoneNo</th>
-            <th scope="col">InstitutionName</th>
+
+
+  <!-- start -->
+  <div class="vh-100 d-flex justify-content-left align-items-left">
+    <div class="container">
+      <div class="row d-flex justify-content-left">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="card bg-light">
+            <div class="card-body p-5">
+              <h2 class="fw-bold mb-2 text-uppercase">Member Details</h2>
+  
+              <form action=""  class="form" method="GET" enctype ="multipart/form-data">  
 
   
-          </thead>
-          <tbody>
-            {% for member in memberdetails %}
-            <tr>
-              <td>{{ member.name }}</td>
-              <td>{{ member.email }}</td>
-              <td>{{ member.phoneno }}</td>
-              <td>{{ member.institution_name }}</td>
-              <td><a href="/updatememberprofile/{{member.id}}">
-                <button type="button" class="btn secondary-button">Update</button>
-              </a></td>
-              <td><a href="/delete-member/{{member.id}}">
-                <button type="button" class="btn secondary-button">Delete</button>
-              </a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-           
-        {% else %}
-            <div>
-              No Members were added
+                {% csrf_token %}
+                {% if memberdetails %}
+
+                {% for member in memberdetails %}
+
+  
+                        <h6>{{ member.name }}</h6>
+                        <p>Email : {{ member.email }}</p>
+                        <p>Contact Number : {{ member.phoneno }}</p>
+                        <p>Institution Name : {{ member.institution_name }}</p>
+
+                        <img src="{{ member.institution_id }}" alt="id" height="100">
+                        <img src="{{ member.upload_photo }}" alt="photo" height="100">
+                        <div>
+                          <a href="/updatememberprofile/{{member.id}}">
+                              <button type="button" class="btn btn-primary">Update</button>
+                            </a>
+                        
+                          <a href="/delete-member/{{member.id}}">
+                              <button type="button" class="btn btn-primary">Delete</button>
+                            </a>
+                            
+                        </div>
+                        
+                        {% endfor %}
+                        
+                        
+                        {% else %}
+                        <div>
+                          No Members were added
+                        </div>
+                        {% endif %}
+                        
+                        <div class="mt-4">
+                          <button type="submit" class="btn btn-outline-primary">
+                            {% if length < 2 %} <a href="/add_member/">Add</a>
+                              {% else %}
+                              <a href="/home/">Continue</a>
+                              {% endif %}
+                          </button>
+                        </div>
+              </form>
+              
+  
             </div>
-        {% endif %}
-
-        <div class="mt-4">
-          <button type="submit" class="btn secondary-button">
-            {% if length < 2 %}
-            <a href="/add_member/" >Add</a>
-            {% else %}
-            <a href="/home/">Continue</a>
-            {% endif %}
-          </button>
-          <a href="/home/">
-            <button type="button" class="btn secondary-button">Back</button>
-          </a>
-          <!-- <a href="">
-            <button type="button" class="btn secondary-button">Update</button>
-          </a> -->
-       
-          <!-- <a href="/mentor/">
-            <button type="button" class="btn secondary-button">Delete</button>
-          </a> -->
+          </div>
         </div>
-
-      </form>
+      </div>
     </div>
-  </section>
+  </div>
+  <!-- end -->
+
+
              
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
   </html>
+  {% endblock %}

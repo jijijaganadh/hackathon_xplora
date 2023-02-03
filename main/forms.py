@@ -22,12 +22,12 @@ class MainParticipantForm(forms.ModelForm):
 class MentordetailsForm(forms.ModelForm):
     class Meta:
         model = Mentordetails
-        fields = ['name',"phoneno","email",'institution_name','designation']
+        fields = ['name',"phoneno","email",'institution_name','designation','upload_photo']
     
 class ShowMentordetailsForm(forms.ModelForm):
     class Meta:
         model = Mentordetails
-        fields = ['name',"phoneno","email",'institution_name','designation']
+        fields = ['name',"phoneno","email",'institution_name','designation','upload_photo']
         
 class ViewproblemdetailsForm(forms.ModelForm):
     class Meta:
@@ -38,7 +38,7 @@ class ViewproblemdetailsForm(forms.ModelForm):
 class MainParticipantForm(forms.ModelForm):
     class Meta:
         model = MainParticipant
-        fields = ['teamleadname','college_id',"phone",'institution_name','institution_address']
+        fields = ['teamleadname','college_id',"phone",'institution_name','institution_address','upload_photo', 'usertype']
 
 
 class NewUserForm(UserCreationForm):
@@ -74,7 +74,7 @@ def phone_number_validator(value):
 class MemberForm(forms.ModelForm):
     class Meta:
         model= Memberdetails
-        fields=('name','email','phoneno','institution_name','institution_id')  
+        fields=('name','email','phoneno','institution_name','institution_id','upload_photo')  
     
     def clean(self):
         super().clean()   
@@ -100,7 +100,7 @@ class AddMemberDetailsForm(forms.ModelForm):
 class MemberdetailsviewprofileForm(forms.ModelForm):
     class Meta:
         model= Memberdetails
-        fields=('name','email','phoneno','institution_name','institution_id')  
+        fields=('name','email','phoneno','institution_name','institution_id','upload_photo')  
     
 class ViewmainParticipantForm(forms.ModelForm):
     class Meta:
@@ -110,7 +110,7 @@ class ViewmainParticipantForm(forms.ModelForm):
 class MentordetailsviewprofileForm(forms.ModelForm):
     class Meta:
         model = Mentordetails
-        fields = ['name',"phoneno","email",'institution_name','designation']
+        fields = ['name',"phoneno","email",'institution_name','designation','upload_photo']
     
 class UpdateMentorForm(forms.ModelForm):
     class Meta:

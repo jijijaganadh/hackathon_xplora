@@ -11,7 +11,7 @@
     <form method="POST">
       {% csrf_token %}
       <div class="material-textfield mt-4">
-        <input placeholder=" " type="text" required id="id_username" name="username" class="width-100" onkeypress="return ignoreSpaces(event)" required>
+        <input placeholder=" " type="text" required id="id_username" name="username"minlength="8" pattern="[a-z]{8}+" oninvalid="setCustomValidity('Username should contain atleast 8 characters')"class="width-100" onkeypress="return ignoreSpaces(event)" required>
         <label for="id_username" class="input-label">Username*</label>
       </div>
       <div class="mt-1">
