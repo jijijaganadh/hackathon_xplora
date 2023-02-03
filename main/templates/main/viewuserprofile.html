@@ -24,51 +24,56 @@
     <link rel="stylesheet" href="{% static 'main/common.css' %}" />
     <link rel="stylesheet" href="{% static 'main/inputstyle.css' %}" />
 
-    <title>Registraion Form</title>
+    <title>User Form</title>
   </head>
 
   
 <!-- start -->
+<form action="" class="form b-3 mt-md-4 " method="GET" enctype="multipart/form-data">
+
+
 <div class="vh-100 d-flex justify-content-left align-items-left">
+
   <div class="container">
     <div class="row d-flex justify-content-left">
-      <div class="col-12 col-md-8 col-lg-6">
+      <div class="col-12 col-md-8 col-lg-8">
+
         <div class="card bg-light">
           <div class="card-body p-5">
-            <h2 class="fw-bold mb-2 text-uppercase">Leader Details</h2>
+            <h2 class="fw-light mb-2">Leader Details</h2>
 
-            <form action="" class="form b-3 mt-md-4 " method="GET" enctype="multipart/form-data">
 
               {% csrf_token %}
                     {% if participant %}
-                      <h6>{{ participant.teamleadname }}</h6>
-                      
-                      <p>Contact Number : {{ participant.phone }}</p>
-                      
-                      <p>Institution Name : {{ participant.institution_name }}</p>
-                      
-                      <p>Institution Address : <br>{{ participant.institution_address }} </p>
+                    <img src="{{ participant.upload_photo.url }}" alt="" height="170" width="138" style="border: 1px solid rgb(2, 117, 216); border-radius: 3px; margin-top: 2rem;">
 
-                      <img src="{{ participant.college_id.url }}" alt="" height="100" >
-                      <img src="{{ participant.upload_photo.url }}" alt="" height="100" >
+                    <br/>  
+                    <br><p class="card-title" style="font-size: x-large;">{{ participant.teamleadname }}</p>
+                                           
+
+                      <p class="card-text"> <b>{{ participant.institution_name }}</b> <br/>
+                      {{ participant.institution_address }}<br/></p>
+                      <p class="card-text">Contact Number : {{ participant.phone }}</p>
 
                       {% else %}
                       <div>
                         No profile found
                       </div>
                       {% endif %}
-                  <a class="btn btn-primary" href="/updateuserprofile/" role="button">Edit</a>
+                  <a class="btn btn-primary" href="/updateuserprofile/" role="button">Edit</a>&nbsp; &nbsp;
 
-              
-            </form>
-            
+                  <a class="btn btn-primary" href="{{ participant.college_id.url }}" role="button">View ID</a>
+                       
 
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
+</form>
+
 <!-- end -->
     
 
