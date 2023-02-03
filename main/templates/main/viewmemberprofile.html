@@ -43,10 +43,12 @@
           <div class="col-12 col-md-8 col-lg-6">
           <div class="card bg-light">
             <div class="card-body p-5">
-              <h2 class="fw-light mb-2">Member {{ member.id }}</h2>
+              <!-- <h2 class="fw-light mb-2">Member {{ member.id }}</h2> -->
+              <h2 class="fw-light mb-2">Member</h2>
 
 
-              <img src="{{ member.upload_photo }}" alt="" height="170" width="138" style="border: 1px solid rgb(2, 117, 216); border-radius: 3px; margin-top: 2rem;">
+
+              <img src="{{ member.upload_photo.url }}" alt="" height="170" width="138" style="border: 1px solid rgb(2, 117, 216); border-radius: 3px; margin-top: 2rem;">
 
                     <br/>  
                     <br><p class="card-title" style="font-size: x-large;">{{ member.name }}</p>
@@ -55,7 +57,7 @@
                       <p class="card-text">Contact Number : {{ member.phoneno }}
                         <br/>Email:{{ member.email }}</p>
                         <div>
-                        <a class="btn btn-outline-primary" href="{{ member.upload_photo.url }}" role="button">View ID</a> 
+                        <a class="btn btn-outline-primary" href="{{ member.institution_id.url }}" role="button">View ID</a> 
                       </div>
 
                         <!-- <img src="{{ member.institution_id }}" alt="id" height="100"> -->
