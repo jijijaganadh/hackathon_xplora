@@ -266,16 +266,19 @@
                                 <div class="widget-heading"><span
                                         style="font-weight: lighter; color: #ffff; font-size: xx-large;">Problem
                                         Status</span></div>
-                                <div class="widget-subheading">
+                                <div class="">
                                     <div>
                                         Problem Submission Status is
                                         {% if user.status == 'U' %}
-                                        Under Processing
+                                        <span class="bg-warning p-2 rounded">Under Processing</span> 
+                                        
                                         {% elif user.status == 'A' %}
-                                        Accepted
+                                        <span class="bg-success p-2 rounded">Accepted</span> 
+                                        
                                         {% else %}
-                                        Rejected
-                                        {{ user.remark }}
+                                        <span class="bg-danger p-2 rounded">Rejected</span><br>
+                                        
+                                        Remarks: {{ user.remark }}
                                         {% endif %}
 
                                     </div>
@@ -292,27 +295,27 @@
 
 
 
-                    <div class="row">
-                        <div class="row">
-                            <div class="col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content bg-midnight-bloom">
+                    <div class="">
+                        <div class="">
+                            <div class="col-md-12 col-xl-12">
+                                <div class="card mb-3 widget-content bg-dark">
                                     <div class="widget-content-wrapper text-white">
                                         <div class="widget-content-left">
                                             <div class="widget-heading"><span
                                                 style="font-weight: lighter; color: #ffff; font-size: x-large;">Uploaded Problem</span></div>
-                                            <div class="widget-subheading">
+                                            <div class="">
                                                 <form action="" class="form" method="GET" enctype="multipart/form-data">
                                                     {% csrf_token %}
 
                                                     {% if problem_details %}
                                                     <p class="card-text"> <b>{{ problem_details.problem_name }}</b><br />
-                                                    </p>
+                                                    </p><br>
 
-                                                    <p class="card-text">{{ problem_details.description }}<br /></p>
+                                                    <!-- <p class="card-text">{{ problem_details.description }}<br /></p> -->
                                                     {% if soln %}
                                                     <a class="btn btn-primary"
                                                         href="{{ soln.solution_upload.url }}"
-                                                        role="button">View Uploaded Solution</a>
+                                                        role="button">View Solution</a>
                                                     {% else %}
                                                     <div>
                                                         No problem were selected
@@ -331,16 +334,7 @@
 
 
 
-                            <div class="col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content bg-grow-early">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">CONTENT</div>
-                                            <div class="widget-subheading">CONTENT CONTENT</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
 
                         <!-- problem statement SELECTED end -->
