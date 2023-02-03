@@ -47,9 +47,8 @@
                         <p>Email : {{ member.email }}</p>
                         <p>Contact Number : {{ member.phoneno }}</p>
                         <p>Institution Name : {{ member.institution_name }}</p>
-
-                        <img src="{{ member.institution_id }}" alt="id" height="100">
-                        <img src="{{ member.upload_photo }}" alt="photo" height="100">
+                        <p><img src="{{ member.upload_photo.url }}" alt="" height="100">
+                        </p>
                         <div>
                           <a href="/updatememberprofile/{{member.id}}">
                               <button type="button" class="btn btn-primary">Update</button>

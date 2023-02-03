@@ -24,9 +24,13 @@ class Institution(models.Model):
     class Meta:
           db_table="institution"
    
-def user_directory_path(instance, filename):
+def user_directory_path_main_participant_photo(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'photos/participant/user_{0}/{1}'.format(instance.user_id, filename)
+
+def user_directory_path_main_participant_idcard(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'photos/participant/idcard/user_{0}/{1}'.format(instance.user_id, filename)
 
 def user_directory_path_mentor(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
@@ -36,9 +40,14 @@ def user_directory_path_solution_details(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'solution/user_{0}/{1}'.format(instance.user_id, filename)
 
-def user_directory_path_member(instance, filename):
+def user_directory_path_member_photo(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'photos/member/user_{0}/{1}'.format(instance.user_id, filename)
+
+def user_directory_path_member_idcard(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'photos/member/idcard/user_{0}/{1}'.format(instance.user_id, filename)
+
 
 class MainParticipant(models.Model):
     user_id= models.ForeignKey(User, null= True,  on_delete=models.CASCADE)
@@ -46,9 +55,9 @@ class MainParticipant(models.Model):
     phone = models.CharField(max_length=15)
     institution_name = models.CharField(max_length=50)
     institution_address = models.CharField(max_length=500)
-    upload_photo = models.ImageField(upload_to=user_directory_path)
+    upload_photo = models.ImageField(upload_to=user_directory_path_main_participant_photo)
     # institution_id = models.ForeignKey(Institution, null=True, on_delete=models.CASCADE)
-    college_id = models.FileField(upload_to=user_directory_path)
+    college_id = models.ImageField(upload_to=user_directory_path_main_participant_idcard)
     status = models.CharField(max_length=1)
     # Status => U: underreview,A: accepted,R: rejected with remark
     usertype = models.CharField(max_length=2)
@@ -98,8 +107,8 @@ class Memberdetails(models.Model):
     email = models.EmailField()
     phoneno = models.CharField(max_length=15)
     institution_name = models.CharField(max_length=100)
-    upload_photo = models.ImageField(upload_to=user_directory_path_member)
-    institution_id= models.ImageField(upload_to=user_directory_path_member)
+    upload_photo = models.ImageField(upload_to=user_directory_path_member_photo)
+    institution_id= models.ImageField(upload_to=user_directory_path_member_idcard)
 
     class Meta:
         db_table="member_details"

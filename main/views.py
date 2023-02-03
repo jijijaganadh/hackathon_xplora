@@ -117,6 +117,7 @@ def login_request(request):
 
                 messages.info(request, f"You are now logged in as {username}.")
                 return redirect("main:homepage")
+        messages.error(request, f"Invalid username or password.")    
         return render(request=request, template_name="main/login.html", context={"login_form": form})
     else:
         if request.user.is_authenticated:
@@ -317,7 +318,7 @@ class ViewMemberProfile(View):
             print(memberdetails)
             # print(memberdetails.institution.id)
 
-            return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails.values()], 'length': len(list(memberdetails))})
+            return render(request, self.template_name, {"form": form, "memberdetails": [member for member in memberdetails], 'length': len(list(memberdetails))})
         except Mentordetails.DoesNotExist:
             pass
         return render(request, self.template_name, {"form": form, 'length': 0})
@@ -356,6 +357,7 @@ class ViewUserProfile(View):
         except MainParticipant.DoesNotExist:
             pass
         return render(request, self.template_name, {"form": form})
+
 
 
 class UpdateMentorProfile(View):
