@@ -103,7 +103,6 @@ def register_request(request):
                 send_activation_email(user, request)
                 # login(request, user)
                 messages.success(request, "Congratulations,Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
-                messages.error(request, f"Unsuccessful Registration, Because {form.error_messages}")
                 return redirect("main:register")
             messages.error(request, f"Unsuccessful Registration, Because {form.error_messages}")
         except Exception as e:
