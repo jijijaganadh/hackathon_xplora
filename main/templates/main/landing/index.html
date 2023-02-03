@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xplora WINHACK</title>
+  <title>Xplora WinHack</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
     crossorigin="anonymous" />
@@ -405,10 +405,10 @@
         </div>
       </div>
     </div>
-    <div class="text-center mt-0" style="background-color: var(--light-blue); z-index: 1; margin-top: -80 !important;">
+    <!-- <div class="text-center mt-0" style="background-color: var(--light-blue); z-index: 1; margin-top: -80 !important;">
     <a class="ct-btn-scroll ct-js-btn-scroll" href="#section2">
       <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Chevron Down Circle</title><path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M352 216l-96 96-96-96"/></svg></a>
-  </div>
+  </div> -->
   </section>
 
 
@@ -1054,7 +1054,7 @@
   {% endblock %}
   <!--========== footer section ==========-->
   <footer>
-    <div class="mt-0">
+    <div class="mt-0 ">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 210">
             <path fill="#19A3FF" fill-opacity="1" d="M0,96L48,96C96,96,192,96,288,122.7C384,149,480,203,576,202.7C672,203,768,149,864,138.7C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
           </svg>
@@ -1073,11 +1073,19 @@
                         <div class="">
                             <h5 class="m-0">Join us and shape the future of tourism at our hackathon for women!</h5>
                             <p class="m-0 mb-3">Fore more details, visit the following links</p>
-                            <div class="p-0 col-lg-6 d-flex justify-content-between footer-link">
-                                <a href="{% url 'main:register' %}">Registration</a>
-                                <a href="{% url 'main:guidelines' %}">Guidelines</a>
-                                <a href="{% url 'main:faq' %}">FAQ</a>
-                                <a href="{% url 'main:about' %}">About us</a>
+                            <div class="m-0 p-0 col-lg-6  col-md-12 col-sm-12 d-flex justify-content-between footer-link">
+                                <div class="">
+                                  <a href="{% url 'main:register' %}" class="m-0 Footer-link-wrapper">Registration</a>
+                                </div>
+                                <div class="">
+                                  <a href="{% url 'main:guidelines' %}" class="m-0 Footer-link-wrapper">Guidelines</a>
+                                </div>
+                                <div class="">
+                                  <a href="{% url 'main:faq' %}" class="m-0 Footer-link-wrapper">FAQ</a>
+                                </div>
+                                <div class="">
+                                  <a href="{% url 'main:about' %}" class="m-0 Footer-link-wrapper">About us</a>
+                                </div>
                             </div>
                         </div>
                         <hr>
