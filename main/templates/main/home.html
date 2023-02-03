@@ -118,6 +118,7 @@
                 </div>
 
             </div>
+            
         </div>
         <!-- phone -->
         <div class="app-main">
@@ -303,21 +304,20 @@
                                                 <form action="" class="form" method="GET" enctype="multipart/form-data">
                                                     {% csrf_token %}
 
-                                                    {% if problemdetails %}
-                                                    <p class="card-text"> <b>{{ problemdetails.problem_name }}</b><br />
+                                                    {% if problem_details %}
+                                                    <p class="card-text"> <b>{{ problem_details.problem_name }}</b><br />
                                                     </p>
 
-                                                    <p class="card-text">{{ problemdetails.description }}<br /></p>
-
+                                                    <p class="card-text">{{ problem_details.description }}<br /></p>
+                                                    {% if soln %}
                                                     <a class="btn btn-primary"
-                                                        href="{{ solutiondetails.solution_upload.url }}"
+                                                        href="{{ soln.solution_upload.url }}"
                                                         role="button">View Uploaded Solution</a>
-
-
                                                     {% else %}
                                                     <div>
                                                         No problem were selected
                                                     </div>
+                                                    {% endif %}
                                                     {% endif %}
 
                                                 </form>

@@ -50,9 +50,16 @@ def homepage(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     if request.user.is_authenticated:
-        mainParticipantDetails = MainParticipant.objects.get(
+        mainParticipantDetails = MainParticipant.objects.filter(
             user_id=request.user)
-    return render(request=request, template_name='main/home.html', context={"books": page_obj, 'user': mainParticipantDetails})
+        solution_detals = Solution_details.objects.filter(user_id=request.user)
+        if mainParticipantDetails.exists() and solution_detals.exists():
+            problem_details = Problem.objects.filter(problem_id = solution_detals[0].problem_id.problem_id)
+            return render(request=request, template_name='main/home.html', context={"books": page_obj, 'user': mainParticipantDetails[0], 'soln':solution_detals[0], 'problem_details': problem_details[0]},)
+        elif not solution_detals.exists():
+            return redirect('main:problem')
+        else:
+            return redirect('main:registration')
 
 
 def contact(request):
