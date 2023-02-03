@@ -10,6 +10,7 @@
     <p class="m-0 small">Enter your details and create an account</p>
     <form method="POST">
       {% csrf_token %}
+      {{form.as_p}}
       <div class="material-textfield mt-4">
         <input placeholder=" " type="text" required id="id_username" name="username"minlength="8" pattern="[a-z]{8}+" oninvalid="setCustomValidity('Username should contain atleast 8 characters')"class="width-100" onkeypress="return ignoreSpaces(event)" required>
         <label for="id_username" class="input-label">Username*</label>

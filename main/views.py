@@ -1,3 +1,4 @@
+from email import message
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views import View
@@ -90,16 +91,23 @@ def contact(request):
 def register_request(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user = form.save()
-            send_activation_email(user, request)
-            # login(request, user)
-            messages.success(request, "Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
-            return redirect("main:register")
-        messages.error(
-            request, f"Unsuccessful Registration, {form.error_messages}")
+        username=request.POST['username']
+        try:
+            if User.objects.filter(username=username):
+                messages.error(request,"Username already exit please try some other")
+                return redirect('main:register')
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.is_active = False
+                user = form.save()
+                send_activation_email(user, request)
+                # login(request, user)
+                messages.success(request, "Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
+                messages.error(request, f"Unsuccessful Registration, {form.error_messages}")
+                return redirect("main:register")
+            messages.error(request, f"Unsuccessful Registration,{form.error_messages}")
+        except Exception as e:
+            messages.error(request,f"Entered Email already exists")
     if request.user.is_authenticated:
         return redirect('main:homepage')
     
