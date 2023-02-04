@@ -96,7 +96,7 @@ def register_request(request):
             if User.objects.filter(username=username):
                 messages.error(request,"Username already exists, Please try again with different Username")
                 return redirect('main:register')
-            if form.is_valid():
+            if form.is_valid():  
                 user = form.save(commit=False)
                 user.is_active = False
                 user = form.save()
@@ -202,15 +202,18 @@ def problem(request):
         # find main Participant with user id
         #add user type to problemDetails model
         # mainparticipant.usertype
-        mainparticipantdetails = MainParticipant.objects.get(
+     try:
+         mainparticipantdetails = MainParticipant.objects.get(
                 user_id=request.user)
-        usetype = mainparticipantdetails.usertype
+         usetype = mainparticipantdetails.usertype
         
         # print(usetype)
-        problemdetails = Problem.objects.filter(usertype=usetype).values()
+         problemdetails = Problem.objects.filter(usertype=usetype).values()
         # problemdetails = Problem.objects.all()
-        print(problemdetails)
-        return render(request, 'main/problem.html', {'problems': problemdetails})
+         print(problemdetails)
+         return render(request, 'main/problem.html', {'problems': problemdetails})
+     except Exception as e:
+            return redirect("main:login")
 
 # view mentor details
 class MentorDetails(View):
