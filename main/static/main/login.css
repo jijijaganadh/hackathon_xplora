@@ -1,4 +1,8 @@
+@import url(colors.css);
 
+.black-shade-text{
+    color: var(--black-shade);
+}
 .auth-container{
     height: 90%;
     width: 75%;

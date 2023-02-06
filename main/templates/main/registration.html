@@ -164,7 +164,7 @@
                         <div class="">
                           <div class="">
                             <div class="material-textfield mt-4">
-                              <input placeholder=" " type="text" required id="teamleadname" name="teamleadname" class="width-100" required>
+                              <input placeholder=" " type="text"  id="teamleadname" name="teamleadname" class="width-100" required>
                               <label for="teamleadname" class="input-label">Name of Team Lead*</label>
                             </div>
                             <div class="material-textfield mt-4">
@@ -175,9 +175,10 @@
                               <h6>your email</h6>
                             </div> -->
                             <div class="material-textfield mt-4">
-                              <input placeholder=" " type="text" required id="phoneno" name="phone" maxlength="10" milength="10" class="width-100" oninvalid="setCustomValidity('Please enter valid phone number')"  onkeypress="return ignoreSpaces(event)" required/>
+                              <input placeholder=" " type="text"  id="phoneno" name="phone" maxlength="10" milength="10" class="width-100" oninvalid="setCustomValidity('Please enter valid phone number')"  onkeypress="return ignoreSpaces(event)" required/>
                               <label for="phoneno" class="input-label">Contact Number*</label>
                             </div>
+                            <p id="phoneNumberError"></p>
                             <div class="mt-3">
                               <label for="ID">Upload photo</label>
                               <input
@@ -192,15 +193,14 @@
                               </div> -->
                           </div>
                             <div class="material-textfield mt-4">
-                              <input placeholder=" " type="text" required id="institution_name" name="institution_name" class="width-100" required>
+                              <input placeholder=" " type="text" id="institution_name" name="institution_name" class="width-100" required>
                               <label for="institution_name" class="input-label">Institution Name*</label>
                             </div>
                             <div class="material-textfield mt-4">
-                              <input placeholder=" " type="text" required id="institution_address" name="institution_address" class="width-100" required>
+                              <input placeholder=" " type="text" id="institution_address" name="institution_address" class="width-100" required>
                               <label for="institution_address" class="input-label">Institution Address*</label>
                             </div>
                             </div>
-                            <p id="phoneNumberError"></p>
                              <div class="mt-4">
                               <label for="ID" class="medium">Upload Institution ID/Valid ID-proof</label>
                               <input
