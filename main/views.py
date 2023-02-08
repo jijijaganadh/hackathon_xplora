@@ -26,6 +26,7 @@ import threading
 from django.urls import reverse
 
 
+
 def index(request):
     return render(request, "main/landing/index.html")
 
@@ -96,7 +97,7 @@ def register_request(request):
             if User.objects.filter(username=username):
                 messages.error(request,"Username already exists, Please try again with different Username")
                 return redirect('main:register')
-            if form.is_valid():
+            if form.is_valid():  
                 user = form.save(commit=False)
                 user.is_active = False
                 user = form.save()
@@ -128,8 +129,6 @@ def login_request(request):
                         user_id=user)
                 except:
                     return redirect('main:registration')
-
-                
                 return redirect("main:homepage")
         messages.error(request, f"Invalid username or password.")    
         return render(request=request, template_name="main/login.html", context={"login_form": form})
@@ -187,30 +186,41 @@ def problem_description(request):
 @login_required(login_url='/login/')
 def problem(request):
     if request.method == 'POST':
-
         usersignupdetails = {
-            "solution_upload": request.FILES['solution_upload']
+            "solution_upload": 
+                request.FILES['solution_upload']
         }
-        print(request.POST.dict())
-        plbm = Problem.objects.get(
+
+        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf') and usersignupdetails['solution_upload'].size <= 10 * 1024 * 1024: 
+             # 10 MB file size limit
+         print(request.POST.dict())
+         plbm = Problem.objects.get(
             problem_id=request.POST.dict()['institution_name'])
-        instance = Solution_details.objects.create(
+         instance = Solution_details.objects.create(
             user_id=request.user, problem_id=plbm, **usersignupdetails)
-        instance.save()
-        return redirect('main:homepage')
+         instance.save()
+         return redirect('main:homepage')
+        else:
+            mainparticipantdetails = MainParticipant.objects.get(
+                user_id=request.user)
+            problemdetails = Problem.objects.filter(usertype=mainparticipantdetails.usertype).values()
+            return render(request, 'main/problem.html', {'problems': problemdetails,'error':True})
     else:
         # find main Participant with user id
         #add user type to problemDetails model
         # mainparticipant.usertype
-        mainparticipantdetails = MainParticipant.objects.get(
+     try:
+         mainparticipantdetails = MainParticipant.objects.get(
                 user_id=request.user)
-        usetype = mainparticipantdetails.usertype
+         usetype = mainparticipantdetails.usertype
         
         # print(usetype)
-        problemdetails = Problem.objects.filter(usertype=usetype).values()
+         problemdetails = Problem.objects.filter(usertype=usetype).values()
         # problemdetails = Problem.objects.all()
-        print(problemdetails)
-        return render(request, 'main/problem.html', {'problems': problemdetails})
+         print(problemdetails)
+         return render(request, 'main/problem.html', {'problems': problemdetails})
+     except Exception as e:
+            return redirect("main:login")
 
 # view mentor details
 class MentorDetails(View):
@@ -535,3 +545,8 @@ def activate_user(request, uidb64, token):
         return redirect(reverse('main:login'))
 
     return render(request, 'authentication/activate-failed.html', {"user": user})
+
+
+# reviewer Home Page
+
+

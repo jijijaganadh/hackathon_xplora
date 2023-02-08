@@ -1,9 +1,15 @@
+@import url(colors.css);
 
-.auth-container{
-    height: 90%;
-    width: 75%;
+.black-shade-text{
+    color: var(--black-shade);
 }
-
+.auth-container{
+    width: 75%;
+    height: auto;
+}
+.height-100vh{
+    height: 100vh;
+}
 .blurred-background{
     background: rgba( 255, 255, 255, 0.45 );
     box-shadow: 0 8px 8px 0 rgba( 31, 38, 135, 0.02 );
@@ -15,7 +21,10 @@
 
 .background-img{
     background: url('/static/assets/background.jpg') repeat;
-    width: 100%;
+    /* background-repeat: repeat-y; */
+    /* background-size: cover;  */
+    /* width: 100%;
+    height: auto; */
 }
 .auth-btn{
     padding: 0.65rem;
@@ -45,11 +54,20 @@
     display: none;
 }
 @media screen and (max-width:820px){
+    .blurred-background{
+        backdrop-filter: blur( 0px );
+        -webkit-backdrop-filter: blur( 0px );
+        border-radius: 10px;
+    }
     .auth-description{
         display: none;
     }
     .xplora-heading{
         display: block;
+    }
+    .height-100vh{
+        height: 100%;
+        padding: 16px 0;
     }
     .auth-container{
         width: 100%;

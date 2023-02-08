@@ -3,10 +3,12 @@
     --light-gray:#E6EEE6;
     --white:#FFFFFF;
     --black:#000;
-    --light-black: rgb(100, 100, 100);
+    --black-shade:#3d3939;
+    --light-black: #5A5A5A;
     --pink:rgb(247,77,118);
     --orange:#FD7E14;
     --medium-black:#3A3B3C;
     --gray:gray;
     --light-blue:#19A3FF;
+    --yellow:yellow
 }
