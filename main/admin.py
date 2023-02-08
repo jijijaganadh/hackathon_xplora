@@ -10,6 +10,7 @@ admin.site.register(Mentordetails)
 admin.site.register(Problem)
 admin.site.register(Solution_details)
 admin.site.register(Memberdetails)
+# admin.site.register(Solution_reviewer)
 
 
 

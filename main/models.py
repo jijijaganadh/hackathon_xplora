@@ -2,6 +2,8 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.core.validators import FileExtensionValidator
+
 
 # Create your models here.
 
@@ -49,6 +51,7 @@ def user_directory_path_member_idcard(instance, filename):
     return 'photos/member/idcard/user_{0}/{1}'.format(instance.user_id, filename)
 
 
+
 class MainParticipant(models.Model):
     user_id= models.ForeignKey(User, null= True,  on_delete=models.CASCADE)
     teamleadname = models.CharField(max_length=50)
@@ -88,13 +91,16 @@ class Problem(models.Model):
     usertype = models.CharField(max_length=2)
     
     class Meta:
-          db_table="problem_details"          
+          db_table="problem_details"    
+          
+          
+             
 
 class Solution_details(models.Model):
      user_id= models.ForeignKey(User, null=True, on_delete=models.CASCADE)
      problem_id = models.ForeignKey('Problem', null=True, on_delete=models.CASCADE)
     #  description = models.CharField(max_length=50)
-     solution_upload = models.FileField(upload_to=user_directory_path_solution_details)
+     solution_upload = models.FileField(upload_to=user_directory_path_solution_details,validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
 
     
      class Meta:
@@ -112,4 +118,18 @@ class Memberdetails(models.Model):
 
     class Meta:
         db_table="member_details"
+        
+# Reviewer table
+
+# class Solution_reviewer(models.Model):
+#     user_id= models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+#     # reviewer_user_id
+#     solution_id = models.ForeignKey('Solution_details', null=True, on_delete=models.CASCADE)
+#     allocated_on=datetime.now().time()
+#     reviewed_on=datetime.now().time()
+    
+#     class Meta:
+#         db_table="Solution_reviewer"
+    
+
  

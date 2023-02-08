@@ -5,7 +5,6 @@
           <p class="small mb-5">Choose Problem and upload your solution</p>
           <form action="" class="form" method="POST" enctype ="multipart/form-data">
             {% csrf_token %}
-
                 <select id="problem-id" class="select form-control-sm width-100 mb-4" name="institution_name">
                     <option selected disabled>Choose problem</option>
                     {% for prob in problems %}
@@ -80,6 +79,9 @@
               Upload your solution only in PDF format. Max file size
               50 MB
             </div>
+            {% if error %}
+            <div style="color: red;">Please upload file with pdf format</div>
+            {% endif %}
 
             <div class="mt-4 mb-4">
               <button role="button" class="btn secondary-button" type="submit">Register</button>
