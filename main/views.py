@@ -186,12 +186,15 @@ def problem_description(request):
 @login_required(login_url='/login/')
 def problem(request):
     if request.method == 'POST':
+        print(request.FILES['solution_upload'].size <= 10000000)
+        print(request.FILES['solution_upload'].size)
         usersignupdetails = {
             "solution_upload": 
                 request.FILES['solution_upload']
         }
 
-        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf') and usersignupdetails['solution_upload'].size <= 100 * 1024 * 1024: 
+        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf') and usersignupdetails['solution_upload'].size <= 10000000: 
+            
              # 10 MB file size limit
          print(request.POST.dict())
          plbm = Problem.objects.get(
