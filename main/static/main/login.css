@@ -4,10 +4,12 @@
     color: var(--black-shade);
 }
 .auth-container{
-    height: 90%;
     width: 75%;
+    height: auto;
 }
-
+.height-100vh{
+    height: 100vh;
+}
 .blurred-background{
     background: rgba( 255, 255, 255, 0.45 );
     box-shadow: 0 8px 8px 0 rgba( 31, 38, 135, 0.02 );
@@ -62,6 +64,10 @@
     }
     .xplora-heading{
         display: block;
+    }
+    .height-100vh{
+        height: 100%;
+        padding: 16px 0;
     }
     .auth-container{
         width: 100%;

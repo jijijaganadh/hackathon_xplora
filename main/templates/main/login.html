@@ -4,15 +4,15 @@
 
 
 <!-- login and signup -->
-<section class="vh-100 d-flex align-items-center justify-content-center ">
-  <div class="container auth-container">
+<section class="height-100vh d-flex align-items-center justify-content-center ">
+  <div class="container  auth-container">
     <div class="row h-100 m-0 blurred-background">
       <div class="col-lg-7 auth-description m-0">
         <div class="d-flex align-items-center justify-content-center">
           <div class="m-1 p-4">
               <div>
                 <h1 class="m-0">Xplora WinHack</h1>
-                <p >24,25 February 2023</p>
+                <p >24-25 February 2023</p>
               </div>
               <div>
                 <p class="small text-muted" align="justify">The Xplora WinHack (Women in Hackathon) programme of ICFOSS aims to promote
@@ -137,7 +137,7 @@
               <div id="auth" class="p-lg-5 p-3">
                 <div class="xplora-heading mb-5">
                   <h1 class="m-0">Xplora WinHack</h1>
-                  <p >24,25 February 2023</p>
+                  <p >24-25 February 2023</p>
                 </div>
                 {% block auth %}
                 <h1>Sign In</h1>
@@ -158,31 +158,12 @@
                 </div>
                 <!-- <p id="pswdError"></p> -->
                 <div class=" text-end mt-4">
-                  <p><a href="/password-reset" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Forgot Password?</a></p>
+                  <p><a href="/password-reset">Forgot Password?</a></p>
                 </div>
                  <button class="btn secondary-button auth-btn mt-4 width-100" type="submit">Sign in</button>
                 </form>
                 <div class="m-0 mt-4 text-center">
                  <p class="m-0">Don't have an account? <a href="/register">Sign up</a></p>
-                </div>
-                <!--========== forgot password modal ==========-->
-                <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-
-                  <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <div class="modal-title " id="staticBackdropLabel">
-                          <p>Reset Password</p>
-                        </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        {% block passwordReset %}
-                        {% endblock %}
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 {% endblock %}
               </div>
@@ -216,7 +197,7 @@
 
 
 
-<!--Login--> 
+<!--Login-->
 <!-- <div class="container header-container">
   <div class="col-lg-3 col-md-8 col-sm-12 p-0">
     <h1>Login</h1>
@@ -233,8 +214,6 @@
       <label for="id_password" class="input-label">Password*</label>
     </div>
     <p id="pswdError"></p> -->
-
-    
     <!-- <button class="btn secondary-button mt-4 width-100" type="submit">Login</button>
   </form>
   <div class="m-0 mt-4 text-center">
@@ -308,7 +287,7 @@
 //   usernameError.textContent = 'Contains white spaces';
 //   usernameError.style.color = 'red';
 //   return;
-// } 
+// }
 
 // }
 
