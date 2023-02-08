@@ -11,15 +11,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Analytics Dashboard - This is an example dashboard created using build-in elements and components.</title>
+    <title> Winhack Dashboard</title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
     <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+        integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+        crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet" />
     <!-- font cdn -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{% static 'main/common.css' %}" />
     <link rel="stylesheet" href="{% static 'main/inputstyle.css' %}" />
@@ -32,9 +38,12 @@
             width: 100%;
             background-repeat: no-repeat;
             background-size: cover; */
-            /* filter: blur(8px);
+        /* filter: blur(8px);
             -webkit-filter: blur(8px);
         } */
+        .signout {
+            color: white;
+        }
 
         .fas {
             color: #0275d8;
@@ -47,6 +56,24 @@
         .close:hover {
             color: rgb(255, 0, 0);
 
+        }
+
+        .blink {
+            animation: 2s linear infinite condemned_blink_effect;
+        }
+
+        @keyframes condemned_blink_effect {
+            0% {
+                visibility: hidden;
+            }
+
+            50% {
+                visibility: hidden;
+            }
+
+            100% {
+                visibility: visible;
+            }
         }
     </style>
 
@@ -80,9 +107,9 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-                <h6>Xplora WinHACK</h6>
-                <!-- <div class="logo-src"></div> -->
-                <div class="header__pane ml-auto">
+
+                <!-- <div class="header__pane ml-auto"> -->
+                <div class="header__pane">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
                             data-class="closed-sidebar">
@@ -92,15 +119,41 @@
                         </button>
                     </div>
                 </div>
-            </div>
-            <div class="app-header__mobile-menu">
-                <div>
-                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                        <span class="hamburger-box">
-                            <span class="hamburger-inner"></span>
-                        </span>
-                    </button>
+
+                <div class="p-5">
+                    <h6>Xplora WinHACK</h6>
                 </div>
+                <!-- <div class="logo-src"></div> -->
+
+                <!-- <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                            data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div> -->
+
+            </div>
+
+            <div class="app-header__mobile-menu">
+                <div class="header__pane">
+
+                    <div>
+                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-3">
+                    <h6>Xplora WinHACK</h6>
+                </div>
+
             </div>
             <!-- <div class="app-header__menu">
                 <span>
@@ -112,21 +165,21 @@
                     </button>
                 </span>
             </div> -->
-            <div class="app-header__content">
+            <!-- <div class="app-header__content">
                 <div class="app-header-left">
-
+<p>hello</p>
 
                 </div>
 
-            </div>
-            
+            </div> -->
+
         </div>
         <!-- phone -->
         <div class="app-main">
             <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">
-                    <h6>Xplora WinHACK</h6>
-                    <!-- <div class="logo-src"></div> -->
+                    <!-- <h6>Xplora WinHACK</h6> -->
+                    <div class="logo-src"></div>
                     <div class="header__pane ml-auto">
                         <div>
                             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -139,6 +192,7 @@
                     </div>
                 </div>
                 <div class="app-header__mobile-menu">
+
                     <div>
                         <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
                             <span class="hamburger-box">
@@ -156,7 +210,7 @@
                             <li class="app-sidebar__heading">MENU</li>
                             <li>
                                 <a href="/home/">
-                                    <i class="metismenu-icon pe-7s-mouse fas fa-list-alt fa-fw me-3">
+                                    <i class="metismenu-icon pe-7s-mouse fas fa-laptop-code fa-fw me-3">
                                     </i>Status
                                 </a>
                             </li>
@@ -164,8 +218,8 @@
                                 <a href="/userprofile/">
                                     <!-- <ion-icon name="person-outline"> -->
                                     <i class="metismenu-icon pe-7s-eyedropper fas fa-user fa-fw me-3">
-                                    </i>  Team Leader
-                                <!-- </ion-icon> -->
+                                    </i> Team Leader
+                                    <!-- </ion-icon> -->
                                 </a>
                             </li>
                             <li>
@@ -177,8 +231,10 @@
 
                             <li>
                                 <a href="/mentorprofile/">
-                                    <i class=" metismenu-icon pe-7s-pendrive fas fa-user-graduate">
+                                    <i class=" metismenu-icon pe-7s-pendrive fas fa-chalkboard-teacher">
                                     </i>Mentor
+                                    <!-- <i class="fas fa-chalkboard-teacher"></i> -->
+
                                 </a>
                             </li>
 
@@ -189,14 +245,21 @@
                                 </a>
                             </li>
 
-
-                            <li>
+                            <!-- <li>
                                 <a href="/logout" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="metismenu-icon pe-7s-pendrive fas fa-sign-out fa-fw me-3 ">
+                                    <i class="metismenu-icon pe-7s-pendrive fas fa-sign-out fa-fw me-3">
                                     </i>Sign Out
                                 </a>
-                            </li>
+                            </li> -->
+                            &nbsp;
 
+                            <li>
+                                <a href="/logout" class=" btn-btn-primary   " data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    <span class="fas fa-sign-out" style="font-size: 14px"></span>
+                                    Sign Out
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -209,12 +272,10 @@
 
                 <div class="app-main__inner mt-4">
 
-
-
                     <!-- <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
-
+<p>hello</p>
 
                             </div>
 
@@ -252,128 +313,153 @@
                     <!-- div start -->
                     <!-- <div class="row mb-0"> -->
 
-
                     {% block view %}
 
 
                     <!-- content here start-->
 
-
-
                     <!-- problem statement status view start end -->
-                    <!-- <div class="col-md-10 col-xl-8 mt-4"> -->
-                    <!-- <label>hello</label> -->
-                    <div class="card mb-3 widget-content bg-primary">
-                        <div class="widget-content-wrapper text-white">
-                            <div class="widget-content-left">
-                                <div class=""><span
-                                        style="font-weight: bold-lighter; color: #ffff; font-size: xx-large;">Problem
-                                        Status</span></div>
-                                <div class="">
+
+                    <div class="col-md-14 col-xl-13 mt-4" style="text-align: left;">
+
+                        <!-- <div class="col-md-14 col-xl-13 mt-4 text-sm-start text-md-start text-lg-start text-xl-start" style="text-align: left; " > -->
+                        <!-- <label>hello</label> -->
+
+                        <div class="card mb-3 bg-dark">
+                            <div class="card-body">
+
+
+                                <!-- <div class="widget-content-wrapper text-white"> -->
+                                <!-- <div class="widget-content-left"> -->
+                                <div class="card-text"><span
+                                        style="font-weight: bold-lighter; color: #fff; font-size: x-large;">Problem Status</span></div>
+                                <div class="card-text">
+                                    <!-- <div class="card-text mx-4"> -->
+
                                     <div>
-                                        Submission Status is
+                                        <!-- Submission Status is -->
+                                        <span style="font-weight: bold-lighter; color: #fff;">Submission Status is</span>
                                         {% if user.status == 'U' %}
                                         <!-- <span class="bg-warning p-2 rounded">Under Reviewing</span>  -->
-                                        <span class= "text-warning">Under Reviewing</span> 
+                                        <!-- <span class="blink" style="color:#0275d8">Under Reviewing</span> -->
+                                        <span style="color:#0275d8">Under Reviewing</span>
 
-                                        
+
+
                                         {% elif user.status == 'A' %}
-                                        <span class="text-success">Accepted</span> 
-                                        
+                                        <span class="text-success">Accepted</span>
+
                                         {% else %}
                                         <span class="text-danger">Rejected</span><br>
-                                        
+
                                         Remarks: {{ user.remark }}
                                         {% endif %}
 
                                     </div>
                                 </div>
+
                             </div>
                         </div>
+                        <!-- </div>
+                    </div> -->
+
                     </div>
+
+                    <!-- ************************************************************ -->
+                    <!-- TESTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG -->
+                    <!-- *************************************************************-->
+
+                    <!-- <div class="col-md-14 col-xl-13 mt-4" style="text-align: left;"> -->
+                    <!-- <label>hello</label> -->
+                    <!-- <div class="card mb-3 bg-info mh-100">
+        <div class="card-body"> -->
+
+                    <!-- <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left"> -->
+                    <!-- <div class="card-text mx-4"><span style="font-weight: bold-lighter; color: #ffff; font-size: x-large;">Problem Status</span></div> -->
+                    <!-- </div>
+        </div> -->
+                    <!-- </div> -->
+
+                    <!-- </div> -->
 
 
                     <!-- </div> -->
+
+
+                    <!-- ************************************************************ -->
+                    <!-- TESTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG -->
+                    <!-- *************************************************************-->
+
                     <!-- problem statement status view end -->
 
                     <!-- problem statement SELECTED start -->
 
+                    <!-- <div class="">
+                        <div class=""> -->
+                    <div class="col-md-14 col-xl-13 mt-4 ">
+                        <div class="card mb-3 bg-dark">
+                            <div class="card-body">
+                                <!-- <div class="card mb-3 widget-content bg-dark"> -->
+                                <!-- <div class="widget-content-wrapper text-white"> -->
+                                <div class="widget-content-left">
+                                    <div class="text-sm-start text-md-start text-lg-start text-xl-start"
+                                        style="text-align: left;"><span
+                                            style="font-weight: bold-lighter; color: #ffff; font-size: x-large;">Problem
+                                            Statement</span></div>
+                                    <div class="">
+                                        <form action="" class="form" method="GET" enctype="multipart/form-data">
+                                            {% csrf_token %}
 
+                                            {% if problem_details %}
+                                            <p class="card-text"> <b> <span
+                                                        style="font-weight: bold-lighter; color: #ffff; font-size: large;">
+                                                        {{ problem_details.problem_name }}</span></b><br /></p>
 
-                    <div class="">
-                        <div class="">
-                            <div class="col-md-12 col-xl-12">
-                                <div class="card mb-3 widget-content bg-dark">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class=""><span
-                                                style="font-weight: bold-lighter; color: #ffff; font-size: x-large;">Problem Statement</span></div>
-                                            <div class="">
-                                                <form action="" class="form" method="GET" enctype="multipart/form-data">
-                                                    {% csrf_token %}
+                                            <a class="btn btn-primary" href="/viewproblem/" role="button">More
+                                                Details</a>
 
-                                                    {% if problem_details %}
-                                                    <p class="card-text"> <b>{{ problem_details.problem_name }}</b><br />
-                                                    </p>
-
-                                                    <a class="btn btn-primary" href="/viewproblem/" role="button">More Details</a>
-
-                                                    <!-- <p class="card-text">{{ problem_details.description }}<br /></p> -->
-                                                    {% if soln %}
-                                                    <!-- <a class="btn btn-primary"
+                                            <!-- <p class="card-text">{{ problem_details.description }}<br /></p> -->
+                                            {% if soln %}
+                                            <!-- <a class="btn btn-primary"
                                                         href="{{ soln.solution_upload.url }}"
                                                         role="button">View Solution</a> -->
-                                                    {% else %}
-                                                    <div>
-                                                        No problem were selected
-                                                    </div>
-                                                    {% endif %}
-                                                    {% endif %}
-
-                                                </form>
-
-
+                                            {% else %}
+                                            <div>
+                                                No problem were selected
                                             </div>
-                                        </div>
+                                            {% endif %}
+                                            {% endif %}
+
+                                        </form>
+
+
                                     </div>
                                 </div>
+                                <!-- </div> -->
+                                <!-- </div> -->
                             </div>
 
+                            <!-- </div> -->
 
+                            <!-- problem statement SELECTED end -->
 
-                            
+                            <!-- content here end-->
+                            {% endblock %}
+                            <!-- </div> -->
+                            <!-- div end -->
+
+                            <!-- </div> -->
                         </div>
-
-                        <!-- problem statement SELECTED end -->
-
-
-
-                        <!-- content here end-->
-                        {% endblock %}
-                        <!-- </div> -->
-                        <!-- div end -->
-
-
-
+                        <!-- </section> -->
                     </div>
-                </div>
-                <!-- </section> -->
-            </div>
 
+                    <script type="text/javascript"
+                        src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
+                    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+                    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-
-            <script type="text/javascript"
-                src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
-                <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-                <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-
-
-            {% endblock %}
-
-
-
-
+                    {% endblock %}
 
 </body>
 

@@ -41,21 +41,21 @@
                 <form action=""  class="form" method="POST" enctype ="multipart/form-data">
                   {% csrf_token %}
                   <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" id="id_name" name="name" class="width-100" value="{{ member.name }}">
+                    <input placeholder=" " type="text" id="id_name" name="name" class="width-100" pattern ="[a-zA-Z\s]+" required value="{{ member.name }}">
                     <label for="id_name" class="input-label">Name</label>
                   </div>
                   <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" id="id_email" name="email" class="width-100" value="{{ member.email }}">
+                    <input placeholder=" " type="email" id="id_email" name="email" class="width-100" required value="{{ member.email }}">
                     <label for="id_email" class="input-label">Email</label>
                   </div>
                   <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)" value="{{ member.phoneno }}">
+                    <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" required pattern="[1-9]{1}[0-9]{9}" onkeypress="return ignoreSpaces(event)" value="{{ member.phoneno }}">
                     <label for="id_email" class="input-label">Contact Number</label>
                   </div>
-                  <p id="phoneNumberError"></p>
+                  <!-- <p id="phoneNumberError"></p> -->
           
                   <div class="material-textfield mt-4">
-                    <input placeholder=" " type="text" id="id_phoneno" name="institution_name" class="width-100" value="{{ member.institution_name }}">
+                    <input placeholder=" " type="text" id="id_phoneno" name="institution_name" class="width-100" required value="{{ member.institution_name }}">
                     <label for="id_phoneno" class="input-label">Institution Name</label>
                   </div>
                   <br>
@@ -79,7 +79,7 @@
   <!-- end -->
                
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-      <script>
+      <!-- <script>
   
   let phoneNumberEl = document.getElementById("id_phoneno");
         let phoneNumberErrorEl = document.getElementById("phoneNumberError");
@@ -109,7 +109,7 @@
           
         }
   
-      </script>
+      </script> -->
 
   </body>
     </html>

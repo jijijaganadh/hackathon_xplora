@@ -29,24 +29,25 @@
         <div class="col-12 col-md-8 col-lg-6">
           <div class="card bg-light">
             <div class="card-body p-5">
-              <h2 class="fw-bold mb-2 text-uppercase">Update Details</h2>
+              <!-- <h2 class="fw-bold mb-2 text-uppercase">Update Details</h2> -->
+              <h2 class="fw-light mb-2">Update Leader Details</h2>
 
-              <form  class="form" method="POST" enctype ="multipart/form-data">
+
+              <form  class="form" name="updateUserProfile" method="POST" enctype ="multipart/form-data">
                 
                 {% csrf_token %}
 
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" required id="teamleadname" name="teamleadname" class="width-100"
-                    value="{{ participant.teamleadname }}" />
+                  <input placeholder=" " type="text" required id="teamleadname" name="teamleadname" pattern ="[a-zA-Z\s]+" class="width-100" value="{{ participant.teamleadname }}" onkeyup = "return validateName()"/>
                   <label for="teamleadname" class="input-label">Name</label>
                 </div>
-
+                <p id="userNameError"></p>
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" required id="phoneno" name="phone" class="width-100"
+                  <input placeholder=" " type="text" required id="phoneno" name="phone" pattern="[1-9]{1}[0-9]{9}" class="width-100"
                     value="{{ participant.phone}}" onkeypress="return ignoreSpaces(event)" />
                   <label for="phoneno" class="input-label">Contact Number*</label>
                 </div>
-                <p id="phoneNumberError"></p>
+                <!-- <p id="phoneNumberError"></p> -->
 
                 <div class="material-textfield mt-4">
                   <input placeholder=" " type="text" required id="institution_name" name="institution_name"
@@ -93,6 +94,24 @@
       phoneNumberErrorEl.style.display = "none";
     }
 
+    function validateName() {
+      // document.write(text);
+      var userNameCheck = document.getElementById("teamleadname");
+      //alert(userNameCheck);
+      let userNameErrorEl = document.getElementById("userNameError");
+      let regx = "^[A-Za-Z\s]";
+      if (!userNameCheck.match(regx)) {
+        userNameErrorEl.style.display = "block";
+        userNameErrorEl.textContent = "Enter characters only";
+        userNameErrorEl.style.color = "red";
+        // document.updateUserProfile.teamleadname.focus();
+        return false;
+      }
+      
+      userNameErrorEl.style.display = "none";
+     
+    }
+
     function ignoreSpaces(event) {
       var character = event ? event.which : window.event.keyCode;
       let text = phoneNumberEl.value;
@@ -104,6 +123,8 @@
       }
       validate(text);
     }
+
+
   </script>
 
   <script src="{% static 'js/script.js' %}" defer></script>

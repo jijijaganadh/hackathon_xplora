@@ -1,6 +1,4 @@
-{%extends "main/home.html"%}
-{% load static %}
-{% block view %}
+{%extends "main/home.html"%} {% load static %} {% block view %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,103 +21,120 @@
 </head>
 
 <body>
-
-
   <!-- start -->
   <form action="" class="form" method="GET" enctype="multipart/form-data">
-
-
     <div class="vh-100 d-flex justify-content-left align-items-left">
-
       <div class="container">
+        <div class="row d-flex justify-content-right">
+          <!-- <div class="col md-4" style="text-align: right;"> -->
+          <div class="col md-4" style="text-align: center;">
+
+            {% if length < 2 %} 
+            <!-- ></2> -->
+              <p>Click here to add </p>
+              <div class="mb-4">
+                <a class="btn btn-primary" href="/add_member/">Add Member</a>
+                <br />
+              </div>
+          </div>
+          {% endif %}
+        </div>
         <h3 class="mb-3">Team Members</h3>
+        <!-- <h3>Team Members</h3> -->
+
+
 
         <div class="row d-flex justify-content-left">
           {% csrf_token %}
           {% if memberdetails %}
+          <!-- <div class="row"> -->
+          <div class="col-md-9 col-lg-9">
+            {% for member in memberdetails %}
 
-          {% for member in memberdetails %}
-
-
-          <div class="col-12 col-md-8 col-lg-6">
             <div class="card bg-light">
               <div class="card-body p-5">
                 <!-- <h2 class="fw-light mb-2">Member {{ member.id }}</h2> -->
                 <!-- <h2 class="fw-light mb-2">Member</h2> -->
 
-
-
-                <img src="{{ member.upload_photo.url }}" alt="" height="170" width="138"
-                  style="border: 1px solid rgb(2, 117, 216); border-radius: 3px; margin-top: 2rem;">
+                <img src="{{ member.upload_photo.url }}" alt="" height="170" width="138" style="
+                      border: 1px solid rgb(2, 117, 216);
+                      border-radius: 3px;
+                      margin-top: 1px;
+                    " />
 
                 <br />
-                <br>
-                <p class="card-title" style="font-size: x-large;">{{ member.name }}</p>
+                <br />
+                <p class="card-title" style="font-size: x-large">
+                  {{ member.name }}
+                </p>
 
-                <p class="card-text"> <b>{{ member.institution_name }}</b> <br /> </p>
-                <p class="card-text">Contact Number : {{ member.phoneno }}
-                  <br />Email:{{ member.email }}
+                <p class="card-text">
+                  <b>{{ member.institution_name }}</b> <br />
+                </p>
+                <p class="card-text">
+                  Contact Number : {{ member.phoneno }} <br />
+                  Email:{{ member.email }}
                 </p>
                 <div>
-                  <a class="btn btn-outline-primary" href="{{ member.institution_id.url }}" role="button">View ID</a>
+                  <a class="btn btn-outline-primary" href="{{ member.institution_id.url }}" role="button" target="_blank" >View ID</a>
                 </div>
 
                 <!-- <img src="{{ member.institution_id }}" alt="id" height="100"> -->
 
-                &nbsp;<div>
-
+                &nbsp;
+                <div>
                   <!-- <a href="/updatememberprofile/{{member.id}}">
                     <button type="button" class="btn btn-primary">Update</button>
                   </a> -->
 
-                  <a class="btn btn-primary " href="/updatememberprofile/{{member.id}}">Update</a>                 
+                  <a class="btn btn-primary" href="/updatememberprofile/{{member.id}}">Update</a>
                   &nbsp;
 
                   <a href="/delete-member/{{member.id}}">
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                    <button type="button" class="btn btn-outline-danger">
+                      Delete
+                    </button>
                   </a>
-
+                  <!-- </div> -->
                 </div>
-
               </div>
+
+
+              {% endfor %}
+
+              {% else %}
+              <div class="mb-2">No Members were added</div>
+              <br />
             </div>
           </div>
-
-
-
-          {% endfor %}
-
         </div>
-      </div>
-    </div>
-
-
-    {% else %}
-    <div class="mb-2">
-      No Members were added
-    </div>
-    <br>
-    {% endif %}
-    <div class="mt-10">
-      <!-- <div> -->
-      <!-- <button type="submit" class="btn btn-outline-primary">
-        {% if length < 2 %} <a href="/add_member/">Add</a>
-          {% else %}
-          {% endif %}
-      </button> -->
-
-      
-
-        {% if length < 2 %} 
-        <div class=" mb-4">
-        
-        <a class="btn btn-primary " href="/add_member/">Add Member</a>
-        <br>
-      </div>
-        {% else %}
         {% endif %}
-  
 
+        <!-- <div class="mt-10"> -->
+        <!-- <div> -->
+        <!-- <button type="submit" class="btn btn-outline-primary">
+              {% if length < 2 %} <a href="/add_member/">Add</a>
+                {% else %}
+                {% endif %}
+            </button> -->
+
+        <!-- {% if length < 2 %}
+                    ></2>
+                    <div class="mb-4">
+                    
+                      <a class="btn btn-primary" href="/add_member/">Add Member</a>
+                      <br /> -->
+
+        <!-- </div> -->
+
+        <!-- </div> -->
+
+
+        <!-- </div> -->
+        <!-- {% endif %} -->
+        <!-- </div> -->
+        <!-- </div> -->
+      </div>
     </div>
 
   </form>
@@ -132,8 +147,6 @@
   </div> -->
 
   <!-- end -->
-
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

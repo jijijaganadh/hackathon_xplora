@@ -36,26 +36,26 @@
                 {% csrf_token %}
 
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_name" name="name" class="width-100" value="{{ mentordetails.name }}">
+                  <input placeholder=" " type="text" id="id_name" name="name" class="width-100" pattern ="[a-zA-Z\s]+" required value="{{ mentordetails.name }}">
                   <label for="id_name" class="input-label">Name</label>
                 </div>
 
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_email" name="email" class="width-100" value="{{ mentordetails.email }}">
+                  <input placeholder=" " type="email" id="id_email" name="email" class="width-100" required value="{{ mentordetails.email }}">
                   <label for="id_email" class="input-label">Email</label>
                 </div>
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" onkeypress="return ignoreSpaces(event)" value="{{ mentordetails.phoneno }}">
+                  <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" required pattern="[1-9]{1}[0-9]{9}" onkeypress="return ignoreSpaces(event)" value="{{ mentordetails.phoneno }}">
                   <label for="id_phoneno" class="input-label">Contact Number</label>
                 </div>
                 <p id="phoneNumberError"></p>
           
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_institution_name" name="institution_name" class="width-100" value="{{ mentordetails.institution_name }}">
+                  <input placeholder=" " type="text" id="id_institution_name" name="institution_name" class="width-100" required value="{{ mentordetails.institution_name }}">
                   <label for="id_institution_name" class="input-label">Institution Name</label>
                 </div>
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_designation" name="designation" class="width-100" value="{{ mentordetails.designation }}">
+                  <input placeholder=" " type="text" id="id_designation" name="designation" class="width-100" required value="{{ mentordetails.designation }}">
                   <label for="id_designation" class="input-label">Designation</label>
                 </div>
                 
@@ -75,7 +75,10 @@
 
                 <br>
                 <!-- <div class="mt-4"> -->
-                  <button type="submit" class="btn btn-primary">Add</button>
+                  <!-- <a href="/mentorprofile/"> -->
+                  <button type="submit" class="btn btn-primary" href="/mentorprofile/">Add</button>
+                <!-- </a> -->
+
                 <!-- </div> -->
                 <a href="/home/">
                   <button type="button" class="btn btn-outline-primary">Back</button>
@@ -89,7 +92,7 @@
     </div>
   </div>
     
-<script>
+<!-- <script>
 
   let phoneNumberEl = document.getElementById("id_phoneno");
         let phoneNumberErrorEl = document.getElementById("phoneNumberError");
@@ -119,7 +122,7 @@
           
         }
   
-      </script>
+      </script> -->
 </body>
 </html>
 {% endblock %}

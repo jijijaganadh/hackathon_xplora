@@ -29,18 +29,21 @@
 
   
 <!-- start -->
-<form action="" class="form b-3 mt-md-4 " method="GET" enctype="multipart/form-data">
+<form action="" class="form b-3 mt-md-3" method="GET" enctype="multipart/form-data">
 
 
 <div class="vh-100 d-flex justify-content-left align-items-left">
 
   <div class="container">
+    <h3 class="mb-3">Leader Profile</h3>
+
+    
     <div class="row d-flex justify-content-left">
       <div class="col-12 col-md-8 col-lg-8">
 
         <div class="card bg-light">
-          <div class="card-body p-5">
-            <h2 class="fw-light mb-2">Leader Details</h2>
+          <div class="card-body p-5 mb-3">
+            <h2 class="fw-light mb-2">Leader</h2>
 
 
               {% csrf_token %}
@@ -62,7 +65,7 @@
                       {% endif %}
                   <a class="btn btn-primary" href="/updateuserprofile/" role="button">Edit</a>&nbsp; &nbsp;
 
-                  <a class="btn btn-primary" href="{{ participant.college_id.url }}" role="button">View ID</a>
+                  <a class="btn btn-primary" href="{{ participant.college_id.url }}" role="button" target="_blank">View ID</a>
                        
 
           </div>
