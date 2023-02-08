@@ -191,7 +191,7 @@ def problem(request):
                 request.FILES['solution_upload']
         }
 
-        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf') and usersignupdetails['solution_upload'].size <= 10 * 1024 * 1024: 
+        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf') and usersignupdetails['solution_upload'].size <= 100 * 1024 * 1024: 
              # 10 MB file size limit
          print(request.POST.dict())
          plbm = Problem.objects.get(
