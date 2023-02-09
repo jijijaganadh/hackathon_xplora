@@ -21,6 +21,7 @@
 
   <title>Registraion Form</title>
 </head>
+
 <body>
   <div class="vh-100 d-flex justify-content-left align-items-left">
     <div class="container">
@@ -31,68 +32,100 @@
               <!-- <h2 class="fw-bold mb-2 text-uppercase">Add Mentor</h2> -->
               <h2 class="fw-light mb-2">Add Mentor</h2>
 
-  
-              <form  class="form" method="POST" enctype ="multipart/form-data">
+
+              <form class="form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_name" name="name" class="width-100" pattern ="[a-zA-Z\s]+" required value="{{ mentordetails.name }}">
+                  <input placeholder=" " type="text" id="id_name" name="name" class="width-100" pattern="[a-zA-Z\s]+"
+                    required value="{{ mentordetails.name }}">
                   <label for="id_name" class="input-label">Name</label>
                 </div>
 
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="email" id="id_email" name="email" class="width-100" required value="{{ mentordetails.email }}">
+                  <input placeholder=" " type="email" id="id_email" name="email" class="width-100" required
+                    value="{{ mentordetails.email }}">
                   <label for="id_email" class="input-label">Email</label>
                 </div>
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" required pattern="[1-9]{1}[0-9]{9}" onkeypress="return ignoreSpaces(event)" value="{{ mentordetails.phoneno }}">
+                  <input placeholder=" " type="text" id="id_phoneno" name="phoneno" class="width-100" required
+                    pattern="[1-9]{1}[0-9]{9}" onkeypress="return ignoreSpaces(event)"
+                    value="{{ mentordetails.phoneno }}">
                   <label for="id_phoneno" class="input-label">Contact Number</label>
                 </div>
                 <p id="phoneNumberError"></p>
-          
+
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_institution_name" name="institution_name" class="width-100" required value="{{ mentordetails.institution_name }}">
+                  <input placeholder=" " type="text" id="id_institution_name" name="institution_name" class="width-100"
+                    required value="{{ mentordetails.institution_name }}">
                   <label for="id_institution_name" class="input-label">Institution Name</label>
                 </div>
                 <div class="material-textfield mt-4">
-                  <input placeholder=" " type="text" id="id_designation" name="designation" class="width-100" required value="{{ mentordetails.designation }}">
+                  <input placeholder=" " type="text" id="id_designation" name="designation" class="width-100" required
+                    value="{{ mentordetails.designation }}">
                   <label for="id_designation" class="input-label">Designation</label>
                 </div>
-                
+
                 <div class=" mt-4">
                   <label for="institution_id">Upload Photo</label>
-                  <input
-                    class="form-control form-control-lg"
-                    name="upload_photo"
-                    id="upload_photo"
-                    type="file"
-                    required
-                  />
+                  <input class="form-control form-control-lg" name="upload_photo" id="file" onchange="return fileValidation()" type="file" required />
                   <div class="small text-muted mt-2">
                     Upload your passport size photo, Maximum file size is 1 mb
                   </div>
 
 
-                <br>
-                <!-- <div class="mt-4"> -->
+                  <br>
+                  <!-- <div class="mt-4"> -->
                   <!-- <a href="/mentorprofile/"> -->
                   <button type="submit" class="btn btn-primary" href="/mentorprofile/">Add</button>
-                <!-- </a> -->
+                  <!-- </a> -->
 
-                <!-- </div> -->
-                <a href="/home/">
-                  <button type="button" class="btn btn-outline-primary">Back</button>
-                </a>
+                  <!-- </div> -->
+                  <a href="/home/">
+                    <button type="button" class="btn btn-outline-primary">Back</button>
+                  </a>
               </form>
-                                           
+
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-    
-<!-- <script>
+
+<script>
+
+function fileValidation() {
+            var fileInput = document.getElementById("file");
+
+            var filePath = fileInput.value;
+
+            // Allowing file type
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+            if (!allowedExtensions.exec(filePath)) {
+                alert("Invalid file type");
+                fileInput.value = "";
+                return false;
+            } else 
+            {
+                // Image preview
+
+                // if (fileInput.files && fileInput.files[0]) {
+                //     var reader = new FileReader();
+                //     reader.onload = function (e) {
+                //         document.getElementById("imagePreview").innerHTML =
+                //             '<img src="' + e.target.result + '"/>';
+                //     };
+
+                //     reader.readAsDataURL(fileInput.files[0]);
+                // }
+            }
+        }
+
+</script>
+
+  <!-- <script>
 
   let phoneNumberEl = document.getElementById("id_phoneno");
         let phoneNumberErrorEl = document.getElementById("phoneNumberError");
@@ -124,5 +157,6 @@
   
       </script> -->
 </body>
+
 </html>
 {% endblock %}
