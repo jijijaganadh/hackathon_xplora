@@ -1,0 +1,5 @@
+main/__pycache__/
+main/migrations/
+main/migrations/__pycache__/
+media/
+mysite/__pycache__/
