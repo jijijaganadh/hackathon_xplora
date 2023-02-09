@@ -103,7 +103,7 @@ def register_request(request):
                 user = form.save()
                 send_activation_email(user, request)
                 # login(request, user)
-                messages.success(request, "Congratulations,Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
+                messages.success(request, "Congratulations,Your Account has been created! we have sent you a confirmation mail please confirm your email to activate your account")
                 return redirect("main:register")
             messages.error(request, f"Unsuccessful Registration, Because {form.error_messages}")
         except Exception as e:
@@ -122,6 +122,9 @@ def login_request(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
+            # if  user is not None and user.is_staff:
+            #    return render(request=request, template_name="main/reviewer.html")
+          
             if user is not None:
                 try:
                     login(request, user)
@@ -191,7 +194,8 @@ def problem(request):
                 request.FILES['solution_upload']
         }
 
-        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf') and usersignupdetails['solution_upload'].size <= 10 * 1024 * 1024: 
+        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf'): 
+            
              # 10 MB file size limit
          print(request.POST.dict())
          plbm = Problem.objects.get(
