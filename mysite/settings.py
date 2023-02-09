@@ -26,18 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mjq6__5fgp#lv@d__$s3r0si1&un29%x!t=yqj&gv=tz!(qy1+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['192.168.32.121','hackzon.icfoss.org']
+CSRF_TRUSTED_ORIGINS = ['https://hackzon.icfoss.org']
 
-EMAIL_FROM_USER = 'xplorawinhack@gmail.com'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'xplorawinhack@gmail.com'
-EMAIL_HOST_PASSWORD = 'tkpfxnlowkaitkvw'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-import sys
-TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+   
+ 
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -92,10 +88,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dgp',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'USER': 'women',
+        'PASSWORD': 'password@123',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -128,22 +124,17 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USEL10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
- 
-
-
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -158,6 +149,15 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FROM_USER = 'trainingcentre@icfoss.in'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'trainingcentre@icfoss.in'
+EMAIL_HOST_PASSWORD = 'obttnsdfjpfkkvfw'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+TESTING = False
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = False
+
