@@ -1,91 +1,118 @@
 {% extends "main/registration.html" %}
 
-          {% block registration %}
-          <h3 class="mb-1">Upload Solution</h3>
-          <p class="small mb-5">Choose Problem and upload your solution</p>
-          <form action="" class="form" method="POST" enctype ="multipart/form-data">
-            {% csrf_token %}
-                <select id="problem-id" class="select form-control-sm width-100 mb-4" name="institution_name">
-                    <option selected disabled>Choose problem</option>
-                    {% for prob in problems %}
-                    <option value="{{prob.problem_id}}" id="problem">{{prob.problem_name}}</option>
-                    {% endfor %}
-                  </select>
-              <div class="mb-4">
-                <p class="m-0 mb-2">Problem Description</p>
-                <div  class="border rounded p-2">
-                  <p id="problem-description" class="medium"></p>
-                </div>
-              </div>
-              
-            
-           <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-          <script>
-              $("#problem-id").change(function () {
-                  const problemId = $(this).val();  
-                  $.ajax({                       // initialize an AJAX request
-                      type: "POST",
-                      url: "{% url 'main:problem_description' %}",
-                      data: {
-                          'problem_id': problemId,      
-                          'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-                      },
-                      
-                      success: function (data) {   
-                        
-                          let html_data = `<div>"${data.description}</div>`;
-                        
-                          $("#problem-description").html(html_data); // replace the contents of the topic input with the data that came from the server
-                      }
-                  });
-              });
-          </script>
-
-           
-           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-           <script  type="text/javascript">
-            let selectElement = document.getElementById('select');
-            let descriptionElement = document.getElementById("description");
-
-            selectElement.addEventListener("click",(event)=>{
-              descriptionElement.textContent = selectElement.value;
-              console.log(selectElement.value);
+{% block registration %}
+<h3 class="mb-1">Upload Solution</h3>
+<p class="small mb-5">Choose Problem and upload your solution</p>
+<form action="" class="form" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <select id="problem-id" class="select form-control-sm width-100 mb-4" name="institution_name">
+    <option selected disabled>Choose problem</option>
+    {% for prob in problems %}
+    <option value="{{prob.problem_id}}" id="problem">{{prob.problem_name}}</option>
+    {% endfor %}
+  </select>
+  <div class="mb-4">
+    <p class="m-0 mb-2">Problem Description</p>
+    <div class="border rounded p-2">
+      <p id="problem-description" class="medium"></p>
+    </div>
+  </div>
 
 
-            });
-            selectElement.addEventListener("change",()=>{
-              console.log(selectElement.value.description);
-              descriptionElement.textContent = JSON.stringify(selectElement.value);
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script>
+    $("#problem-id").change(function () {
+      const problemId = $(this).val();
+      $.ajax({                       // initialize an AJAX request
+        type: "POST",
+        url: "{% url 'main:problem_description' %}",
+        data: {
+          'problem_id': problemId,
+          'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+        },
+
+        success: function (data) {
+
+          let html_data = `<div>"${data.description}</div>`;
+
+          $("#problem-description").html(html_data); // replace the contents of the topic input with the data that came from the server
+        }
+      });
+    });
+  </script>
 
 
-            })
-            $('#select').change(function(){
-                  data = {"problem_id": $("#select").find(":selected").text()}
-            });
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    let selectElement = document.getElementById('select');
+    let descriptionElement = document.getElementById("description");
 
-           </script>
+    selectElement.addEventListener("click", (event) => {
+      descriptionElement.textContent = selectElement.value;
+      console.log(selectElement.value);
 
-            <label for="ID" class="mb-2">Upload Solution</label>
-            <input
-              class="form-control form-control-sm"
-              name="solution_upload"
-              id="formFileLg"
-              type="file"
-              required
-              accept=".pdf"
 
-            />
-            <div class="small text-muted mt-2">
-              Upload your solution only in PDF format. Max file size
-              10 MB
-            </div>
-            {% if error %}
-            <div style="color: red;">Please upload your solution in PDF format and Maximum file size is 10 mb</div>
-            {% endif %}
+    });
+    selectElement.addEventListener("change", () => {
+      console.log(selectElement.value.description);
+      descriptionElement.textContent = JSON.stringify(selectElement.value);
 
-            <div class="mt-4 mb-4">
-              <button role="button" class="btn secondary-button" type="submit">Register</button>
-            </div>
-          </form>
 
-          {% endblock %}
+    })
+    $('#select').change(function () {
+      data = { "problem_id": $("#select").find(":selected").text() }
+    });
+
+  </script>
+
+  <label for="ID" class="mb-2">Upload Solution</label>
+  <input class="form-control form-control-sm" name="solution_upload" id="file" onchange="Filevalidation()" type="file" required accept="application/pdf" />
+  <div class="small text-muted mt-2">
+    Upload your solution only in PDF format. Max file size
+    10 MB
+  </div>
+  <!-- {% if error %}
+  <div style="color: red;">Please upload your solution in PDF format and Maximum file size is 10 mb</div>
+  {% endif %} -->
+
+  <div class="mt-4 mb-4">
+    <button role="button" class="btn secondary-button" type="submit">Register</button>
+  </div>
+</form>
+<!-- pdf validation start script -->
+<script>
+Filevalidation = () => {
+  const fi = document.getElementById("file");
+  var fileName = fi.value;
+  var ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+  if (ext == "pdf") {
+    if (fi.files.length > 0) {
+      for (const i = 0; i <= fi.files.length - 1; i++) {
+        const fsize = fi.files.item(i).size;
+        const file = Math.round(fsize / 1024);
+        // The size of the file.
+        if (file >= 10096) {
+          alert("File size is too Big, please select a file less than 10 mb");
+          fi.value = "";
+          // } else if (file < 2048) {
+          // 	alert(
+          // 	"File too small, please select a file greater than 2mb");
+        } else {
+        }
+      }
+    }
+  } else {
+    alert("Upload pdf files only");
+    fi.focus();
+    fi.value = "";
+    return false;
+  }
+
+};
+</script>
+
+<!-- pdf validation script end -->
+
+
+{% endblock %}
