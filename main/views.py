@@ -122,8 +122,8 @@ def login_request(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            # if  user is not None and user.is_staff:
-            #    return render(request=request, template_name="main/reviewer.html")
+            if  user is not None and user.is_staff:
+               return render(request=request, template_name="main/reviewer.html")
           
             if user is not None:
                 try:
@@ -194,21 +194,12 @@ def problem(request):
                 request.FILES['solution_upload']
         }
 
-        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf'): 
-            
-             # 10 MB file size limit
-         print(request.POST.dict())
-         plbm = Problem.objects.get(
+        plbm = Problem.objects.get(
             problem_id=request.POST.dict()['institution_name'])
-         instance = Solution_details.objects.create(
+        instance = Solution_details.objects.create(
             user_id=request.user, problem_id=plbm, **usersignupdetails)
-         instance.save()
-         return redirect('main:homepage')
-        else:
-            mainparticipantdetails = MainParticipant.objects.get(
-                user_id=request.user)
-            problemdetails = Problem.objects.filter(usertype=mainparticipantdetails.usertype).values()
-            return render(request, 'main/problem.html', {'problems': problemdetails,'error':True})
+        instance.save()
+        return redirect('main:homepage')
     else:
         # find main Participant with user id
         #add user type to problemDetails model
@@ -221,7 +212,6 @@ def problem(request):
         # print(usetype)
          problemdetails = Problem.objects.filter(usertype=usetype).values()
         # problemdetails = Problem.objects.all()
-         print(problemdetails)
          return render(request, 'main/problem.html', {'problems': problemdetails})
      except Exception as e:
             return redirect("main:login")
@@ -405,8 +395,6 @@ class UpdateMentorProfile(View):
 
         if form.is_valid():
             details = form.save()
-            messages.success(request, "Updation Successfull")
-
             print(details)
         return render(request, self.template_name, {"mentordetails": details})
 
