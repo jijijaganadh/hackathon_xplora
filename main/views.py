@@ -110,7 +110,7 @@ def register_request(request):
                 user = form.save()
                 send_activation_email(user, request)
                 # login(request, user)
-                messages.success(request, "Congratulations,Your Account has been created! we have sent you a confirmation mail please confirm your email to activate your account")
+                messages.success(request, "Congratulations,Your Account has been created! we have sent you a confirmation mail please confirm your email to ativate your account")
                 return redirect("main:register")
             messages.error(request, f"Unsuccessful Registration, Because {form.error_messages}")
         except Exception as e:
@@ -129,9 +129,6 @@ def login_request(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if  user is not None and user.is_staff:
-               return render(request=request, template_name="main/reviewer.html")
-          
             if user is not None:
                 try:
                     login(request, user)
@@ -196,17 +193,28 @@ def problem_description(request):
 @login_required(login_url='/login/')
 def problem(request):
     if request.method == 'POST':
+        print(request.FILES['solution_upload'].size <= 10000000)
+        print(request.FILES['solution_upload'].size)
         usersignupdetails = {
             "solution_upload": 
                 request.FILES['solution_upload']
         }
 
-        plbm = Problem.objects.get(
+        if usersignupdetails['solution_upload'] and (usersignupdetails['solution_upload'].content_type == 'application/pdf') and usersignupdetails['solution_upload'].size <= 10000000: 
+            
+             # 10 MB file size limit
+         print(request.POST.dict())
+         plbm = Problem.objects.get(
             problem_id=request.POST.dict()['institution_name'])
-        instance = Solution_details.objects.create(
+         instance = Solution_details.objects.create(
             user_id=request.user, problem_id=plbm, **usersignupdetails)
-        instance.save()
-        return redirect('main:homepage')
+         instance.save()
+         return redirect('main:homepage')
+        else:
+            mainparticipantdetails = MainParticipant.objects.get(
+                user_id=request.user)
+            problemdetails = Problem.objects.filter(usertype=mainparticipantdetails.usertype).values()
+            return render(request, 'main/problem.html', {'problems': problemdetails,'error':True})
     else:
         # find main Participant with user id
         #add user type to problemDetails model
@@ -219,6 +227,7 @@ def problem(request):
         # print(usetype)
          problemdetails = Problem.objects.filter(usertype=usetype).values()
         # problemdetails = Problem.objects.all()
+         print(problemdetails)
          return render(request, 'main/problem.html', {'problems': problemdetails})
      except Exception as e:
             return redirect("main:login")
@@ -402,6 +411,8 @@ class UpdateMentorProfile(View):
 
         if form.is_valid():
             details = form.save()
+            messages.success(request, "Updation Successfull")
+
             print(details)
         return render(request, self.template_name, {"mentordetails": details})
 

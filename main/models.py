@@ -127,6 +127,7 @@ class Memberdetails(models.Model):
 #     solution_id = models.ForeignKey('Solution_details', null=True, on_delete=models.CASCADE)
 #     allocated_on=datetime.now().time()
 #     reviewed_on=datetime.now().time()
+    
 #     class Meta:
 #         db_table="Solution_reviewer"
     
