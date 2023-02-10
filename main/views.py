@@ -14,7 +14,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import MainParticipant, Memberdetails, Problem, Institution, Mentordetails, Solution_details
+from .models import MainParticipant, Memberdetails, Problem, Institution, Mentordetails, Solution_details, Solution_reviewer
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -123,7 +123,21 @@ def login_request(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if  user is not None and user.is_staff:
-               return render(request=request, template_name="main/reviewer.html")
+                template_name = "main/reviewer/reviewerhome.html"
+                login(request, user)
+                reviewer = Solution_reviewer.objects.get(user_id=request.user)
+                print(reviewer)
+                print(reviewer.solution_id_id)
+                
+                solutiondetails = Solution_details.objects.filter(id=reviewer.solution_id_id)
+                print(solutiondetails[0].problem_id)
+                print(solutiondetails[0].problem_id_id)
+
+                plbmdetails = Problem.objects.filter(problem_id=solutiondetails[0].problem_id_id)
+
+                return render(request, template_name)
+
+
           
             if user is not None:
                 try:

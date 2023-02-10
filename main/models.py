@@ -121,14 +121,14 @@ class Memberdetails(models.Model):
         
 # Reviewer table
 
-# class Solution_reviewer(models.Model):
-#     user_id= models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-#     # reviewer_user_id
-#     solution_id = models.ForeignKey('Solution_details', null=True, on_delete=models.CASCADE)
-#     allocated_on=datetime.now().time()
-#     reviewed_on=datetime.now().time()
-#     class Meta:
-#         db_table="Solution_reviewer"
+class Solution_reviewer(models.Model):
+    user_id= models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    # reviewer_user_id
+    solution_id = models.ForeignKey(Solution_details, null=True, on_delete=models.CASCADE)
+    allocated_on=datetime.now().time()
+    reviewed_on=datetime.now().time()
+    class Meta:
+        db_table="Solution_reviewer"
     
 
  
