@@ -1,0 +1,160 @@
+@import url('colors.css');
+
+/* ========== review status indicators ========== */
+.under-review{
+    color: var(--orange-medium);
+    background-color:var(--orange-light-bg);
+    padding: 8px;
+    border-radius: 4px;
+}
+.accepted{
+    color: var(--green);
+    background-color:var(--green-light-bg);
+    padding: 8px;
+    border-radius: 4px;
+    }
+.rejected{
+    color: var(--red);
+    background-color:var(--red-light-bg);
+    padding: 8px;
+    border-radius: 4px;
+}
+.view{
+    background-color:var(--blue-light-bg);
+    padding: 8px 20px;
+    border-radius: 4px;
+}
+.view a{
+    text-decoration: none;
+}
+.view a:hover{
+    text-decoration: underline;
+}
+.edit{
+    background-color: var(--violet-light-bg);
+    padding: 8px 20px;
+    border-radius: 4px;
+}
+.edit a{
+    color: var(--violet);
+    text-decoration: none;
+}
+.edit a:hover{
+    text-decoration: underline;
+}
+/*========== Accept , Reject , Cancel and View solution buttons ==========*/
+/* .accept-btn{
+    color:var(--white) !important;
+    background-color: var(--green) !important;
+}
+.reject-btn{
+    color:var(--white) !important;
+    background-color: var(--red-medium) !important;
+} */
+.cancel-btn{
+    color: var(--blue) !important;
+    text-decoration: none;
+}
+.cancel-btn:hover{
+    background-color: var(--blue-light-bg);
+}
+.view-solution-btn{
+    border: 1px solid var(----light-blue);
+}
+/*========== userview table ==========*/
+table{
+    border-collapse: separate;
+    /* border-spacing: 0 15px; */
+}
+tbody{
+    height: 200px;
+    overflow-y: scroll;
+}
+th,
+td {
+    text-align:center;
+    padding:1.5rem;
+    border-bottom: 1px solid var(--gray);
+}
+/* ========== User Avathar ========== */
+.user-avathar{
+    border: 1px solid var(--gray);
+    border-radius: 50px;
+    height: 6rem;
+    width:6rem;
+}
+.profile{
+    background-color: var(--white);
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.10);
+}
+.profile-wrapper{
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.10);
+}
+/* ========== Modal ========== */
+
+.btn-close:hover{
+    border:1px solid var(--gray);
+    border-radius: 20px;
+}
+
+.modal-content {
+    border-radius: 8px;
+}
+/*========== filter ==========*/
+.filter {
+    position:relative;
+    display: inline-block;
+}
+.filter-btn{
+    cursor: pointer;
+}
+.filter-item{
+    display: none;
+    position: absolute;
+    min-width: 190px;
+    border-radius: 8px;
+    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
+    z-index:100;
+}
+.filter-item a{
+    color:black;
+    text-decoration: none;
+    padding: 16px 12px;
+    display: block;
+}
+.filter-item a:hover{
+    background-color:#f1f1f1 ;
+}
+.filter:hover .filter-item{
+    display: block;
+}
+.filter:hover .filter-btn{
+    background-color:#f7e8e8 ;
+}
+.user-table{
+    z-index: 1;
+}
+/*========== search button ==========*/
+.search-btn{
+    color: #96017a;
+    padding: 8px 12px;
+    border-radius: 50px;
+    margin-right: 16px;
+    background: #f3f3f3;
+    border: none;
+}
+.search-btn:hover {
+  padding: 8px 12px;
+  border-radius: 50px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width:768px){
+    .filter-item{
+        width: 80%;
+    }
+}

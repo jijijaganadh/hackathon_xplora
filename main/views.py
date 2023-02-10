@@ -44,6 +44,13 @@ def guidelines(request):
 
 def about(request):
     return render(request, "main/landing/about.html")
+# reviewer dashboard
+def reviewerhome(request):
+    return render(request, "main/reviewer/reviewerhome.html")
+def userview(request):
+    return render(request, "main/reviewer/userview.html")
+
+
 
 
 def homepage(request):

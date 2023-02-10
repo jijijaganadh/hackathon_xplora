@@ -9,6 +9,20 @@
     --orange:#FD7E14;
     --medium-black:#3A3B3C;
     --gray:gray;
+    --blue:rgb(20,100,206);
     --light-blue:#19A3FF;
-    --yellow:yellow
+    --yellow:yellow;
+    --orange-medium:rgb(255, 136, 0);
+    --orange-light-bg: rgba(255, 255,0, 0.20);
+    --green:green;
+    --green-light-bg: rgba(76, 247, 153, 0.40);
+    --green-dark:rgb(0, 88, 0);
+    --red:red;
+    --red-medium:rgb(255, 78, 78);
+    --red-light-bg: rgba(252, 98, 98, 0.25);
+    --blue-light-bg: #f0f6fa;
+    --violet:#96017a;
+    --violet-light-bg:#ffeafb;
+
+
 }

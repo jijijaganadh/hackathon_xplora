@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,6 +156,9 @@
             }
         }
     </style>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="{% static 'main/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/reviewer.css'%}">
 </head>
 
 <body>
@@ -176,6 +180,7 @@
         {% block reviewerhome %}
         <div class="row m-0 p-0 justify-content-between mt-4">
             <div class="col-lg-4 m-0 p-0 col-md-6  d-flex">
+            <div class="col-lg-2 m-0 p-0 col-md-6  d-flex">
                 <form action="">
                     <input type="text" placeholder="Search" name="search-bar" class="search p-2 ps-3 border rounded-3">
                     <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
