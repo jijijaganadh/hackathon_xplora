@@ -62,6 +62,27 @@ def homepage(request):
             return redirect('main:problem')
         else:
             return redirect('main:registration')
+        
+def Reviewerhome(request):
+    template_name = "main/reviewer/reviewerhome.html"
+    if request.user.is_authenticated:
+     try:
+      reviewer = Solution_reviewer.objects.get(user_id=request.user)
+      print(reviewer)
+      print(reviewer.solution_id_id)
+      solutiondetails = Solution_details.objects.filter(id=reviewer.solution_id_id)
+      print(solutiondetails[0].user_id)
+      username = solutiondetails[0].user_id
+      print(solutiondetails[0].problem_id)
+      print(solutiondetails[0].problem_id_id)
+      
+      plbmdetails = Problem.objects.filter(problem_id=solutiondetails[0].problem_id_id)
+      print(plbmdetails[0])
+      print(plbmdetails[0].problem_name)
+
+      return render(request, template_name,{'plbmdetails':plbmdetails[0],'solutiondetails':solutiondetails[0]})
+     except:
+           return render(request, template_name,{'plbmdetails':plbmdetails[0]})
 
 
 def contact(request):
@@ -123,22 +144,9 @@ def login_request(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if  user is not None and user.is_staff:
-                template_name = "main/reviewer/reviewerhome.html"
                 login(request, user)
-                reviewer = Solution_reviewer.objects.get(user_id=request.user)
-                print(reviewer)
-                print(reviewer.solution_id_id)
-                
-                solutiondetails = Solution_details.objects.filter(id=reviewer.solution_id_id)
-                print(solutiondetails[0].problem_id)
-                print(solutiondetails[0].problem_id_id)
-
-                plbmdetails = Problem.objects.filter(problem_id=solutiondetails[0].problem_id_id)
-
-                return render(request, template_name)
-
-
-          
+                return redirect('main:reviewerhome')
+            
             if user is not None:
                 try:
                     login(request, user)
@@ -553,6 +561,7 @@ def activate_user(request, uidb64, token):
     return render(request, 'authentication/activate-failed.html', {"user": user})
 
 
-# reviewer Home Page
+def Userview(request):
+    return render(request,"main/reviewer/userview.html")
 
 

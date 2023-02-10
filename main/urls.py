@@ -17,6 +17,12 @@ urlpatterns = [
     # login urls
     path("login/", views.login_request, name="login"),
     path("register/", views.register_request, name="register"),
+    # reviewer urls
+    path("reviewerhome/", views.Reviewerhome, name='reviewerhome'),
+    path("userview/", views.Userview, name='userview'),
+
+    
+
 
 
 
@@ -39,6 +45,7 @@ urlpatterns = [
     path("delete-member/<int:id>", views.DeleteMember.as_view(), name="deletemember"),
     path("viewproblem/", views.ViewProblemdetails.as_view(), name='viewproblem'),
     path('activate-user/<uidb64>/<token>',views.activate_user, name='activate'),
+
     
      # Forget Password
     path('password-reset/',
