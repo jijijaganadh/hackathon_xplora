@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,139 +23,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        
-        .under-review{
-            color: rgb(255, 136, 0);
-            background-color: rgba(255, 255,0, 0.20);
-            padding: 8px;
-            border-radius: 4px;
-        }
-        .accepted{
-            color: green;
-            background-color: rgba(76, 247, 153, 0.40);
-            padding: 8px;
-            border-radius: 4px;
-        }
-        .rejected{
-            color: red;
-            background-color: rgba(252, 98, 98, 0.25);
-            padding: 8px;
-            border-radius: 4px;
-        }
-        .view{
-            background-color: #f0f6fa;
-            padding: 8px 20px;
-            border-radius: 4px;
-        }
-        .view a{
-            text-decoration: none;
-        }
-        .view a:hover{
-            text-decoration: underline;
-        }
-        .edit{
-            background-color: #ffeafb;
-            padding: 8px 20px;
-            border-radius: 4px;
-        }
-        .edit a{
-            color: #96017a;
-            text-decoration: none;
-        }
-        .edit a:hover{
-            text-decoration: underline;
-        }
-        tbody{
-            height: 200px;
-            overflow-y: scroll;
-        }
-        th,
-        td {
-            text-align:center;
-            padding:1rem;
-            }
-        tr{
-            margin: 1rem;
-            border: 1px solid black;
-        }
-        .user-avathar{
-            border: 1px solid black;
-            border-radius: 50px;
-            height: 6rem;
-            width:6rem;
-        }
-        .modal-header {
-            border-bottom: 1px solid orange;
-            color: black;
-            }
-
-        .btn-close:hover{
-        color: white !important;
-        border:1px solid orange;
-        border-radius: 20px;
-        }
-
-        .modal-content {
-        border-radius: 8px;
-        }
-        .filter {
-            position:relative;
-            display: inline-block;
-        }
-        .filter-btn{
-            cursor: pointer;
-        }
-        .filter-item{
-            display: none;
-            position: absolute;
-            min-width: 190px;
-            border-radius: 8px;
-            box-shadow:0px 4px 4px rgba(0,0,0,0.25);
-            z-index:100;
-        }
-        .filter-item a{
-            color:black;
-            text-decoration: none;
-            padding: 16px 12px;
-            display: block;
-        }
-        .filter-item a:hover{
-            background-color:#f1f1f1 ;
-        }
-        .filter:hover .filter-item{
-            display: block;
-        }
-        .filter:hover .filter-btn{
-            background-color:#f7e8e8 ;
-        }
-        .user-table{
-            z-index: 1;
-        }
-        .search-btn{
-            color: #96017a;
-            padding: 8px 12px;
-            border-radius: 50px;
-            margin-right: 16px;
-            background: #f3f3f3;
-            border: none;
-        }
-.search-btn:hover {
-  padding: 8px 12px;
-  border-radius: 50px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-}
-
-
-        @media screen and (max-width:768px){
-            .filter-item{
-                width: 80%;
-            }
-        }
-    </style>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="{% static 'main/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/reviewer.css'%}">
 </head>
 
 <body>
@@ -175,7 +46,7 @@
     <section class="container">
         {% block reviewerhome %}
         <div class="row m-0 p-0 justify-content-between mt-4">
-            <div class="col-lg-4 m-0 p-0 col-md-6  d-flex">
+            <div class="col-lg-2 m-0 p-0 col-md-6  d-flex">
                 <form action="">
                     <input type="text" placeholder="Search" name="search-bar" class="search p-2 ps-3 border rounded-3">
                     <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
