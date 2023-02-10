@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Book, MainParticipant, Memberdetails, Mentordetails, Problem, Solution_details
+from .models import Book, MainParticipant, Memberdetails, Mentordetails, Problem, Solution_details, Solution_reviewer
 
 # Register your models here.
 
@@ -10,7 +10,7 @@ admin.site.register(Mentordetails)
 admin.site.register(Problem)
 admin.site.register(Solution_details)
 admin.site.register(Memberdetails)
-# admin.site.register(Solution_reviewer)
+admin.site.register(Solution_reviewer)
 
 
 

@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from nbformat import ValidationError
-from .models import MainParticipant, Memberdetails,Mentordetails, Solution_details
+from .models import MainParticipant, Memberdetails,Mentordetails, Solution_details, Solution_reviewer
 
 # from .models import Solution
 
