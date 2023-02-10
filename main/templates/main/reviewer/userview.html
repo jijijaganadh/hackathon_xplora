@@ -1,5 +1,28 @@
 {% extends "main/reviewer/reviewerhome.html" %}
 {% block reviewerhome %}
+<section class="container mt-5">
+    <div class="row p-2 border rounded-3">
+        <div class="col-lg-4 col-md-4 p-1 profile border rounded-2">
+            <div class=" p-2 border rounded-2 d-flex flex-column align-items-center justify-content-center">
+                <img src="" alt="" class="user-avathar">
+                <div class="mt-3">
+                    <p>Username: ADeeBz2330</p>
+                    <p>Problem Choosen:</p>
+                    <h6>GPS-enabled Destination Tracker System (XWH_P01)</h6>
+                </div>
+                <div>
+                    <a href="index.html" role="button" class="btn btn-outlined mt-5" target="_blank">View uploaded Solution</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 p-1 remarks border rounded-2">
+            <div class="p-2 border rounded-2">
+                <form action="">
+                    <p class="m-0"><label for="remarks">Remarks:</label></p>
+                    <textarea name="remarks" id="remarks" cols="30" rows="8" class="w-100"></textarea>
+                    <div class="mt-5 m-0 p-0 text-end">
+                        <a role="button" class="btn secondary-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Reject</a>
+                        <a role="button" class="btn secondary-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Accept</a>
 <section class="container p-lg-5">
     <div class="row profile-wrapper p-3 rounded-4 align-items-center mt-5">
         <div class="col-lg-4 col-md-4 p-2 ">
@@ -42,6 +65,8 @@
             Are you sure you want to Accept the uploaded solution?
         </p>
         <div class="text-end">
+            <a href="">Cancel</a>
+            <button type="submit">Accept</button>
             <a href="" class="me-3 btn cancel-btn">Cancel</a>
             <button type="submit" class="btn btn-success">Accept</button>
         </div>
@@ -61,6 +86,8 @@
             Are you sure you want to Reject the uploaded solution?
         </p>
         <div class="text-end">
+            <a href="">Cancel</a>
+            <button type="submit">Reject</button>
             <a href="" class="me-3 btn cancel-btn">Cancel</a>
             <button type="submit" class="btn btn-danger">Reject</button>
         </div>
