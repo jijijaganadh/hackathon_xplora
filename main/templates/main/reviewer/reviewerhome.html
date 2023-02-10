@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,6 +156,9 @@
             }
         }
     </style>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="{% static 'main/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/reviewer.css'%}">
 </head>
 
 <body>
@@ -173,14 +177,11 @@
             </div>
         </div>
     </header>
+    {% block reviewerhome %}
     <section class="container">
-        {% block reviewerhome %}
         <div class="row m-0 p-0 justify-content-between mt-4">
-            <div class="col-lg-4 m-0 p-0 col-md-6  d-flex">
-                <form action="">
-                    <input type="text" placeholder="Search" name="search-bar" class="search p-2 ps-3 border rounded-3">
-                    <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
-                </form>
+            <div class="col-lg-2 m-0 p-0 col-md-6">
+                <input type="text" placeholder="Search" id="search" class="search p-2 ps-3 border rounded-3" onkeyup="myFunction()">
             </div>
             <div class="filter col-lg-2 m-0 p-0  col-md-2">
                     <div class="filter-btn border rounded-3 ps-3 p-2">
@@ -196,7 +197,7 @@
         </div>
         <div class="user-table border rounded-3 mt-4">
             <div class="p-3" >
-                <table class="table-responsive table-scroll w-100" style="height: 500px;">
+                <table id="myTable" class="table-responsive table-scroll w-100" style="height: 500px;">
                     <thead class="sticky-top bg-light">
                         <tr>
                         <th class="col-lg-3 border">Username</th>
@@ -315,8 +316,28 @@
                 </table>
             </div>
         </div>
-        {% endblock %}
     </section>
+    <script>
+        function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++){
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+    </script>
+    {% endblock %}
 
 </body>
 </html>
