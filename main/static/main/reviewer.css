@@ -73,7 +73,7 @@ tbody{
 th,
 td {
     text-align:center;
-    padding:1.5rem;
+    padding:0.5rem;
     border-bottom: 1px solid var(--gray);
 }
 /* ========== User Avathar ========== */
@@ -100,7 +100,15 @@ td {
 .modal-content {
     border-radius: 8px;
 }
-/*========== filter ==========*/
+/*========== Search and filter ==========*/
+/* Search */
+#search{
+    
+}
+
+
+
+/* Filter */
 .filter {
     position:relative;
     display: inline-block;
