@@ -17,7 +17,9 @@ urlpatterns = [
     # login urls
     path("login/", views.login_request, name="login"),
     path("register/", views.register_request, name="register"),
-
+    # reviewer urls
+    path("reviewerhome/", views.reviewerhome, name="reviewerhome"),
+    path("userview/", views.userview, name="userview"),
 
 
     path("home/", views.homepage, name="homepage"),
