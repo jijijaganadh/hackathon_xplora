@@ -164,6 +164,7 @@
                 <nav class="navbar ustify-content-between">
                     <div class="navbar-brand">
                         <h4>Xplora WinHack</h4>
+                        {% csrf_token %}
                     </div>
                     <div>
                         Logout
@@ -207,6 +208,9 @@
                     <tbody>
                         <tr>
                             <td>Name</td>
+                         <td>plbm:{{plbmdetails.problem_name}}</td>   
+                         <td>{{plbmdetails.description}}</td> 
+                       <td>{{solutiondetails.user_id}}</td>  
                             <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
                             <td><span class="under-review">Under Reviewing</span> </td>
                             <td><span class="view"><a href="">View</a></span></td>
