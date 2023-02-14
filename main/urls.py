@@ -20,6 +20,7 @@ urlpatterns = [
     # reviewer urls
     path("reviewerhome/", views.Reviewerhome, name='reviewerhome'),
     path("userview/", views.Userview, name='userview'),
+    # path("acceptplbm/",views.Acceptplbm, name='acceptplbm'),
 
     
 

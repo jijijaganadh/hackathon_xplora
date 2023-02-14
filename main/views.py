@@ -47,8 +47,8 @@ def about(request):
 # reviewer dashboard
 def reviewerhome(request):
     return render(request, "main/reviewer/reviewerhome.html")
-def userview(request):
-    return render(request, "main/reviewer/userview.html")
+# def userview(request):
+#     return render(request, "main/reviewer/userview.html")
 
 
 
@@ -72,24 +72,26 @@ def homepage(request):
         
 def Reviewerhome(request):
     template_name = "main/reviewer/reviewerhome.html"
+    result = []
     if request.user.is_authenticated:
+     print(request.user)
      try:
-      reviewer = Solution_reviewer.objects.get(user_id=request.user)
-      print(reviewer)
-      print(reviewer.solution_id_id)
-      solutiondetails = Solution_details.objects.filter(id=reviewer.solution_id_id)
-      print(solutiondetails[0].user_id)
-      username = solutiondetails[0].user_id
-      print(solutiondetails[0].problem_id)
-      print(solutiondetails[0].problem_id_id)
-      
-      plbmdetails = Problem.objects.filter(problem_id=solutiondetails[0].problem_id_id)
-      print(plbmdetails[0])
-      print(plbmdetails[0].problem_name)
-
-      return render(request, template_name,{'plbmdetails':plbmdetails[0],'solutiondetails':solutiondetails[0]})
-     except:
-           return render(request, template_name,{'plbmdetails':plbmdetails[0]})
+    #   login(request,user)
+        print(request.user)
+        reviewer = Solution_reviewer.objects.filter(user_id=request.user)
+        for rev in reviewer:
+            result_dict ={}
+            result_dict['solnrev'] = rev
+            result_dict['main'] = MainParticipant.objects.filter(user_id = rev.solution_id.user_id)[0]
+            result.append(result_dict)
+        print(reviewer)
+        print(result)
+    #   print(reviewer[0].solution_id_id)
+        return render(request, template_name,{'reviewer': reviewer, 'result':result})
+     except Exception as e:
+      print(e)
+      return render(request, template_name)
+    return render(request, template_name)
 
 
 def contact(request):
@@ -152,6 +154,7 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if  user is not None and user.is_staff:
                 login(request, user)
+                print(request.user)
                 return redirect('main:reviewerhome')
             
             if user is not None:
@@ -569,6 +572,50 @@ def activate_user(request, uidb64, token):
 
 
 def Userview(request):
+    
+    template_name = "main/reviewer/userview.html"
+    if request.user.is_authenticated:
+     print(request.user)
+     try:
+      print(request.user)
+      reviewer = Solution_reviewer.objects.filter(user_id=request.user)
+      print(reviewer)
+    #   print(reviewer.solution_id_id)
+      solutiondetails = Solution_details.objects.filter(id=reviewer[0].solution_id_id)
+      print(solutiondetails)
+      mainpaticipantdetails = MainParticipant.objects.filter(user_id = solutiondetails[0].user_id)
+    #   print(mainpaticipantdetails[0].status) 
+      print(solutiondetails[0].user_id)
+      print(solutiondetails[0].problem_id)
+      print(solutiondetails[0].problem_id_id)
+      plbmdetails = Problem.objects.filter(problem_id=solutiondetails[0].problem_id_id)
+      print(plbmdetails[0])
+      print(plbmdetails[0].problem_name)
+
+      return render(request, template_name,{'plbmdetails':plbmdetails[0],'solutiondetails':solutiondetails[0],'mainpaticipantdetails':mainpaticipantdetails[0]})
+     except:
+           return render(request,"main/reviewer/userview.html")
+    
     return render(request,"main/reviewer/userview.html")
+
+# def Acceptplbm(request):
+#     try:
+#       if request.method == 'POST':
+#        reviewer = Solution_reviewer.objects.filter(user_id=request.user)
+#        print(reviewer)
+#        print(reviewer[0].solution_id_id)
+#        solutiondetails = Solution_details.objects.filter(id=reviewer[0].solution_id_id)
+#        mainpaticipantdetails = MainParticipant.objects.filter(user_id = solutiondetails[0].user_id)
+#        print(mainpaticipantdetails[0].remark)
+#     #   remark=request.POST.get['remark']
+#        remark=request.POST['remark']
+#        print(remark)
+#        mainpaticipantdetails[0].status = 'A'
+#        mainpaticipantdetails[0].remark = remark
+#        mainpaticipantdetails[0].save(update_fields=['status','remark'])
+#       return render(request,"main/reviewer/userview.html")
+#     except:
+#      return render(request,"main/reviewer/userview.html")
+    #    return render(request,"main/reviewer/userview.html")
 
 
