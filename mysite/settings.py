@@ -150,10 +150,10 @@ MESSAGE_TAGS = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_FROM_USER = 'trainingcentre@icfoss.in'
+EMAIL_FROM_USER = 'xplorawinhack1@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'trainingcentre@icfoss.in'
-EMAIL_HOST_PASSWORD = 'obttnsdfjpfkkvfw'
+EMAIL_HOST_USER = 'xplorawinhack1@gmail.com'
+EMAIL_HOST_PASSWORD = 'ajkkvydfupaeuhyw'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 TESTING = False
