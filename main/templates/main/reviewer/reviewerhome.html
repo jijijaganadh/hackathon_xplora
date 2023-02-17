@@ -168,15 +168,20 @@
                 <nav class="navbar justify-content-between">
                     <div class="navbar-brand">
                         <h4>Xplora WinHack</h4>
+                        {% csrf_token %}
                     </div>
                     <div>
-                        Logout
+                        <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+                        
                     </div>
                 </nav>
             </div>
         </div>
     </header>
     {% block reviewerhome %}
+    
+
+    
     <section class="container">
         <div class="row m-0 p-0 justify-content-between mt-5">
             <div class="col-lg-2 m-0 p-0 col-md-6">
@@ -213,10 +218,12 @@
                     <tbody>
                         <tr>
                             <td>A</td>
+                        <!-- <tr>
                             <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
                             <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
+                            <td><span class="view"><a href="{% url 'main:userview' %}">View</a></span></td>
+                        </tr> -->
+                        {% for rev in result %}
                         <tr>
                             <td>B</td>
                             <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
@@ -274,45 +281,20 @@
                         <tr>
                             <td>Name</td>
                             <td>GIS-enabled Facility Management Solution(XWH_P03)</td>
-                            <td><span class="rejected">Rejected</span></td>
-                            <td><span class="edit"><a href="">Edit</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Unified Ticket Management System(XWH_P02)</td>
-                            <td><span class="accepted">Accepted</span></td>
-                            <td><span class="edit"><a href="">Edit</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Unified Ticket Management System(XWH_P02)</td>
-                            <td><span class="accepted">Accepted</span></td>
-                            <td><span class="edit"><a href="">Edit</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
+                            <td>{{ rev.solnrev.solution_id.user_id }}</td>
+                            <td>{{ rev.solnrev.solution_id.problem_id.problem_name }}</td>
+                            {% if rev.main.status == 'U' %}
                             <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>GIS-enabled Facility Management Solution(XWH_P03)</td>
+                            {% elif rev.main.status == 'A' %}
+                            <td><span class="under-review">Accepted</span> </td>
+                            {% else %}
                             <td><span class="rejected">Rejected</span></td>
-                            <td><span class="edit"><a href="">Edit</a></span></td>
+                            {% endif %}
+                            <td><span class="view"><a href="{% url 'main:userview' %}">View</a></span></td>
                         </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>GIS-enabled Facility Management Solution(XWH_P03)</td>
-                            <td><span class="rejected">Rejected</span></td>
-                            <td><span class="edit"><a href="">Edit</a></span></td>
-                        </tr>
+                        {% endfor %}
+                        
+                       
                     </tbody>
                 </table>
             </div>
