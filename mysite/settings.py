@@ -14,6 +14,9 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 from decouple import config
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mjq6__5fgp#lv@d__$s3r0si1&un29%x!t=yqj&gv=tz!(qy1+'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -150,10 +153,10 @@ MESSAGE_TAGS = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_FROM_USER = 'noreply@icfoss.in'
+EMAIL_FROM_USER = str(os.getenv('EMAIL_FROM_USER'))
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'noreply@icfoss.in'
-EMAIL_HOST_PASSWORD = 'hyxciwfdqfzxpage'
+EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 TESTING = False

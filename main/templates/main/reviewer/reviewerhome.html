@@ -163,9 +163,9 @@
 
 <body>
     <header>
-        <div class="bg-light" class="style:border-bottom:1px solid #000;">
+        <div class="bg-light p-lg-2">
             <div class="container">
-                <nav class="navbar ustify-content-between">
+                <nav class="navbar justify-content-between">
                     <div class="navbar-brand">
                         <h4>Xplora WinHack</h4>
                         {% csrf_token %}
@@ -183,12 +183,17 @@
 
     
     <section class="container">
-        <div class="row m-0 p-0 justify-content-between mt-4">
+        <div class="row m-0 p-0 justify-content-between mt-5">
             <div class="col-lg-2 m-0 p-0 col-md-6">
-                <input type="text" placeholder="Search" id="search" class="search p-2 ps-3 border rounded-3" onkeyup="myFunction()">
+                <!-- <input type="text" placeholder="Search" id="search" class="search p-2 ps-3 border rounded-3" onkeyup="myFunction()"> -->
+                <!-- <form action="#" method="get" onsubmit="return false;">
+                    <input type="text" placeholder="Search" name="search" id="search" class="white-div p-2 ps-3 rounded-3" onkeyup="doSearch();" />
+                </form> -->
+                <input type="text" id="search" onkeyup="searchTable()" placeholder="Search" class="white-div search p-2 ps-3 rounded-3">
+
             </div>
-            <div class="filter col-lg-2 m-0 p-0  col-md-2">
-                    <div class="filter-btn border rounded-3 ps-3 p-2">
+            <div class="filter col-2 m-0 p-0 justify-content-end">
+                    <div class="white-div filter-btn  rounded-3 ps-3 p-2">
                         <i class="fa fa-search"></i>
                         <span>Filter</span>
                     </div>
@@ -199,9 +204,9 @@
                     </div>
             </div>
         </div>
-        <div class="user-table border rounded-3 mt-4">
-            <div class="p-3" >
-                <table id="myTable" class="table-responsive table-scroll w-100" style="height: 500px;">
+        <div class="white-div user-table rounded-4 mt-5 mb-5">
+            <div class="p-4" >
+                <table id="userTable" class="table-responsive table-scrollable w-100">
                     <thead class="sticky-top bg-light">
                         <tr>
                         <th class="col-lg-3 border">Username</th>
@@ -211,6 +216,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>A</td>
                         <!-- <tr>
                             <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
                             <td><span class="under-review">Under Reviewing</span> </td>
@@ -218,6 +225,62 @@
                         </tr> -->
                         {% for rev in result %}
                         <tr>
+                            <td>B</td>
+                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
+                            <td><span class="under-review">Under Reviewing</span> </td>
+                            <td><span class="view"><a href="">View</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>C</td>
+                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
+                            <td><span class="under-review">Under Reviewing</span> </td>
+                            <td><span class="view"><a href="">View</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>D</td>
+                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
+                            <td><span class="under-review">Under Reviewing</span> </td>
+                            <td><span class="view"><a href="">View</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>Unified Ticket Management System(XWH_P02)</td>
+                            <td><span class="accepted">Accepted</span></td>
+                            <td><span class="edit"><a href="">Edit</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>Unified Ticket Management System(XWH_P02)</td>
+                            <td><span class="accepted">Accepted</span></td>
+                            <td><span class="edit"><a href="">Edit</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
+                            <td><span class="under-review">Under Reviewing</span> </td>
+                            <td><span class="view"><a href="">View</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
+                            <td><span class="under-review">Under Reviewing</span> </td>
+                            <td><span class="view"><a href="">View</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
+                            <td><span class="under-review">Under Reviewing</span> </td>
+                            <td><span class="view"><a href="">View</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>Unified Ticket Management System(XWH_P02)</td>
+                            <td><span class="accepted">Accepted</span></td>
+                            <td><span class="edit"><a href="">Edit</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>GIS-enabled Facility Management Solution(XWH_P03)</td>
                             <td>{{ rev.solnrev.solution_id.user_id }}</td>
                             <td>{{ rev.solnrev.solution_id.problem_id.problem_name }}</td>
                             {% if rev.main.status == 'U' %}
@@ -238,25 +301,28 @@
         </div>
     </section>
     <script>
-        function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++){
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-    </script>
+        function searchTable() {
+            var input, filter, found, table, tr, td, i, j;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("userTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        found = true;
+                    }
+                }
+                if (found) {
+                    tr[i].style.display = "";
+                    found = false;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+        </script>
     {% endblock %}
 
 </body>
