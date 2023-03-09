@@ -63,14 +63,14 @@
               </div>
               <div class=" mt-4">
                 <label for="institution_id">Upload Institution ID/Valid ID Proof</label>
-                <input class="form-control form-control-lg" name="institution_id" id="file" onchange="return fileValidation()" type="file" required />
+                <input class="form-control form-control-lg" name="institution_id" id="file" onchange="return fileValidation()" type="file" required accept="image/*" />
                 <div class="small text-muted mt-2">
                Only images are accepted, Maximum file size is 1 mb
                 </div>
               </div>
               <div class=" mt-4">
                 <label for="institution_id"> Upload your Photo</label>
-                <input class="form-control form-control-lg" name="upload_photo" id="file" onchange="return fileValidation()" type="file" required />
+                <input class="form-control form-control-lg" name="upload_photo" id="file1" onchange="return fileValidation1()" type="file" required accept="image/*" />
                 <div class="small text-muted mt-2">
                   Only images are accepted, Maximum file size is 1 mb
                 </div>
@@ -128,6 +128,40 @@
           }
   
   </script>
+  <!-- photo validation start -->
+  <script>
+
+    function fileValidation1() {
+                var fileInput = document.getElementById("file1");
+    
+                var filePath = fileInput.value;
+    
+                // Allowing file type
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    
+                if (!allowedExtensions.exec(filePath)) {
+                    alert("Invalid file type");
+                    fileInput.value = "";
+                    return false;
+                } else 
+                {
+                    // Image preview
+    
+                    // if (fileInput.files && fileInput.files[0]) {
+                    //     var reader = new FileReader();
+                    //     reader.onload = function (e) {
+                    //         document.getElementById("imagePreview").innerHTML =
+                    //             '<img src="' + e.target.result + '"/>';
+                    //     };
+    
+                    //     reader.readAsDataURL(fileInput.files[0]);
+                    // }
+                }
+            }
+    
+    </script>
+      <!-- photo validation end -->
+
 <!-- <script>
 
   let phoneNumberEl = document.getElementById("id_phoneno");

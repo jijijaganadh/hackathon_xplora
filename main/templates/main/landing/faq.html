@@ -103,7 +103,7 @@
         </div>
         <div class="answercont">
           <div class="answer light-black-text">
-            Last date for submission is 17-02-2023 and Grand Finale conducted on 25-26 February, 2023.
+            Last date for submission is <s>17th February 2023</s>&nbsp;&nbsp;10<sup>th</sup> March 2023 and Grand Finale conducted on 18<sup>th</sup>, 19<sup>th</sup> March 2023.
           </div>
         </div>
       </div>
@@ -118,103 +118,8 @@
       </div>
     </div>
       </div>
-     
-
-
-<!--========== FAQ active and inactive interaction script ==========-->
-<script>
-  let question = document.querySelectorAll(".question");
-
-  question.forEach(question => {
-    question.addEventListener("click", event => {
-      const active = document.querySelector(".question.active");
-      if (active && active !== question) {
-        active.classList.toggle("active");
-        active.nextElementSibling.style.maxHeight = 0;
-      }
-      question.classList.toggle("active");
-      const answer = question.nextElementSibling;
-      if (question.classList.contains("active")) {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-      } else {
-        answer.style.maxHeight = 0;
-      }
-    })
-  })
-</script>
-
-
-
-      <!--========== FAQ Accordion ==========-->
-      <!-- <div class="accordion accordion-container div-margin mt-5" data-aos="fade-up">
-        <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-1" aria-expanded="false">
-            <span class="accordion-title">How do I Register for Xplora-WINHACK?</span>
-            <span class="icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-content">
-            <p alignment="justify">
-              Xplora is a live 30 Hrs long coding challenge specifically for women,
-              in the field of Tourism.For registering in the event, you can visit <a href="">Xplora WINHACK Registration</a>,
-              provide your details (and of your team)
-              and also provide the details of the solution you have envisaged.
-            </p>
-          </div>
-        </div>
-        <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-2" aria-expanded="false">
-            <span class="accordion-title">Xplora WIN HACK  is only open to teams? Can an individual participate?</span>
-            <span class="icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-content">
-            <p alignment="justify">
-              You can participate in this event as a team or as an individual contributor,
-              providing your solutions to the <a href="{% url 'main:plbmstmt' %}">problem statements</a>.
-              For those participating as a team, the team lead needs to do the registration process.
-              Each team can have a maximum of 3 members
-            </p>
-          </div>
-        </div>
-        <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-3" aria-expanded="false">
-            <span class="accordion-title">Is it possible to change the team members after registration?</span>
-            <span class="icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-content">
-            <p alignment="justify">
-              Members of the team can be changed up until the initial evaluation process.
-              Once the initial evaluation is complete, the registered team will be treated as final.
-              However, there is no provision to change the team lead.
-            </p>
-          </div>
-        </div>
-        <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-4" aria-expanded="false">
-            <span class="accordion-title">
-              What are the selection criteria for the final hackathon?
-            </span>
-              <span class="icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-content">
-            <p alignment="justify">
-              Evaluation criteria will include the novelty of the idea, simplicity, clarity,
-              cost-effectiveness, social relevance, and viability of the project.
-            </p>
-          </div>
-        </div>
-        <div class="accordion-item" data-aos="fade-up">
-          <button id="accordion-button-5" aria-expanded="false">
-            <span class="accordion-title">What is the last date of submission of solution and Grand Finale ?</span>
-            <span class="icon" aria-hidden="true"></span>
-          </button>
-          <div class="accordion-content">
-            <p alignment="justify">
-              The Last date for submission is 08-02-2023 and Grand Finale conducted on 25-26 February 2023.
-            </p>
-          </div>
-        </div>
-      </div>Accordion end -->
-      <!--======== Mail Section ==========-->
+    
+            <!--======== Mail Section ==========-->
       <div class="mt-5 text-center mb-0"  data-aos="fade-up">
         <div>
           <svg width="200" height="200" viewBox="0 0 340 233" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -281,25 +186,27 @@
         </p>
       </div>
     </section>
-    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
-    <script>
-      const items = document.querySelectorAll('.accordion button');
-      function toggleAccordion() {
-        const itemToggle = this.getAttribute('aria-expanded');
+    <!--========== FAQ active and inactive interaction script ==========-->
+<script>
+  let question = document.querySelectorAll(".question");
 
-        for (i = 0; i < items.length; i++) {
-          items[i].setAttribute('aria-expanded', 'false');
-        }
-
-        if (itemToggle == 'false') {
-          this.setAttribute('aria-expanded', 'true');
-        }
+  question.forEach(question => {
+    question.addEventListener("click", event => {
+      const active = document.querySelector(".question.active");
+      if (active && active !== question) {
+        active.classList.toggle("active");
+        active.nextElementSibling.style.maxHeight = 0;
       }
-      items.forEach((item) => item.addEventListener('click', toggleAccordion));
-      </script> -->
+      question.classList.toggle("active");
+      const answer = question.nextElementSibling;
+      if (question.classList.contains("active")) {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      } else {
+        answer.style.maxHeight = 0;
+      }
+    })
+  })
+</script>
       {% endblock %}
   </body>
 </html>
