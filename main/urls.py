@@ -19,14 +19,14 @@ urlpatterns = [
     path("register/", views.register_request, name="register"),
     # reviewer urls
     path("reviewerhome/", views.Reviewerhome, name='reviewerhome'),
-    path("userview/", views.Userview, name='userview'),
-    # path("acceptplbm/",views.Acceptplbm, name='acceptplbm'),
+    path("reviewer-userview/<int:id>", views.Revieweruserview.as_view(), name='userview'),
+
 
     
 
 
 
-
+    
     path("home/", views.homepage, name="homepage"),
     path("contact/", views.contact, name="contact"),
     path("logout/", views.logout_request, name="logout"),

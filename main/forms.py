@@ -123,6 +123,11 @@ class UpdateMentorForm(forms.ModelForm):
         model = Mentordetails
         fields = ['name',"phoneno","email",'institution_name','designation']
 
+class UserRemarksForm(forms.ModelForm):
+     class Meta:
+        model = MainParticipant
+        fields = ['status','remark']
+
 class UpdateMainParticipantForm(forms.ModelForm):
     class Meta:
         model = MainParticipant

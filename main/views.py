@@ -5,7 +5,7 @@ from django.views import View
 import json
 from django.http import BadHeaderError, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from main.forms import ContactForm, MainParticipantForm, MemberForm, MemberdetailsviewprofileForm, MentordetailsviewprofileForm, NewUserForm, MentordetailsForm, ShowMentordetailsForm, AddMemberDetailsForm, UpdateMainParticipantForm, UpdateMemberdetailsForm, UpdateMentorForm, ViewmainParticipantForm, ViewproblemdetailsForm
+from main.forms import ContactForm, MainParticipantForm, MemberForm, MemberdetailsviewprofileForm, MentordetailsviewprofileForm, NewUserForm, MentordetailsForm, ShowMentordetailsForm, AddMemberDetailsForm, UpdateMainParticipantForm, UpdateMemberdetailsForm, UpdateMentorForm, UserRemarksForm, ViewmainParticipantForm, ViewproblemdetailsForm
 from django.contrib.auth.models import User
 from main.models import Book, Institution
 from django.core.paginator import Paginator
@@ -70,24 +70,19 @@ def homepage(request):
         else:
             return redirect('main:registration')
         
+# @login_required(login_url='/login/')     
 def Reviewerhome(request):
     template_name = "main/reviewer/reviewerhome.html"
     result = []
     if request.user.is_authenticated:
-     print(request.user)
      try:
-    #   login(request,user)
-        print(request.user)
         reviewer = Solution_reviewer.objects.filter(user_id=request.user)
         for rev in reviewer:
             result_dict ={}
             result_dict['solnrev'] = rev
             result_dict['main'] = MainParticipant.objects.filter(user_id = rev.solution_id.user_id)[0]
             result.append(result_dict)
-        print(reviewer)
-        print(result)
-    #   print(reviewer[0].solution_id_id)
-        return render(request, template_name,{'reviewer': reviewer, 'result':result})
+        return render(request, template_name,{'reviewer': reviewer[0], 'result':result})
      except Exception as e:
       print(e)
       return render(request, template_name)
@@ -239,10 +234,11 @@ def problem(request):
      try:
          mainparticipantdetails = MainParticipant.objects.get(
                 user_id=request.user)
-         usetype = mainparticipantdetails.usertype
-        
-        # print(usetype)
-         problemdetails = Problem.objects.filter(usertype=usetype).values()
+         usertype = mainparticipantdetails.usertype
+         if usertype == 'ST':
+             problemdetails = Problem.objects.all()
+         else:
+          problemdetails = Problem.objects.filter(usertype=usertype).values()
         # problemdetails = Problem.objects.all()
          return render(request, 'main/problem.html', {'problems': problemdetails})
      except Exception as e:
@@ -447,7 +443,6 @@ class DeleteMember(View):
     def get(self, request, id):
         try:
             memberprofile = Memberdetails.objects.filter(id=id)
-            
             print(memberprofile)
             memberprofile.delete()
             return redirect("/memberprofile/")
@@ -502,23 +497,16 @@ class UpdateMemberProfile(View):
 class ViewProblemdetails(View):
     form_class = ViewproblemdetailsForm
     template_name = "main/viewproblemdetails.html"
-
     def get(self, request):
         form = self.form_class()
         try:
             solutiondetails = Solution_details.objects.get(user_id=request.user)
-            # print(solutiondetails.problem_id.problem_id)
             problemdetails = Problem.objects.get(problem_id=solutiondetails.problem_id.problem_id)
             print(solutiondetails)
-            
-            
             return render(request, self.template_name, {"form": form, "problemdetails": problemdetails,"solutiondetails":solutiondetails})
-
         except Solution_details.DoesNotExist:
             pass
         return render(request, self.template_name, {"form": form})
-
-
 
 class EmailThread(threading.Thread):
 
@@ -550,7 +538,6 @@ def send_activation_email(user, request):
    
 # activate user when clicking the link in email   
 def activate_user(request, uidb64, token):
-
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
 
@@ -570,52 +557,32 @@ def activate_user(request, uidb64, token):
 
     return render(request, 'authentication/activate-failed.html', {"user": user})
 
-
-def Userview(request):
+class Revieweruserview(View):
+    # form_class = UserRemarksForm
+    def get(self, request, id, *args, **kwargs):
+        print(id)
+        template_name = "main/reviewer/userview.html"
+        # form = self.form_class()
+        userdetails = MainParticipant.objects.filter(
+            user_id=id)
+        print(userdetails[0].user_id.id)
+        solutiondetails = Solution_details.objects.filter(user_id=userdetails[0].user_id.id)
+        print(solutiondetails)
+        plbmdetails = Problem.objects.filter(problem_id = solutiondetails[0].problem_id.problem_id)
+        print(plbmdetails)
+        # print(userdetails.id)
+        print(userdetails)
+        return render(request, template_name, {"userdetails": userdetails[0],"soltndtls":solutiondetails[0],"plbmdetails":plbmdetails[0]})
     
-    template_name = "main/reviewer/userview.html"
-    if request.user.is_authenticated:
-     print(request.user)
-     try:
-      print(request.user)
-      reviewer = Solution_reviewer.objects.filter(user_id=request.user)
-      print(reviewer)
-    #   print(reviewer.solution_id_id)
-      solutiondetails = Solution_details.objects.filter(id=reviewer[0].solution_id_id)
-      print(solutiondetails)
-      mainpaticipantdetails = MainParticipant.objects.filter(user_id = solutiondetails[0].user_id)
-    #   print(mainpaticipantdetails[0].status) 
-      print(solutiondetails[0].user_id)
-      print(solutiondetails[0].problem_id)
-      print(solutiondetails[0].problem_id_id)
-      plbmdetails = Problem.objects.filter(problem_id=solutiondetails[0].problem_id_id)
-      print(plbmdetails[0])
-      print(plbmdetails[0].problem_name)
-
-      return render(request, template_name,{'plbmdetails':plbmdetails[0],'solutiondetails':solutiondetails[0],'mainpaticipantdetails':mainpaticipantdetails[0]})
-     except:
-           return render(request,"main/reviewer/userview.html")
-    
-    return render(request,"main/reviewer/userview.html")
-
-# def Acceptplbm(request):
-#     try:
-#       if request.method == 'POST':
-#        reviewer = Solution_reviewer.objects.filter(user_id=request.user)
-#        print(reviewer)
-#        print(reviewer[0].solution_id_id)
-#        solutiondetails = Solution_details.objects.filter(id=reviewer[0].solution_id_id)
-#        mainpaticipantdetails = MainParticipant.objects.filter(user_id = solutiondetails[0].user_id)
-#        print(mainpaticipantdetails[0].remark)
-#     #   remark=request.POST.get['remark']
-#        remark=request.POST['remark']
-#        print(remark)
-#        mainpaticipantdetails[0].status = 'A'
-#        mainpaticipantdetails[0].remark = remark
-#        mainpaticipantdetails[0].save(update_fields=['status','remark'])
-#       return render(request,"main/reviewer/userview.html")
-#     except:
-#      return render(request,"main/reviewer/userview.html")
-    #    return render(request,"main/reviewer/userview.html")
-
+    def post(self, request, id, *args, **kwargs):
+        mainpaticipantdetails = MainParticipant.objects.filter(
+            user_id=id)
+        remark=request.POST.get['remark']
+        remark=request.POST['remark']
+        print(remark)
+        mainpaticipantdetails[0].status = 'A'
+        mainpaticipantdetails[0].remark = remark
+        mainpaticipantdetails[0].save(update_fields=['status','remark'])
+        
+        return render(request, self.template_name, {"member": memberdetails})
 
