@@ -23,6 +23,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- bootsrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <style>
         
         .under-review{
@@ -85,10 +87,6 @@
             height: 6rem;
             width:6rem;
         }
-        .modal-header {
-            border-bottom: 1px solid orange;
-            color: black;
-            }
 
         .btn-close:hover{
         color: white !important;
@@ -167,139 +165,91 @@
             <div class="container">
                 <nav class="navbar justify-content-between">
                     <div class="navbar-brand">
-                        <h4>Xplora WinHack</h4>
+                        <a href="{% url 'main:reviewerhome' %}" class="text-decoration-none"><h4>Xplora WinHack</h4></a>
                         {% csrf_token %}
                     </div>
                     <div>
-                        <a href="/logout" class="btn btn-primary" role="button">Logout</a>
-                        
+                      <div class="dropdown">
+                        <button class="dropdown-toggle custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="{% static 'assets/img_avatar.png'%}" alt="reviewer avathar" class="reviewer-avathar"/>
+                        </button>
+                        <div class="dropdown-menu p-3 dropdown-menu-end dropdown-menu-lg-start">
+                          <div class="mb-3 ">
+                            <img src="{% static 'assets/img_avatar.png'%}" alt="reviewer avathar" class="reviewer-avathar-large"/>
+                          </div>
+                          <p>{{reviewer.user_id}}</p>
+                          <p>{{reviewer.user_id.email}}</p>
+                          <li class="mb-3"><hr class="dropdown-divider"></li>
+                          <li> <a href="/logout" class="btn btn-primary w-100" role="button"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;&nbsp;Logout</a></li>
+                        </div>
+                      </div>
                     </div>
                 </nav>
             </div>
         </div>
     </header>
     {% block reviewerhome %}
-    
 
-    
-    <section class="container">
-        <div class="row m-0 p-0 justify-content-between mt-5">
-            <div class="col-lg-2 m-0 p-0 col-md-6">
-                <!-- <input type="text" placeholder="Search" id="search" class="search p-2 ps-3 border rounded-3" onkeyup="myFunction()"> -->
-                <!-- <form action="#" method="get" onsubmit="return false;">
-                    <input type="text" placeholder="Search" name="search" id="search" class="white-div p-2 ps-3 rounded-3" onkeyup="doSearch();" />
-                </form> -->
-                <input type="text" id="search" onkeyup="searchTable()" placeholder="Search" class="white-div search p-2 ps-3 rounded-3">
+    <section class="container mt-5">
+      <div class="d-flex justify-content-between">
+        <div>
+          <input type="text" id="search" onkeyup="searchTable()" placeholder="Search" class="white-div p-2 ps-3 rounded-3 w-100">
+        </div>
+        <div class="ms-3">
+          <div class="dropdown">
+            <button class="btn white-div p-2 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-hover="dropdown" aria-expanded="false">
+              <i class="bi bi-filter me-1"></i>
+                  <span>Filter</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Accepted</a></li>
+              <li><a class="dropdown-item" href="#">Rejected</a></li>
+              <li><a class="dropdown-item" href="#">Under Reviewing</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive h-75 white-div mt-4 p-3 rounded-3">
+        <table id="userTable" class="table table-scrollable">
+          <thead class="sticky-top bg-light">
+            <tr>
+              <th class="border">Name of Team lead</th>
+              <th class="border">Selected Problem</th>
+              <th class="border">Category</th>
+              <th class="border">Status</th>
+              <th class="border">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-hover">
+            {% for rev in result %}
+              <tr>
+                <td>{{ rev.solnrev.solution_id.user_id }}</td>
 
-            </div>
-            <div class="filter col-2 m-0 p-0 justify-content-end">
-                    <div class="white-div filter-btn  rounded-3 ps-3 p-2">
-                        <i class="fa fa-search"></i>
-                        <span>Filter</span>
-                    </div>
-                    <div class="filter-item">
-                        <a href="">Accepted</a>
-                        <a href="">Rejected</a>
-                        <a href="">Under Reviewind</a>
-                    </div>
-            </div>
-        </div>
-        <div class="white-div user-table rounded-4 mt-5 mb-5">
-            <div class="p-4" >
-                <table id="userTable" class="table-responsive table-scrollable w-100">
-                    <thead class="sticky-top bg-light">
-                        <tr>
-                        <th class="col-lg-3 border">Username</th>
-                        <th class="col-lg-4 border">Selected Problem</th>
-                        <th class="col-lg-3 border">Status</th>
-                        <th class="col-lg-2 border">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>A</td>
-                        <!-- <tr>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="{% url 'main:userview' %}">View</a></span></td>
-                        </tr> -->
-                        {% for rev in result %}
-                        <tr>
-                            <td>B</td>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>C</td>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>D</td>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Unified Ticket Management System(XWH_P02)</td>
-                            <td><span class="accepted">Accepted</span></td>
-                            <td><span class="edit"><a href="">Edit</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Unified Ticket Management System(XWH_P02)</td>
-                            <td><span class="accepted">Accepted</span></td>
-                            <td><span class="edit"><a href="">Edit</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="">View</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Unified Ticket Management System(XWH_P02)</td>
-                            <td><span class="accepted">Accepted</span></td>
-                            <td><span class="edit"><a href="">Edit</a></span></td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>GIS-enabled Facility Management Solution(XWH_P03)</td>
-                            <td>{{ rev.solnrev.solution_id.user_id }}</td>
-                            <td>{{ rev.solnrev.solution_id.problem_id.problem_name }}</td>
-                            {% if rev.main.status == 'U' %}
-                            <td><span class="under-review">Under Reviewing</span> </td>
-                            {% elif rev.main.status == 'A' %}
-                            <td><span class="under-review">Accepted</span> </td>
-                            {% else %}
-                            <td><span class="rejected">Rejected</span></td>
-                            {% endif %}
-                            <td><span class="view"><a href="{% url 'main:userview' %}">View</a></span></td>
-                        </tr>
-                        {% endfor %}
-                        
-                       
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                <td>{{ rev.solnrev.solution_id.problem_id.problem_name }}</td>
+
+                {% if rev.solnrev.solution_id.problem_id.usertype == 'PT' %}
+                  <td>Professional</td>
+                  {% else %}
+                  <td>Student</td>
+                {% endif %}
+
+                {% if rev.main.status == 'U' %}
+                    <td><span class="under-review">Under Reviewing</span></td>
+                  {% elif rev.main.status == 'A' %}
+                    <td><span class="accepted">Accepted</span> </td>
+                  {% else %}
+                    <td><span class="rejected">Rejected</span></td>
+                {% endif %}
+
+                <td><a class="view" href="/reviewer-userview/{{rev.solnrev.solution_id.user_id.id}}">View</a></td>
+
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </section>
+
     <script>
         function searchTable() {
             var input, filter, found, table, tr, td, i, j;
@@ -322,8 +272,9 @@
                 }
             }
         }
-        </script>
+      </script>
     {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 </body>
 </html>

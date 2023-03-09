@@ -1,77 +1,147 @@
 {% extends "main/reviewer/reviewerhome.html" %}
+{% load static %}
 {% block reviewerhome %}
-<section class="container p-lg-5">
-    <div class="row white-div-wrapper p-3 rounded-4 align-items-center mt-5">
-        <div class="col-lg-4 col-md-4 p-2 ">
-            <div class="white-div p-3 rounded-3 d-flex flex-column align-items-center justify-content-center">
-                <div class="user-avathar mb-3">
-                    <img src="" alt="">
-                </div>
-                <div class="mt-3">
-                    <p class="text-muted m-0">Username:</p>
-                    <p>ADeeBz2330</p>
-                    <p class="text-muted m-0">Problem Choosen:</p>
-                    <p>GPS-enabled Destination Tracker System (XWH_P01)</p>
-                    <p class="text-muted m-0">Category:</p>
-                    <p>Student</p>
-                </div>
-                <a href=""  class="btn btn-outline-primary w-100 mt-5" target="_blank">View uploaded Solution</a>
-            </div>
-        </div>
-        <div class="col-lg-8 col-md-8 p-1 remarks">
-            <div class="p-3">
-                <form action="">
-                    <p class="m-0 text-muted"><label for="remarks">Remarks:</label></p>
-                    <textarea name="remarks" id="remarks" cols="30" rows="8" class="w-100"></textarea>
-                    <div class="mt-5 m-0 p-0 text-end">
-                        <a role="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Reject</a>
-                        <a role="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Accept</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div>
-            <embed src="" width="100%" height="600px">
-        </div>
+<section class="container mt-5">
+  <div class="row g-4 mb-5">
+    <div class="col-lg-12">
+      <a href="{% url 'main:reviewerhome' %}" role="button" class="btn back-btn">
+        <i class="bi bi-chevron-compact-left me-2"></i>
+        <p class="m-0 p-0">Back</p>
+      </a>
     </div>
-</section>
-<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-        <p class="font-weight-500" align="justify">
-            Are you sure you want to Accept the uploaded solution?
-        </p>
-        <div class="text-end">
-            <a href="" class="me-3 btn cancel-btn">Cancel</a>
-            <button type="submit" class="btn btn-success">Accept</button>
-        </div>
-        </div>
-    </div>
-    </div>
-</div>
-<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-        <p class="font-weight-500" align="justify">
-            Are you sure you want to Reject the uploaded solution?
-        </p>
-        <div class="text-end">
-            <a href="" class="me-3 btn cancel-btn">Cancel</a>
-            <button type="submit" class="btn btn-danger">Reject</button>
-        </div>
-        </div>
-    </div>
-    </div>
-</div>
 
+    <div class="col-lg-4">
+      <div class="p-3 white-div rounded-3 h-100 d-flex flex-column justify-content-center">
+        <div class="mb-3 align-self-center">
+          <img src="{% static 'assets/img_avatar.png'%}" alt="user avathar" class="user-avathar">
+        </div>
+        <div class="mt-3 p-3">
+          <form action=""  method="GET" enctype ="multipart/form-data">
+            {% csrf_token %}
+            <p class="text-muted m-0">Username:</p>
+              <p>{{userdetails.teamleadname}}</p>
+            <p class="text-muted m-0">Problem Choosen:</p>
+              <p>{{plbmdetails.problem_name}}</p>
+            <p class="text-muted m-0">Category:</p>
+              {% if plbmdetails.usertype == 'PT' %}
+                <p>Professional</p>
+                {% else %}
+                <p>Student</p>
+              {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="p-3 white-div rounded-3">
+        <embed
+          src="{% static 'assets/ICFOSS-3.pdf'%}"
+          width="100%"
+          height="500px"
+        />
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="p-3 white-div rounded-3">
+        <form action="">
+          <p class="m-0 text-muted"><label for="remarks">Remarks:</label></p>
+
+          <textarea
+            name="remarks"
+            id="remarks"
+            cols="30"
+            rows="6"
+            class="form-controll w-100"
+          ></textarea>
+
+          <div class="mt-5 m-0 p-0 text-end">
+            <a
+              role="button"
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#rejectModal"
+              >Reject
+            </a>
+            <a
+              role="button"
+              class="ms-2 btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#acceptModal"
+              >Accept
+            </a>
+          </div>
+
+          <div
+            class="modal fade"
+            id="acceptModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="reviewModal"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <p class="font-weight-500" align="justify">
+                    Are you sure you want to Accept the uploaded solution?
+                  </p>
+                  <div class="text-end">
+                    <button data-bs-dismiss="modal" class="me-3 btn cancel-btn">
+                      Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">Accept</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal fade"
+            id="rejectModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="reviewModal"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <p class="font-weight-500" align="justify">
+                    Are you sure you want to Reject the uploaded solution?
+                  </p>
+                  <div class="text-end">
+                    <button data-bs-dismiss="modal" class="me-3 btn cancel-btn">
+                      Cancel
+                    </button>
+                    <button type="submit" class="btn btn-danger">Reject</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
