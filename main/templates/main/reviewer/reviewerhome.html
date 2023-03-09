@@ -183,6 +183,7 @@
 
     
     <section class="container">
+    <form class="form"  action ="" method="GET" enctype="multipart/form-data">
         <div class="row m-0 p-0 justify-content-between mt-4">
             <div class="col-lg-2 m-0 p-0 col-md-6">
                 <input type="text" placeholder="Search" id="search" class="search p-2 ps-3 border rounded-3" onkeyup="myFunction()">
@@ -206,7 +207,7 @@
                         <tr>
                         <th class="col-lg-3 border">Username</th>
                         <th class="col-lg-4 border">Selected Problem</th>
-                        <th class="col-lg-3 border">Status</th>
+                        <th class="col-lg-3 border">Category</th>
                         <th class="col-lg-2 border">Actions</th>
                         </tr>
                     </thead>
@@ -214,12 +215,17 @@
                         <!-- <tr>
                             <td>GPS-enabled Destination Tracker System (XWH_P01)</td>
                             <td><span class="under-review">Under Reviewing</span> </td>
-                            <td><span class="view"><a href="{% url 'main:userview' %}">View</a></span></td>
                         </tr> -->
                         {% for rev in result %}
                         <tr>
                             <td>{{ rev.solnrev.solution_id.user_id }}</td>
                             <td>{{ rev.solnrev.solution_id.problem_id.problem_name }}</td>
+
+                            {% if rev.solnrev.solution_id.problem_id.usertype == 'PT' %}
+                            <td>Professional</td>
+                            {% else %}
+                            <td>Student</td>
+                            {% endif %}
                             {% if rev.main.status == 'U' %}
                             <td><span class="under-review">Under Reviewing</span> </td>
                             {% elif rev.main.status == 'A' %}
@@ -227,15 +233,25 @@
                             {% else %}
                             <td><span class="rejected">Rejected</span></td>
                             {% endif %}
-                            <td><span class="view"><a href="{% url 'main:userview' %}">View</a></span></td>
+                        <td><a class="btn btn-primary" href="/reviewer-userview/{{rev.solnrev.solution_id.user_id.id}}">View</a></td>    
+
                         </tr>
                         {% endfor %}
+                    <td><span class="under-review">Reviewer Details</span> </td>
+                    <td><span class="under-review">Reviewer Name:{{reviewer.user_id}}</span> </td>
+                    <td><span class="under-review">{{reviewer.user_id.first_name}}</span> </td>
+                    <td><span class="under-review">{{reviewer.user_id.last_name}}</span> </td>
+                    <td><span class="under-review">{{reviewer.user_id.email}}</span> </td>
+
+
+
+
                         
-                       
                     </tbody>
                 </table>
             </div>
         </div>
+    </form>    
     </section>
     <script>
         function myFunction() {
