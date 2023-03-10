@@ -21,12 +21,6 @@ urlpatterns = [
     path("reviewerhome/", views.Reviewerhome, name='reviewerhome'),
     path("reviewer-userview/<int:id>", views.Revieweruserview.as_view(), name='userview'),
 
-
-    
-
-
-
-    
     path("home/", views.homepage, name="homepage"),
     path("contact/", views.contact, name="contact"),
     path("logout/", views.logout_request, name="logout"),
