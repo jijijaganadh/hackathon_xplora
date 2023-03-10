@@ -31,7 +31,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.32.121','hackzon.icfoss.org','159.65.152.88']
+ALLOWED_HOSTS = ['159.65.152.88','hackzon.icfoss.org']
 CSRF_TRUSTED_ORIGINS = ['https://hackzon.icfoss.org']
 
 
