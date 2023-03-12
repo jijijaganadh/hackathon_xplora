@@ -16,8 +16,8 @@
           <img src="{% static 'assets/img_avatar.png'%}" alt="user avathar" class="user-avathar">
         </div>
         <div class="mt-3 p-3">
-          <form action=""  method="GET" enctype ="multipart/form-data">
-            {% csrf_token %}
+
+            
             <p class="text-muted m-0">Username:</p>
               <p>{{userdetails.teamleadname}}</p>
             <p class="text-muted m-0">Problem Choosen:</p>
@@ -28,7 +28,6 @@
                 {% else %}
                 <p>Student</p>
               {% endif %}
-          </form>
         </div>
       </div>
     </div>
@@ -45,9 +44,10 @@
 
     <div class="col-lg-12">
       <div class="p-3 white-div rounded-3">
-        <form action="">
+        <form action="" method="POST">
+          {% csrf_token %}
+          {% if userdetails.status == 'U' %}
           <p class="m-0 text-muted"><label for="remarks">Remarks:</label></p>
-
           <textarea
             name="remarks"
             id="remarks"
@@ -55,22 +55,31 @@
             rows="6"
             class="form-controll w-100"
           ></textarea>
+          {% else %}  
+          Remarks:{{userdetails.remark}}
+          {% endif %}
 
-          <div class="mt-5 m-0 p-0 text-end">
+          {% if userdetails.status == 'A' %}  
+          Accepted   
+         {% elif userdetails.status == 'R' %}
+        Rejected  
+        {% else %}
+          <div class="mt-5 m-0 p-0 text-end">     
             <a
-              role="button"
-              class="btn btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#rejectModal"
-              >Reject
-            </a>
-            <a
-              role="button"
-              class="ms-2 btn btn-success"
-              data-bs-toggle="modal"
-              data-bs-target="#acceptModal"
-              >Accept
-            </a>
+            role="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#rejectModal"
+            >Reject
+          </a>
+          <a
+            role="button"
+            class="ms-2 btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#acceptModal"
+            >Accept
+          </a> 
+            {% endif %}
           </div>
 
           <div
@@ -100,7 +109,7 @@
                     <button data-bs-dismiss="modal" class="me-3 btn cancel-btn">
                       Cancel
                     </button>
-                    <button type="submit" class="btn btn-success">Accept</button>
+                    <button type="submit"  value="accept" name="status"  class="btn btn-success">Accept</button>
                   </div>
                 </div>
               </div>
@@ -133,7 +142,7 @@
                     <button data-bs-dismiss="modal" class="me-3 btn cancel-btn">
                       Cancel
                     </button>
-                    <button type="submit" class="btn btn-danger">Reject</button>
+                    <button type="submit" value="reject" name="status" class="btn btn-danger">Reject</button>
                   </div>
                 </div>
               </div>
