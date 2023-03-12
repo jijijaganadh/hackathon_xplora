@@ -1,168 +1,166 @@
-@import url('colors.css');
+@import url("colors.css");
+
+/* ========== background colors  ========== */
+.white-shade-gray-bg{
+  background-color: var(--white-shade-gray-bg);
+}
+.nav-bg{
+  background-color: var(--blue-shade);
+}
+.nav-brand-text{
+  color: var(--primary-blue);
+}
 
 /* ========== review status indicators ========== */
-.under-review{
-    color: var(--orange-medium);
-    background-color:var(--orange-light-bg);
-    padding: 8px;
-    border-radius: 4px;
+.under-review {
+  color: var(--orange-medium);
+  background-color: var(--orange-light-bg);
+  padding: 6px;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
 }
-.accepted{
-    color: var(--green);
-    background-color:var(--green-light-bg);
-    padding: 8px;
-    border-radius: 4px;
-    }
-.rejected{
-    color: var(--red);
-    background-color:var(--red-light-bg);
-    padding: 8px;
-    border-radius: 4px;
+.accepted {
+  color: var(--green);
+  background-color: var(--green-light-bg);
+  padding: 6px;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
 }
-.view{
-    background-color:var(--blue-light-bg);
-    padding: 8px 20px;
-    border-radius: 4px;
+.rejected {
+  color: var(--red);
+  background-color: var(--red-light-bg);
+  padding: 6px;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
 }
-.view a{
-    text-decoration: none;
+.view {
+  background-color: var(--blue-light-bg);
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--blue-light-bg);
 }
-.view a:hover{
-    text-decoration: underline;
+.view a {
+  text-decoration: none;
 }
-.edit{
-    background-color: var(--violet-light-bg);
-    padding: 8px 20px;
-    border-radius: 4px;
+.view:hover {
+  background-color: var(--blue-light-bg-hover);
 }
-.edit a{
-    color: var(--violet);
-    text-decoration: none;
+.edit {
+  background-color: var(--violet-light-bg);
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--violet-light-bg);
 }
-.edit a:hover{
-    text-decoration: underline;
+.edit a {
+  color: var(--violet);
+  text-decoration: none;
 }
-/*========== Accept , Reject , Cancel and View solution buttons ==========*/
-/* .accept-btn{
-    color:var(--white) !important;
-    background-color: var(--green) !important;
+.edit:hover {
+  background-color: var(--violet-light-bg-hover);
 }
-.reject-btn{
-    color:var(--white) !important;
-    background-color: var(--red-medium) !important;
-} */
-.cancel-btn{
-    color: var(--blue) !important;
-    text-decoration: none;
+/*========== Accept , Reject , Cancel and Back buttons ==========*/
+
+.cancel-btn {
+  color: var(--blue) !important;
+  text-decoration: none;
 }
-.cancel-btn:hover{
-    background-color: var(--blue-light-bg);
+.cancel-btn:hover {
+  background-color: var(--blue-light-bg);
 }
-.view-solution-btn{
-    border: 1px solid var(----light-blue);
+.back-btn {
+  display: flex;
+  width: 120px !important;
+  padding: 8px;
+  background-color: var(--white);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.back-btn:hover {
+  color: var(--light-black);
+  background-color: var(--white-shade);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
 }
 /*========== userview table ==========*/
-table{
-    border-collapse: separate;
-    /* border-spacing: 0 15px; */
+.border-radius-8{
+  overflow: hidden;
+  border: 1px solid var(--bs-secondary) ;
+  border-radius: 8px !important;
+  -webkit-border-radius: 8px !important;
+  -moz-border-radius: 8px !important;
+  -ms-border-radius: 8px !important;
+  -o-border-radius: 8px !important;
 }
-tbody{
-    height: 200px;
-    overflow-y: scroll;
+tbody {
+  overflow-y: scroll;
 }
-th,
+.tr-border-bottom-none{
+  border-bottom:0px !important
+}
+tr{
+  border-bottom: 1px solid rgb(214, 214, 214);
+}
+th {
+  text-align: center;
+}
 td {
-    text-align:center;
-    padding:0.5rem;
-    border-bottom: 1px solid var(--gray);
+  text-align: center;
+  padding: 1.25rem !important;
 }
 /* ========== User Avathar ========== */
-.user-avathar{
-    border: 1px solid var(--gray);
-    border-radius: 50px;
-    height: 6rem;
-    width:6rem;
+.reviewer-avathar {
+  border: 1px solid var(--gray);
+  border-radius: 50px;
+  height: 3.2rem;
+  width: 3.2rem;
 }
-.profile{
-    background-color: var(--white);
-    box-shadow: 0px 1px 5px rgba(0,0,0,0.10);
+.reviewer-avathar-large {
+  border: 1px solid var(--gray);
+  border-radius: 50px;
+  height: 6rem;
+  width: 6rem;
 }
-.profile-wrapper{
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.10);
+.custom-dropdown-toggle {
+  border: none !important;
+  background: none !important;
+}
+.user-avathar {
+  border: 1px solid var(--gray);
+  border-radius: 50px;
+  height: 120px;
+  width: 120px;
+}
+.white-div {
+  background-color: var(--white-light-gray);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+.white-div-wrapper {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 /* ========== Modal ========== */
 
-.btn-close:hover{
-    border:1px solid var(--gray);
-    border-radius: 20px;
+.btn-close:hover {
+  border: 1px solid var(--gray);
+  border-radius: 20px;
 }
 
 .modal-content {
-    border-radius: 8px;
+  border-radius: 8px;
 }
 /*========== Search and filter ==========*/
 /* Search */
-#search{
-    
-}
-
-
-
-/* Filter */
-.filter {
-    position:relative;
-    display: inline-block;
-}
-.filter-btn{
-    cursor: pointer;
-}
-.filter-item{
-    display: none;
-    position: absolute;
-    min-width: 190px;
-    border-radius: 8px;
-    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
-    z-index:100;
-}
-.filter-item a{
-    color:black;
-    text-decoration: none;
-    padding: 16px 12px;
-    display: block;
-}
-.filter-item a:hover{
-    background-color:#f1f1f1 ;
-}
-.filter:hover .filter-item{
-    display: block;
-}
-.filter:hover .filter-btn{
-    background-color:#f7e8e8 ;
-}
-.user-table{
-    z-index: 1;
-}
-/*========== search button ==========*/
-.search-btn{
-    color: #96017a;
-    padding: 8px 12px;
-    border-radius: 50px;
-    margin-right: 16px;
-    background: #f3f3f3;
-    border: none;
-}
-.search-btn:hover {
-  padding: 8px 12px;
-  border-radius: 50px;
-  background: #ddd;
-  font-size: 17px;
+#search {
   border: none;
-  cursor: pointer;
-}
-
-
-@media screen and (max-width:768px){
-    .filter-item{
-        width: 80%;
-    }
 }

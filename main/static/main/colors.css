@@ -2,6 +2,9 @@
     --primary-blue:#264960;
     --light-gray:#E6EEE6;
     --white:#FFFFFF;
+    --white-shade:#fafafa;
+    --white-light-gray:#FDFDFD;
+    --white-shade-gray-bg:#f8f9fa;
     --black:#000;
     --black-shade:#3d3939;
     --light-black: #5A5A5A;
@@ -11,18 +14,21 @@
     --gray:gray;
     --blue:rgb(20,100,206);
     --light-blue:#19A3FF;
+    --blue-shade:#E7EAF8;
     --yellow:yellow;
     --orange-medium:rgb(255, 136, 0);
-    --orange-light-bg: rgba(255, 255,0, 0.20);
+    --orange-light-bg: rgba(255, 255, 20, 0.2);
     --green:green;
-    --green-light-bg: rgba(76, 247, 153, 0.40);
+    --green-light-bg: rgba(104, 248, 169, 0.4);
     --green-dark:rgb(0, 88, 0);
     --red:red;
     --red-medium:rgb(255, 78, 78);
-    --red-light-bg: rgba(252, 98, 98, 0.25);
+    --red-light-bg: rgba(255, 145, 145, 0.25);
     --blue-light-bg: #f0f6fa;
+    --blue-light-bg-hover: #d1e4f1;
     --violet:#96017a;
     --violet-light-bg:#ffeafb;
+    --violet-light-bg-hover:#ffd7f8;
 
 
 }
