@@ -23,15 +23,6 @@ urlpatterns = [
     # path("reviewstatusaccept/<int:id>", views.ReviewStatusAccept, name='reviewstatusaccept'),
     # path("reviewstatusreject/<int:id>", views.ReviewStatusReject, name='reviewstatusreject'),
     path("reviewer-userview/<int:id>", views.Revieweruserview.as_view(), name='userview'),
-
-
-
-
-    
-
-
-
-    
     path("home/", views.homepage, name="homepage"),
     path("contact/", views.contact, name="contact"),
     path("logout/", views.logout_request, name="logout"),
