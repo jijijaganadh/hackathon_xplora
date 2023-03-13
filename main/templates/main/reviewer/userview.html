@@ -38,8 +38,8 @@
           width="100%"
           height="500px"
         />
+        <a href="{{ soltndtls.solution_upload.url }}" target="_blank">View Full Pdf Solution</a>
       </div>
-      <a href="{{ soltndtls.solution_upload.url }}">View Full Pdf Solution</a>
     </div>
 
     <div class="col-lg-12">
@@ -56,13 +56,13 @@
             class="form-controll w-100"
           ></textarea>
           {% else %}  
-          Remarks:{{userdetails.remark}}
+          <div>Remarks: {{userdetails.remark}}</div>
           {% endif %}
 
-          {% if userdetails.status == 'A' %}  
-          Solution Status:Accepted   
+          {% if userdetails.status == 'A' %}
+          <div>Solution Status: <span class="accepted-status">Accepted</span> </div>  
           {% elif userdetails.status == 'R' %}
-          Solution Status:Rejected  
+          <div>Solution Status: <span class="rejected-status">Rejected</span> </div>  
           {% else %}
           <div class="mt-5 m-0 p-0 text-end">     
             <a

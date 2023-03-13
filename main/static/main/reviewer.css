@@ -10,7 +10,13 @@
 .nav-brand-text{
   color: var(--primary-blue);
 }
-
+/* ========= */
+.accepted-status{
+  color: var(--green);
+}
+.rejected-status{
+  color: var(--red);
+}
 /* ========== review status indicators ========== */
 .under-review {
   color: var(--orange-medium);
