@@ -173,7 +173,7 @@
           <tbody class="table-hover" id="userDetails">
             {% for rev in result %}
             <tr>
-              <td>{{ rev.solnrev.solution_id.user_id }}</td>
+              <td>{{ rev.main.teamleadname }}</td>
 
               <td>{{ rev.solnrev.solution_id.problem_id.problem_name }}</td>
 
@@ -188,7 +188,6 @@
               {% else %}
               <td><span class="rejected">Rejected</span></td>
               {% endif %}
-
               <td>
                 <a
                   class="view"

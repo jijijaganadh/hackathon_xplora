@@ -44,11 +44,6 @@ def guidelines(request):
 
 def about(request):
     return render(request, "main/landing/about.html")
-# reviewer dashboard
-# def reviewerhome(request):
-#     return render(request, "main/reviewer/reviewerhome.html")
-# def userview(request):
-#     return render(request, "main/reviewer/userview.html")
 
 
 
@@ -557,6 +552,7 @@ def activate_user(request, uidb64, token):
 
     return render(request, 'authentication/activate-failed.html', {"user": user})
 
+
 class Revieweruserview(View):
     def get(self, request,id, *args, **kwargs):
         print(id)
@@ -566,9 +562,6 @@ class Revieweruserview(View):
         solutiondetails = Solution_details.objects.filter(user_id=userdetails[0].user_id.id)
         print(solutiondetails)
         plbmdetails = Problem.objects.filter(problem_id = solutiondetails[0].problem_id.problem_id)
-        print(plbmdetails)
-        # print(userdetails.id)
-        print(userdetails)
         return render(request, template_name, {"userdetails": userdetails[0],"soltndtls":solutiondetails[0],"plbmdetails":plbmdetails[0]})
     
     def post(self, request,id):
@@ -576,7 +569,6 @@ class Revieweruserview(View):
             template_name = "main/reviewer/reviewerhome.html"
             mainpaticipantdetails = MainParticipant.objects.filter(
             user_id=id)[0]
-        # remark=request.POST.get['remark']
             remark=request.POST['remarks']
             status=request.POST['status']
             if status =='accept':
@@ -587,38 +579,3 @@ class Revieweruserview(View):
             mainpaticipantdetails.save()
             return redirect('main:reviewerhome')
         return redirect('main:reviewerhome')
-
-        # return redirect('main:reviewerhome')
-
-
-
-
-# def ReviewStatusAccept(request, id):
-#     if request.method == "POST":
-#         template_name = "main/reviewer/userview.html"
-#         mainpaticipantdetails = MainParticipant.objects.filter(
-#             user_id=id)[0]
-#         print(mainpaticipantdetails)
-#         # remark=request.POST.get['remark']
-#         remark=request.POST['remarks']
-#         print(remark)
-#         mainpaticipantdetails.status = 'A'
-#         mainpaticipantdetails.remark = remark
-#         mainpaticipantdetails.save()
-#         return render(request, template_name)
-#     return render(request, template_name)
-
-#     # form_class = UserRemarksForm
-# def ReviewStatusReject(request, id):
-#     if request.method == "POST":
-#         template_name = "main/reviewer/userview.html"
-#         mainpaticipantdetails = MainParticipant.objects.filter(
-#             user_id=id)[0]
-#         print(mainpaticipantdetails)
-#         remark=request.POST['remarks']
-#         print(remark)
-#         mainpaticipantdetails.status = 'R'
-#         mainpaticipantdetails.remark = remark
-#         mainpaticipantdetails.save()
-#         return render(request, template_name)
-#     return render(request,template_name)

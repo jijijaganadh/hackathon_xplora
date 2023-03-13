@@ -31,8 +31,7 @@
         </div>
       </div>
     </div>
-
-    <div class="col-lg-8">
+<div class="col-lg-8">
       <div class="p-3 white-div rounded-3">
         <embed
           src="{{ soltndtls.solution_upload.url }}"
@@ -40,6 +39,7 @@
           height="500px"
         />
       </div>
+      <a href="{{ soltndtls.solution_upload.url }}">View Full Pdf Solution</a>
     </div>
 
     <div class="col-lg-12">
@@ -60,10 +60,10 @@
           {% endif %}
 
           {% if userdetails.status == 'A' %}  
-          Accepted   
-         {% elif userdetails.status == 'R' %}
-        Rejected  
-        {% else %}
+          Solution Status:Accepted   
+          {% elif userdetails.status == 'R' %}
+          Solution Status:Rejected  
+          {% else %}
           <div class="mt-5 m-0 p-0 text-end">     
             <a
             role="button"
