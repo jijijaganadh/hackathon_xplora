@@ -13,6 +13,7 @@ urlpatterns = [
     path('problemstatements/',views.plbmstmt,name="plbmstmt"),
     path('guidelines/',views.guidelines,name="guidelines"),
     path('about/',views.about,name="about"),
+    path('result/',views.result,name="result"),
 
     # login urls
     path("login/", views.login_request, name="login"),
