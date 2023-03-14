@@ -30,7 +30,6 @@ from django.urls import reverse
 def index(request):
     return render(request, "main/landing/index.html")
 
-
 def faq(request):
     return render(request, "main/landing/faq.html")
 
@@ -44,6 +43,9 @@ def guidelines(request):
 
 def about(request):
     return render(request, "main/landing/about.html")
+
+def result(request):
+    return render(request, "main/landing/result.html")
 
 
 
