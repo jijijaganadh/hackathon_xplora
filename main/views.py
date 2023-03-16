@@ -78,6 +78,8 @@ def Reviewerhome(request):
             result_dict ={}
             result_dict['solnrev'] = rev
             result_dict['main'] = MainParticipant.objects.filter(user_id = rev.solution_id.user_id)[0]
+            result_dict['member'] = Memberdetails.objects.filter(user_id=rev.solution_id.user_id)
+            result_dict['mentor'] = Mentordetails.objects.filter(user_id=rev.solution_id.user_id)[0]
             result.append(result_dict)
         return render(request, template_name,{'reviewer': reviewer[0], 'result':result})
      except Exception as e:
