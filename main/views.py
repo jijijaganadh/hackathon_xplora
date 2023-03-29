@@ -28,24 +28,27 @@ from django.urls import reverse
 
 
 def index(request):
-    return render(request, "main/landing/index.html")
+  return render(request, "main/landing/index.html")
 
 def faq(request):
-    return render(request, "main/landing/faq.html")
+  return render(request, "main/landing/faq.html")
 
 
 def plbmstmt(request):
-    return render(request, "main/landing/problemstatements.html")
+  return render(request, "main/landing/problemstatements.html")
 
 
 def guidelines(request):
-    return render(request, "main/landing/guidelines.html")
+  return render(request, "main/landing/guidelines.html")
 
 def about(request):
-    return render(request, "main/landing/about.html")
+  return render(request, "main/landing/about.html")
 
 def result(request):
-    return render(request, "main/landing/result.html")
+  return render(request, "main/landing/result.html")
+
+def gallery(request):
+  return render(request, "main/landing/gallery.html")
 
 
 

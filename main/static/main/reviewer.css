@@ -1,20 +1,20 @@
 @import url("colors.css");
 
 /* ========== background colors  ========== */
-.white-shade-gray-bg{
+.white-shade-gray-bg {
   background-color: var(--white-shade-gray-bg);
 }
-.nav-bg{
+.nav-bg {
   background-color: var(--blue-shade);
 }
-.nav-brand-text{
+.nav-brand-text {
   color: var(--primary-blue);
 }
 /* ========= */
-.accepted-status{
+.accepted-status {
   color: var(--green);
 }
-.rejected-status{
+.rejected-status {
   color: var(--red);
 }
 /* ========== review status indicators ========== */
@@ -100,9 +100,9 @@
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
 }
 /*========== userview table ==========*/
-.border-radius-8{
+.border-radius-8 {
   overflow: hidden;
-  border: 1px solid var(--bs-secondary) ;
+  border: 1px solid var(--bs-secondary);
   border-radius: 8px !important;
   -webkit-border-radius: 8px !important;
   -moz-border-radius: 8px !important;
@@ -112,10 +112,10 @@
 tbody {
   overflow-y: scroll;
 }
-.tr-border-bottom-none{
-  border-bottom:0px !important
+.tr-border-bottom-none {
+  border-bottom: 0px !important;
 }
-tr{
+tr {
   border-bottom: 1px solid rgb(214, 214, 214);
 }
 th {

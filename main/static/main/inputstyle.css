@@ -2,7 +2,6 @@
 
 .material-textfield {
   position: relative;
-
 }
 /* .container{
     display: flex;
@@ -11,7 +10,7 @@
     padding-top: 5rem;
 } */
 
-.input-label{
+.input-label {
   position: absolute;
   font-size: 1rem;
   left: 0;
@@ -21,7 +20,7 @@
   color: var(--gray);
   padding: 0 0.3rem;
   margin: 0 0.5rem;
-  transition: .1s ease-out;
+  transition: 0.1s ease-out;
   transform-origin: left top;
   pointer-events: none;
 }
@@ -31,48 +30,30 @@ input {
   border: 1px solid var(--gray);
   border-radius: 4px;
   padding: 0.5rem 0.7rem;
-  color:var(--gray);
+  color: var(--gray);
   transition: 0.1s ease-out;
 }
 input:focus {
   /* border-color:var(--orange);   */
-  border-color:  #297FFD;
+  border-color: #297ffd;
 }
 input:focus + .input-label {
-  color: #297FFD;
+  color: #297ffd;
   /* color: var(--orange); */
   top: 0;
-  transform: translateY(-50%) scale(.9);
+  transform: translateY(-50%) scale(0.9);
 }
 input:not(:placeholder-shown) + .input-label {
   top: 0;
-  transform: translateY(-50%) scale(.9);
+  transform: translateY(-50%) scale(0.9);
 }
-.width-100{
-    width: 100%;
-}
-
-.input[type="file"]{
-    padding: .5rem !important;
+.width-100 {
+  width: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.input[type="file"] {
+  padding: 0.5rem !important;
+}
 
 /* input{
     border-top: none;
@@ -86,7 +67,6 @@ input:not(:placeholder-shown) + .input-label {
 @use "@material/textfield";
 
 @include textfield.core-styles; */
-
 
 /* css2 */
 

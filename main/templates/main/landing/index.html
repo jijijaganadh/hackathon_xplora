@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="{% static 'main/faq.css'%}">
   <link rel="stylesheet" href="{% static 'main/problem.css' %}">
   <link rel="stylesheet" href="{% static 'main/guidelines.css' %}">
+  <link rel="stylesheet" href="{% static 'main/gallery.css' %}">
   <link rel="stylesheet" href="{% static 'main/index.css' %}">
 
 <body>
@@ -56,6 +57,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'main:result' %}">Results</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:gallery' %}">Gallery</a>
           </li>
           <li class="nav-item">
             <a href="{% url 'main:login' %}">
