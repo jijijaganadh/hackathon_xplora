@@ -167,6 +167,9 @@
               <th>Selected Problem</th>
               <th>College Name</th>
               <th>Phone Number</th>
+              <th>Email </th>
+              <th>Member Details</th>
+              <th>Mentor Details</th>
               <th>Submitted On</th>
               <th>Category</th>
               <th>Status</th>
@@ -181,6 +184,16 @@
               <td>{{ rev.solnrev.solution_id.problem_id.problem_name }}</td>
               <td>{{ rev.main.institution_name }}</td>
               <td>{{ rev.main.phone }}</td>
+              <td>{{ rev.main.user_id.email }}</td>
+              <td> 
+                <ul>
+                {% for member in rev.member %}
+                <li><span class="font-weight-bold">{{ member.name }}</span>: {{ member.email }}, {{ member.phoneno }} </li>
+                {% endfor %}
+              </ul>
+              </td>
+                <td><span class="font-weight-bold">{{ rev.mentor.first.name }}</span> {{ rev.mentor.first.email }} {{ rev.mentor.first.phoneno }}</td>
+
               <td>{{ rev.main.user_id.date_joined }}</td>
 
               {% if rev.solnrev.solution_id.problem_id.usertype == 'PT' %}
